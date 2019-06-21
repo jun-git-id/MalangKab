@@ -17,3 +17,6 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('navbar');
 });
+Route::get('/daftar', function () {
+    return view('daftar');
+});

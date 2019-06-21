@@ -37,7 +37,7 @@
         </div>
       </li>
       <li class="nav-item mr-3 mt-lg-0 mt-3">
-        <a class="nav-link" href="#">Daftar</a>
+        <a class="nav-link" href="/daftar">Daftar</a>
       </li>
       <li class="nav-item mr-3 mt-lg-0 mt-3">
         <a class="nav-link" href="#">Login</a>
