@@ -77,9 +77,13 @@
   </div>
 </nav>
 
-<main class="py-0">
+<main class="py-3">
 @yield('content')
 </main>
+
+<div class="cpy-right text-center py-4">
+    <p class="text-black-50">© 2019 Marketplace Kab.Malang. All rights reserved </p>
+</div>
 </body>
 
 </html>
