@@ -168,3 +168,7 @@ section.wthree-row:after {
     transform: rotate(-180deg);
 	z-index: 9;
 }
+.carousel-size{
+	background: red;
+	height: 10%;
+}

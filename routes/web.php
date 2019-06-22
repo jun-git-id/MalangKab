@@ -12,11 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('beranda');
 });
-Route::get('/home', function () {
-    return view('navbar');
-});
+
 Route::get('/daftar', function () {
     return view('daftar');
 });
