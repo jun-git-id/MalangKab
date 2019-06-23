@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('/daftar', function () {
     return view('daftar');
 });
+
+Auth::routes();
+
+Route::get('/beranda', 'HomeController@index')->name('home');

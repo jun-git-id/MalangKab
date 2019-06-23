@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Role;
 
 class CreateRolesTable extends Migration
 {
@@ -18,11 +19,11 @@ class CreateRolesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
-//        Roles::insert([
-//            ['name' => 'superadmin'],
-//            ['name' => 'admin'],
-//            ['name' => 'user'],
-//        ]);
+        Role::insert([
+            ['name' => 'superadmin'],
+            ['name' => 'admin'],
+            ['name' => 'user'],
+        ]);
     }
 
     /**

@@ -7,6 +7,8 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    @if (Route::has('login'))
+      @auth
     <ul class="navbar-nav ml-lg-auto text-center">
       <li class="nav-item mr-3 mt-lg-0 mt-3">
         <a class="nav-link" href="#">Beranda <span class="sr-only">(current)</span></a>
@@ -36,13 +38,19 @@
           <a class="dropdown-item" href="#">Produk Favorit</a>
         </div>
       </li>
+      @else
+        @if (Route::has('register'))
       <li class="nav-item mr-3 mt-lg-0 mt-3">
         <a class="nav-link" href="/daftar">Daftar</a>
       </li>
-      <li class="nav-item mr-3 mt-lg-0 mt-3">
-        <a class="nav-link" href="#">Login</a>
+        @endif
+        <li class="nav-item mr-3 mt-lg-0 mt-3">
+        <a class="nav-link" href="{{ route('login') }}">Login</a>
       </li>
+        @endauth
     </ul>
+    @endif
+
     <!-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

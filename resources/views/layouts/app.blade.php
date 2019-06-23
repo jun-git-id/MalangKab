@@ -34,42 +34,71 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-lg-auto text-center">
-      <li class="nav-item mr-3 mt-lg-0 mt-3">
-        <a class="nav-link" href="{{url('/')}}">Beranda <span class="sr-only">(current)</span></a>
-      </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="#">Tempat Usaha</a>
-      </li> -->
-      <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Tempat Usaha
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Tempat</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Tempat Saya</a>
-          <a class="dropdown-item" href="#">Tempat Favorit</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Produk
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Produk</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Produk Saya</a>
-          <a class="dropdown-item" href="#">Produk Favorit</a>
-        </div>
-      </li>
-      <li class="nav-item mr-3 mt-lg-0 mt-3">
-        <a class="nav-link" href="/daftar">Daftar</a>
-      </li>
-      <li class="nav-item mr-3 mt-lg-0 mt-3">
-        <a class="nav-link" href="#">Login</a>
-      </li>
-    </ul>
+
+
+              <ul class="navbar-nav ml-lg-auto text-center">
+
+                  <li class="nav-item mr-3 mt-lg-0 mt-3">
+                      <a class="nav-link" href="#">Beranda <span class="sr-only">(current)</span></a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Tempat Usaha</a>
+                  </li> -->
+                  <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Tempat Usaha
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">Tempat</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Tempat Saya</a>
+                          <a class="dropdown-item" href="#">Tempat Favorit</a>
+                      </div>
+                  </li>
+                  <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Produk
+                      </a>
+
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">Produk</a>
+
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Produk Saya</a>
+                          <a class="dropdown-item" href="#">Produk Favorit</a>
+                      </div>
+
+                  </li>
+                  @guest
+                      <li class="nav-item mr-3 mt-lg-0 mt-3">
+                          <a class="nav-link" href="{{ route('login') }}">Login</a>
+                      </li>
+                      @if (Route::has('register'))
+                          <li class="nav-item mr-3 mt-lg-0 mt-3">
+                              <a class="nav-link" href="{{ route('register') }}">Daftar</a>
+                          </li>
+                      @endif
+                  @else
+                      <li class="nav-item dropdown">
+                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                              {{ Auth::user()->name }} <span class="caret"></span>
+                          </a>
+
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{{ route('logout') }}"
+                                 onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                  {{ __('Logout') }}
+                              </a>
+
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                  @csrf
+                              </form>
+                          </div>
+                      </li>
+                  @endguest
+
+              </ul>
     <!-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
