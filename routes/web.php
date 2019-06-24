@@ -12,14 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('beranda');
 });
-Route::get('/home', function () {
-    return view('navbar');
-});
+
 Route::get('/daftar', function () {
     return view('daftar');
 });
+<<<<<<< HEAD
 Route::get('/login', function () {
     return view('login');
 });
+=======
+
+Auth::routes();
+
+Route::get('/beranda', 'HomeController@index')->name('home');
+>>>>>>> d133d913989663dc87dc7bb88488061ced3ca310

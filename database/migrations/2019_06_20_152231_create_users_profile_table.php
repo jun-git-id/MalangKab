@@ -17,8 +17,7 @@ class CreateUsersProfileTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->integer('nik')->unique();
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('name');
             $table->tinyInteger('gender')->comment('1. Laki-Laki, 2. Perempuan');
             $table->string('no_telp')->nullable();
             $table->longText('alamat')->nullable();

@@ -168,8 +168,14 @@ section.wthree-row:after {
     transform: rotate(-180deg);
 	z-index: 9;
 }
+<<<<<<< HEAD
 
 .modal-content{
 padding-left: 50px;
 padding-right: 50px;
 }
+=======
+  .carousel-inner{
+	height: 100%;
+  }
+>>>>>>> d133d913989663dc87dc7bb88488061ced3ca310
