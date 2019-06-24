@@ -45,28 +45,33 @@
                     <a class="nav-link" href="#">Tempat Usaha</a>
                   </li> -->
                   <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Tempat Usaha
                       </a>
+                      @guest
+                          @else
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="#">Tempat</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="#">Tempat Saya</a>
                           <a class="dropdown-item" href="#">Tempat Favorit</a>
                       </div>
+                          @endguest
                   </li>
                   <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                      <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Produk
                       </a>
-
+                      @guest
+                      @else
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="#">Produk</a>
-
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="#">Produk Saya</a>
                           <a class="dropdown-item" href="#">Produk Favorit</a>
                       </div>
+                          @endguest
 
                   </li>
                   @guest
@@ -75,13 +80,13 @@
                       </li>
                       @if (Route::has('register'))
                           <li class="nav-item mr-3 mt-lg-0 mt-3">
-                              <a class="nav-link" href="{{ route('register') }}">Daftar</a>
+                              <a class="nav-link" href="/daftar">Daftar</a>
                           </li>
                       @endif
                   @else
                       <li class="nav-item dropdown">
                           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                              {{ Auth::user()->name }} <span class="caret"></span>
+                              {{ Auth::user()->username }} <span class="caret"></span>
                           </a>
 
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

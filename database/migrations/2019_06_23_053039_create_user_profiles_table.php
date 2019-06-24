@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersProfileTable extends Migration
+class CreateUserProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateUsersProfileTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_profile', function (Blueprint $table) {
+        Schema::create('user_profiles', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->integer('nik')->unique();
-            $table->string('name');
-            $table->tinyInteger('gender')->comment('1. Laki-Laki, 2. Perempuan');
+            $table->string('nik')->unique();
+            $table->string('nama_lengkap');
             $table->string('no_telp')->nullable();
             $table->longText('alamat')->nullable();
             $table->timestamps();
@@ -34,6 +33,6 @@ class CreateUsersProfileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_profile');
+        Schema::dropIfExists('user_profiles');
     }
 }

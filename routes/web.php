@@ -18,7 +18,11 @@ Route::get('/', function () {
 Route::get('/daftar', function () {
     return view('daftar');
 });
-
 Auth::routes();
+
+
+Route::get('/home', 'HomeController@index')->name('beranda');
+
+Route::get('/home', 'ProfileController@index');
 
 Route::get('/beranda', 'HomeController@index')->name('home');
