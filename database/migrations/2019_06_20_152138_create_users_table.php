@@ -51,31 +51,7 @@ class CreateUsersTable extends Migration
            ]
        ]);
 
-        User::insert([
-            [
-                'username' => 'superadmin',
-                'email'    => 'superadmin@malangkab.go.id',
-                'password' => bcrypt('admin123'),
-                'role_id'  => 1,
-                'created_at' => \Carbon\Carbon::now()
-            ],
-
-            [
-                'username' => 'admin',
-                'email'    => 'admin@malangkab.go.id',
-                'password' => bcrypt('admin123'),
-                'role_id'  => 2,
-                'created_at' => \Carbon\Carbon::now()
-            ],
-            [
-                'username' => 'rizky',
-                'email'    => 'rizkyrhakiki21@gmail.com',
-                'password' => bcrypt('admin123'),
-                'role_id'  => 3,
-                'created_at' => \Carbon\Carbon::now()
-            ]
-        ]);
-
+        
     }
 
     /**
