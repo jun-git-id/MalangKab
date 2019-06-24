@@ -21,4 +21,6 @@ Route::get('/daftar', function () {
 
 Auth::routes();
 
-Route::get('/beranda', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('beranda');
+
+Route::get('/home', 'ProfileController@index');
