@@ -168,3 +168,8 @@ section.wthree-row:after {
     transform: rotate(-180deg);
 	z-index: 9;
 }
+
+.modal-content{
+padding-left: 50px;
+padding-right: 50px;
+}
