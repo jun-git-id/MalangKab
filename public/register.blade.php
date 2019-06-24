@@ -1,5 +1,3 @@
-
-
 <!-- Stephonce R. MOrris | 2014 -->
 <head>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap-coba.css">

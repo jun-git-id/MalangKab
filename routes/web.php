@@ -18,9 +18,18 @@ Route::get('/', function () {
 Route::get('/daftar', function () {
     return view('daftar');
 });
+//<<<<<<< HEAD
+//Route::get('/login', function () {
+//    return view('login');
+//});
+//=======
 
 Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('beranda');
 
 Route::get('/home', 'ProfileController@index');
+
+Route::get('/beranda', 'HomeController@index')->name('home');
+
