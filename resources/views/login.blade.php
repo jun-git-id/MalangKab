@@ -22,7 +22,7 @@
 <div class="container">
   <h2>Modal Login Example</h2>
   <!-- Trigger the modal with a button -->
-  <button type="button" class="navbar" id="myBtn">Login</button>
+  <button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -49,9 +49,7 @@
             </div>
               <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+   
           <p>Not a member? <a href="#">Sign Up</a></p>
           <p>Forgot <a href="#">Password?</a></p>
         </div>
