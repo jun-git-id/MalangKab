@@ -76,7 +76,7 @@
                   </li>
                   @guest
                       <li class="nav-item mr-3 mt-lg-0 mt-3">
-                          <a class="nav-link" href="{{ route('login') }}">Login</a>
+                          <a class="nav-link" href="/masuk">Login</a>
                       </li>
                       @if (Route::has('register'))
                           <li class="nav-item mr-3 mt-lg-0 mt-3">

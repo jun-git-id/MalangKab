@@ -19,8 +19,13 @@ Route::get('/daftar', function () {
     return view('daftar');
 });
 Auth::routes();
+Route::get('/masuk', function () {
+    return view('login');
+});
 
-
+Route::get('/profile', function () {
+    return view('editprofile');
+});
 Route::get('/home', 'HomeController@index')->name('beranda');
 
 Route::get('/home', 'ProfileController@index');

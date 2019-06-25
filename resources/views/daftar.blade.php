@@ -1,6 +1,7 @@
+@extends('layouts.app')
 
+@section('content')
 
-<!-- Stephonce R. MOrris | 2014 -->
 <head>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap-coba.css">
 			<link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
@@ -11,33 +12,26 @@
 <form action="index.html" method="post">
 
 <!-- Form Title -->
-	<h1>Marketplace Kabupaten Malang</h1>
-		<h1>Registrasi</h1>
+	<h1>Registrasi Marketplace Kabupaten Malang</h1>
+		
 
 		<fieldset>
 
 			<legend> <abbr title="Information"></abbr></legend>
 <!-- Name Input -->
-			<label for="name">Nama Lengkap:</label>
-			<input type="text" id="name" name="user_name">
+      <input id="name" type="text" class="form-control" name="name" placeholder="Nama Lengkap">
 			<!-- NIP -->
-						<label for="name">Nomor Induk Kependudukan:</label>
-						<input type="text" id="name" name="nip">
+						<input type="number" id="nip" class="form-control" placeholder="Nomor Induk Kependudukan">
 						<!--no telp -->
-									<label for="name">No Telepon:</label>
-									<input type="text" id="name" name="no_telepon">
+            <input type="number" id="tlp" class="form-control" name="tlp" placeholder="Nomor Telepon">
 <!-- Username Input -->
-												<label for="username">Username:</label>
-												<input type="text" id="username" name="username">
+<input type="text" id="usrname" class="form-control" name="usrname" placeholder="Username">
 <!-- E-mail Input -->
-			<label for="mail">E-Mail:</label>
-			<input type="email" id="mail" name="user_email">
+<input type="text" id="email" class="form-control" name="email" placeholder="Email">
 <!-- Password Input -->
-			<label for="password">Password:</label>
-			<input type="password" id="password" name="user_password">
+<input type="password" id="pwd" class="form-control" name="pwd" placeholder="Password">
 			<!-- Password Input -->
-						<label for="password">Konfirmasi Password:</label>
-						<input type="password" id="password" name="confirm_password">
+			<input type="password" id="cpwd" class="form-control" name="cpwd" placeholder="Konfirmasi Password">
 
 <!-- Age Dropdown -->
 			<!-- <label for="age">Age:</label>
@@ -51,3 +45,4 @@
 		<button type="submit">Sign Up</button>
 
 		</form>
+    @endsection
