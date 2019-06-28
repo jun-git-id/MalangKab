@@ -13,10 +13,14 @@ class CreateJenisProdukTable extends Migration
      */
     public function up()
     {
-        Schema::create('jenis_produk', function (Blueprint $table) {
+        Schema::create('jenis_produks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('jenis_produk');
         });
+
+        \App\JenisProduk::insert([
+            'jenis_produk' => 'test'
+        ]);
     }
 
     /**
@@ -26,6 +30,6 @@ class CreateJenisProdukTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_produk');
+        Schema::dropIfExists('jenis_produks');
     }
 }

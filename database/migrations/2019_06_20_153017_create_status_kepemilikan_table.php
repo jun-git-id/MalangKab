@@ -13,10 +13,13 @@ class CreateStatusKepemilikanTable extends Migration
      */
     public function up()
     {
-        Schema::create('status_kepemilikan', function (Blueprint $table) {
+        Schema::create('status_kepemilikans', function (Blueprint $table) {
             $table->increments('id');
             $table->string('status_kepemilikan');
         });
+        \App\StatusKepemilikan::insert([
+            'status_kepemilikan' => 'Pribadi'
+        ]);
     }
 
     /**
@@ -26,6 +29,6 @@ class CreateStatusKepemilikanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status_kepemilikan');
+        Schema::dropIfExists('status_kepemilikans');
     }
 }

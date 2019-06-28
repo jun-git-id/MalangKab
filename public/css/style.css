@@ -1,178 +1,30 @@
-/* header */
-
-header h1,
-footer h2 {
-	line-height: 0;
-}
-
-.navbar-light {
-	padding: 2em 5em;
-	position: absolute;
-	z-index: 999;
-	width: 100%;
-	left: 0;
-}
-
-a.navbar-brand {
-	font-family: 'Montserrat', sans-serif;
-	text-transform: uppercase;
-	font-weight: 800;
-	font-size: 0.7em;
-	letter-spacing: 1px;
-}
-
-a.navbar-brand i {
-	color: rgba(0, 0, 0, 0.18);
-	font-size: 2em;
-}
-
-.navbar-light .navbar-nav .nav-link {
-	font-weight: 600;
-	text-transform: capitalize;
-	color: #fff;
-	padding: 4px 15px;
-	letter-spacing: 1px;
-	-webkit-transition: 0.5s all ease;
-	-moz-transition: 0.5s all ease;
-	-o-transition: 0.5s all ease;
-	-ms-transition: 0.5s all ease;
-}
-
-.navbar-light .navbar-nav .nav-link:hover,
-.navbar-light .navbar-nav .nav-link:focus,
-.navbar-light .navbar-nav .show>.nav-link,
-.navbar-light .navbar-nav .active>.nav-link,
-.navbar-light .navbar-nav .nav-link.show,
-.navbar-light .navbar-nav .nav-link.active {
-	color: #000000;
-	background: #fff;
-	border-radius: 5px;
-	box-shadow: 0 20px 5px -10px rgba(0, 0, 0, 0.15);
-	transform: translateY(5px);
-	transform: translateY(5px);
-	-ms-transform: translateY(5px);
-	-o-transform: translateY(5px);
-	-webkit-transform: translateY(5px);
-}
-
-.dropdown-item {
-	color: #fff;
-}
-
-.dropdown-item,
-.dropdown-item.active,
-.dropdown-item:active {
-	background-color: white;
-	color: #000 !important;
-	font-weight: 600;
-}
-
-.w3ls-btn {
-    color: #fff;
-	letter-spacing: 1px;
-	font-weight: 600;
-	background: transparent;
-	/*border: 2px solid #fff;*/
-	padding: 4px 15px;
-	/*background: #eee;*/
-}
-
-/*-- //header --*/
-
-/* banner */
-
-.banner {
-	background: url(../images/bg4.jpg) center no-repeat;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	-ms-background-size: cover;
-	background-size: cover;
-	position: relative;
-}
-.banner:after {
-    content: '';
-    position: absolute;
-    bottom: 0px;
-    left: 1px;
-    width: 0;
-    height: 0;
-    border-bottom: 74px solid #ffffff;
-    border-right: 1582px solid transparent;
-    border-left: 0px solid transparent;
-    transform: rotate(-360deg);
-}
-.inner-banner {
-	background: url(../images/bg4.jpg)no-repeat;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	-ms-background-size: cover;
-	background-size: cover;
-	min-height: 350px;
-	position: relative;
-}
-
-.banner-text {
-	padding: 14vw 0;
-	box-sizing: border-box;
-}
-
-.slider-info {
-    text-align: left;
-    width: 600px;
-    margin-right: auto;
-}
-
-.slider-info h3 {
-	font-size: 3.5em;
-	text-transform: uppercase;
-	color: #fff;
-	font-weight: 600;
-}
-
-.agile-link-bnr {
-	padding: 15px 80px;
-	color: #fff;
-	font-weight: 600;
-	letter-spacing: 1px;
-	font-size: 17px;
-	background: #ff9108;
-	border: none;
-	border-radius: 30px;
-}
-
-.agile-link-cnt {
-	padding: 15px 40px;
-	color: #fff;
-	letter-spacing: 2px;
-	font-size: 16px;
-	background: #ff9108;
-	border: none;
-	border-radius: 30px;
-	text-transform: uppercase;
-}
-section.wthree-row{
-    position: relative;
-}
-section.wthree-row:after {
-    content: '';
-    position: absolute;
-    bottom: -73px;
-    left: 1px;
-    width: 0;
-    height: 0;
-    border-bottom: 74px solid #ffffff;
-    border-right: 1582px solid transparent;
-    border-left: 0px solid transparent;
-    transform: rotate(-180deg);
-	z-index: 9;
-}
-
-.modal-content{
-padding-left: 50px;
-padding-right: 50px;
-}
-  .carousel-inner{
-	height: 100%;
+  .input_class{
+	  background: rgba(243, 242, 242, 0.932);
+	  border: none;
+	  font-size: 15px;
+	  height: auto;
+	  margin: 0;
+	  outline: 0;
+	  padding: 10px;
+	  width: 100%;
+	  background-color: #e8efea;
+	  color: hsl(204, 20%, 5%);
+	  box-shadow: #8265B0;
+	  margin-bottom: 15px;
   }
+  .form-input-class {
+	  max-width: 100px;
+	  margin: 10px auto;
+	  padding: 5px 5px;
+	  background: #f4f7f8;
+	  border-radius: 3px;
+	  border: 0 solid;
+	  box-shadow: #8265B0;
+  }
+
+.head-login-modal{
+	background-color: #5cb85c;
+	color:white !important;
+	text-align: center;
+	font-size: 30px;
+}

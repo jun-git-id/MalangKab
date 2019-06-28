@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
+use App\Desa;
 class CreateDesaTable extends Migration
 {
     /**
@@ -13,10 +13,13 @@ class CreateDesaTable extends Migration
      */
     public function up()
     {
-        Schema::create('desa', function (Blueprint $table) {
+        Schema::create('desas', function (Blueprint $table) {
             $table->Increments('id');
             $table->string('nama_desa');
         });
+        Desa::insert([
+            'nama_desa' => 'dampit'
+        ]);
     }
 
     /**
@@ -26,6 +29,6 @@ class CreateDesaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('desa');
+        Schema::dropIfExists('desas');
     }
 }

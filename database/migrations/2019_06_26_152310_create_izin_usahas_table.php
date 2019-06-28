@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJenisInvestasiTable extends Migration
+class CreateIzinUsahasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateJenisInvestasiTable extends Migration
      */
     public function up()
     {
-        Schema::create('jenis_investasis', function (Blueprint $table) {
+        Schema::create('izin_usahas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('jenis_investasi');
+            $table->string('no_izin_usaha');
+            $table->string('foto_izin_usaha');
+            $table->date('tgl_izin_berkhir');
+            $table->timestamps();
         });
-        \App\JenisInvestasi::insert([
-           'jenis_investasi' => 'Pribadi'
-        ]);
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateJenisInvestasiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_investasis');
+        Schema::dropIfExists('izin_usahas');
     }
 }

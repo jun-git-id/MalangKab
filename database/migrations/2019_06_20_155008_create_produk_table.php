@@ -13,7 +13,7 @@ class CreateProdukTable extends Migration
      */
     public function up()
     {
-        Schema::create('produk', function (Blueprint $table) {
+        Schema::create('produks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_produk');
             $table->string('deskripsi');
@@ -27,8 +27,8 @@ class CreateProdukTable extends Migration
             $table->integer('views');
             $table->timestamps();
 
-            $table->foreign('jenis_produk_id')->references('id')->on('jenis_produk');
-            $table->foreign('kategori_usaha_id')->references('id')->on('kategori_usaha');
+            $table->foreign('jenis_produk_id')->references('id')->on('jenis_produks');
+            $table->foreign('kategori_usaha_id')->references('id')->on('kategori_usahas');
 
         });
     }
@@ -40,6 +40,6 @@ class CreateProdukTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produk');
+        Schema::dropIfExists('produks');
     }
 }
