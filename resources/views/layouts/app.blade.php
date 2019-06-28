@@ -22,6 +22,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 </head>
@@ -76,11 +78,11 @@
                   </li>
                   @guest
                       <li class="nav-item mr-3 mt-lg-0 mt-3">
-                          <a class="nav-link" href="/masuk">Login</a>
+                          <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#">Login</a>
                       </li>
                       @if (Route::has('register'))
                           <li class="nav-item mr-3 mt-lg-0 mt-3">
-                              <a class="nav-link" href="/daftar">Daftar</a>
+                              <a class="nav-link" href="/register">Daftar</a>
                           </li>
                       @endif
                   @else
@@ -113,6 +115,56 @@
     </form> -->
   </div>
 </nav>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="head-login-modal" style="padding:35px 50px;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4><span class="fas fa-lock"></span> Login</h4>
+            </div>
+            <div class="modal-body" style="padding:40px 50px;">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="email"><span class="fas fa-user"></span> Email / Username</label>
+                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email"
+                               placeholder="Enter email / Username">
+
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password"><span class="fas fa-eye"></span> Password</label>
+                        <input id="password" type="text" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"  placeholder="Enter password">
+
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="remember"><input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>Remember Me</label>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+                </form>
+
+                <p>Not a member? <a href="/register">Sign Up</a></p>
+                <p> <a href="#">Forgot Password?</a></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
 
 <main class="py-3">
 @yield('content')
