@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
+use App\KegiatanUsaha;
 class CreateKegiatanUsahaTable extends Migration
 {
     /**
@@ -13,10 +13,14 @@ class CreateKegiatanUsahaTable extends Migration
      */
     public function up()
     {
-        Schema::create('kegiatan_usaha', function (Blueprint $table) {
+        Schema::create('kegiatan_usahas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_kegiatan_usaha');
         });
+        KegiatanUsaha::insert([
+            'nama_kegiatan_usaha' => 'Bengkel'
+        ]);
+
     }
 
     /**
@@ -26,6 +30,6 @@ class CreateKegiatanUsahaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kegiatan_usaha');
+        Schema::dropIfExists('kegiatan_usahas');
     }
 }

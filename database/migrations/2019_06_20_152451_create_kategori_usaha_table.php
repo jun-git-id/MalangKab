@@ -13,10 +13,13 @@ class CreateKategoriUsahaTable extends Migration
      */
     public function up()
     {
-        Schema::create('kategori_usaha', function (Blueprint $table) {
+        Schema::create('kategori_usahas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_kategori_usaha');
         });
+        \App\KategoriUsaha::insert([
+           'nama_kategori_usaha' => 'mikro'
+        ]);
     }
 
     /**
@@ -26,6 +29,6 @@ class CreateKategoriUsahaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategori_usaha');
+        Schema::dropIfExists('kategori_usahas');
     }
 }

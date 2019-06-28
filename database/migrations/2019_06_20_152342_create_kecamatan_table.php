@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
+use App\Kecamatan;
 class CreateKecamatanTable extends Migration
 {
     /**
@@ -13,10 +13,14 @@ class CreateKecamatanTable extends Migration
      */
     public function up()
     {
-        Schema::create('kecamatan', function (Blueprint $table) {
+        Schema::create('kecamatans', function (Blueprint $table) {
             $table->Increments('id');
             $table->string('nama_kecamatan');
         });
+
+        Kecamatan::insert([
+           'nama_kecamatan' => 'Dampit',
+        ]);
     }
 
     /**
@@ -26,6 +30,6 @@ class CreateKecamatanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kecamatan');
+        Schema::dropIfExists('kecamatans');
     }
 }
