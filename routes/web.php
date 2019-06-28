@@ -26,6 +26,10 @@ Route::get('/masuk', function () {
 Route::get('/profile', function () {
     return view('editprofile');
 });
+
+Route::get('/input', function () {
+    return view('input');
+});
 Route::get('/home', 'HomeController@index')->name('beranda');
 
 Route::get('/home', 'ProfileController@index');

@@ -28,7 +28,7 @@
 
 <body style="background-color: #f2f6fc">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Malang Marketplace</a>
+  <a class="navbar-brand" href="/">Malang Marketplace</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -39,11 +39,20 @@
               <ul class="navbar-nav ml-lg-auto text-center">
 
                   <li class="nav-item mr-3 mt-lg-0 mt-3">
-                      <a class="nav-link" href="#">Beranda <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="/">Beranda <span class="sr-only">(current)</span></a>
                   </li>
                   <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Tempat Usaha</a>
                   </li> -->
+                  <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
+                      <a class="nav-link dropdown-toggle" href="/input" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Kategori
+                      </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="/input">Hotel</a>
+                              <a class="dropdown-item" href="#">Bengkel</a>
+                          </div>
+                  </li>
                   <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
                       <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Tempat Usaha
