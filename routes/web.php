@@ -25,8 +25,13 @@ Route::get('/daftar', function () {
 //=======
 
 Auth::routes();
+Route::get('/masuk', function () {
+    return view('login');
+});
 
-
+Route::get('/profile', function () {
+    return view('editprofile');
+});
 Route::get('/home', 'HomeController@index')->name('beranda');
 
 Route::get('/editProfile/{id}', 'ProfileController@edit');
