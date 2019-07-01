@@ -14,7 +14,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-<!-- font-awesome icons -->
+    <script src="{{ asset('js/jquery.js') }}" defer></script>
+
+    <!-- font-awesome icons -->
 <link href="{{asset('css/fontawesome-all.min.css')}}" rel="stylesheet">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
