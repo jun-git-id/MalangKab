@@ -36,6 +36,9 @@ Route::get('/profile', function () {
 Route::get('/input', function () {
     return view('input');
 });
+Route::get('/Tempat', function () {
+    return view('TempatUsaha');
+});
 Route::get('/home', 'HomeController@index')->name('beranda');
 
 Route::get('/editProfile/{id}', 'ProfileController@edit');
