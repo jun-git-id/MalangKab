@@ -6,7 +6,9 @@ use App\Http\Requests\UpdateProfile;
 use App\User;
 use Illuminate\Http\Request;
 use App\UserProfile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -37,6 +39,14 @@ class ProfileController extends Controller
         $profile->alamat = $request -> alamat;
         $profile->gender = $request -> gender;
         $profile->password = Hash::make($request -> password);
+        if ($request->hasFile('foto')){
+            $image = $request-> file('foto');
+            $new_name = uniqid() . '.' . $image->getClientOriginalName();
+            $foto = Storage::disk('public')->putFileAs('user', $image, $new_name);
+            $profile->foto = $foto;
+            Storage::delete('public/'.Auth::user()->foto);
+
+        }
 
         $profile->save();
 

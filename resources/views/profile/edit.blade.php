@@ -5,24 +5,27 @@
         <div class="container mb-5">
             <h1 class="text-center">Edit Profil</h1>
         </div>
+        <form method="POST" action="/editProfile/{{Auth::user()->id}}" enctype="multipart/form-data">
+            @csrf
+            {{method_field('PUT')}}
         <div class="row justify-content-center">
             <div class="com-md-4 px-5">
                 <div class="media-container">
                     <span class="media-overlay">
-                        <input type="file" name="image" id="media-input" accept="image/*">
+                        <input type="file" name="foto" id="media-input" accept="image/*" onchange="readURL(this);">
                     </span>
 
-                    <figure class="media-object">
-                        <img class="img-object" src="https://image.flaticon.com/icons/svg/149/149098.svg">
-                    </figure>
+{{--                    <figure class="media-object">--}}
+{{--                        @foreach($profile as $item)--}}
+                        <img id="userfoto" class="w-100" src="{{ asset('storage/' . Auth::user()->foto)}}">
+{{--                            @endforeach--}}
+{{--                    </figure>--}}
                 </div>
                 <p class="mt-3">Click image for change photo</p>
             </div>
             <div class="col-md-8">
 
-                <form method="POST" action="/editProfile/{{Auth::user()->id}}">
-                    @csrf
-                    {{method_field('PUT')}}
+
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-left">{{ __('Nama Lengkap') }}</label>
 
@@ -175,9 +178,23 @@
                             </button>
                         </div>
                     </div>
-                </form>
+            </form>
             </div>
         </div>
     </div>
 
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#userfoto')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection
