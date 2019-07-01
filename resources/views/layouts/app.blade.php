@@ -54,7 +54,7 @@
                       </a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="/input">Hotel</a>
-                              <a class="dropdown-item" href="#">Bengkel</a>
+                              <a class="dropdown-item" href="/Tempat">Bengkel</a>
                           </div>
                   </li>
                   <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
