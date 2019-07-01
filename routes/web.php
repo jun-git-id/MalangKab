@@ -50,3 +50,10 @@ Route::get('/beranda', 'HomeController@index')->name('home');
 Route::get('/createTempatUsaha', 'TempatUsahaController@create');
 Route::resource('/','TempatUsahaController');
 //Route::resource('/','ProdukController');
+
+Route::get('/detailusaha', function () {
+    return view('detailusaha');
+});
+Route::get('/detailproduk', function () {
+    return view('detailproduk');
+});

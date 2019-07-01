@@ -117,3 +117,15 @@
   .media-control {
 	  margin-top: 50px;
   }
+
+  .fotoprofile {
+	  width: 35%;
+  }
+  #owl-demo .item{
+	  margin: 3px;
+  }
+  #owl-demo .item img{
+	  display: block;
+	  width: 100%;
+	  height: auto;
+  }
