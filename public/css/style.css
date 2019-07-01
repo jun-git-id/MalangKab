@@ -29,6 +29,19 @@
 	font-size: 30px;
 }
 
+.no-border-right{
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0;
+}
+
+  .no-border-left{
+	  border-top-left-radius: 0px;
+	  border-bottom-left-radius: 0;
+  }
+
+  .width-tempat{
+	  width: 100%;
+  }
 .opacity-3{
 	opacity: 0.3;
 }
