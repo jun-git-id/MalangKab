@@ -36,7 +36,7 @@ Route::get('/profile', function () {
 Route::get('/input', function () {
     return view('input');
 });
-Route::get('/home', 'HomeController@index')->name('beranda');
+Route::get('/', 'HomeController@index')->name('beranda');
 
 Route::get('/editProfile/{id}', 'ProfileController@edit');
 Route::put('/editProfile/{id}', 'ProfileController@update');
@@ -44,5 +44,5 @@ Route::put('/editProfile/{id}', 'ProfileController@update');
 Route::get('/beranda', 'HomeController@index')->name('home');
 
 Route::get('/createTempatUsaha', 'TempatUsahaController@create');
-Route::resource('tempatUsaha','TempatUsahaController');
+Route::resource('/','TempatUsahaController');
 //Route::resource('/','ProdukController');

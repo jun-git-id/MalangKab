@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('no_telp')->nullable();
             $table->longText('alamat')->nullable();
+            $table->string('foto')->nullable();
             $table->enum('gender', [1,2])->nullable()->comment('1. Laki-laki, 2. Perempuan');
             $table->unsignedInteger('role_id');
             $table->rememberToken();

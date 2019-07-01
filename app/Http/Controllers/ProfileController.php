@@ -37,6 +37,7 @@ class ProfileController extends Controller
         $profile->alamat = $request -> alamat;
         $profile->gender = $request -> gender;
         $profile->password = Hash::make($request -> password);
+
         $profile->save();
 
         return redirect('/editProfile/'.$id)->with('status', 'Villa successfully updated');
