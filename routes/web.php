@@ -53,3 +53,10 @@ Route::get('/input', 'TempatUsahaController@create');
 //Route::get('/', 'TempatUsahaController@store');
 
 //Route::resource('/','ProdukController');
+
+Route::get('/detailusaha', function () {
+    return view('detailusaha');
+});
+Route::get('/detailproduk', function () {
+    return view('detailproduk');
+});
