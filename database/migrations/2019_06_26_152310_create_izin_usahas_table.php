@@ -16,8 +16,8 @@ class CreateIzinUsahasTable extends Migration
         Schema::create('izin_usahas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('no_izin_usaha');
-            $table->string('foto_izin_usaha');
-            $table->date('tgl_izin_berkhir');
+            $table->string('jenis_izin_usaha')->nullable();
+            $table->date('tgl_izin_berakhir')->nullable();
             $table->timestamps();
         });
     }

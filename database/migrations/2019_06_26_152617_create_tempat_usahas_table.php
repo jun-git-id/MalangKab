@@ -16,12 +16,11 @@ class CreateTempatUsahasTable extends Migration
         Schema::create('tempat_usahas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_tempat');
-            $table->string('foto_tempat_usaha');
+            $table->string('foto_tempat_usaha')->nullable();
             $table->string('alamat');
-            $table->string('pemilik');
             $table->string('no_telp');
             $table->string('deskripsi');
-            $table->unsignedInteger('izin_usaha_id');
+            $table->unsignedInteger('izin_usaha_id')->nullable();
             $table->string('koordinat_lokasi');
             $table->unsignedInteger('kecamatan_id');
             $table->unsignedInteger('desa_id');
@@ -29,11 +28,11 @@ class CreateTempatUsahasTable extends Migration
             $table->unsignedInteger('kegiatan_usaha_id');
             $table->unsignedInteger('status_kepemilikan_id');
             $table->unsignedInteger('jenis_investasi_id');
-            $table->integer("created_by");
+            $table->unsignedInteger("user_id");
             $table->integer("updated_by")->nullable();
-            $table->integer('like');
-            $table->double('rating');
-            $table->integer('views');
+            $table->integer('like')->nullable()->default(0);
+            $table->double('rating')->nullable()->default(0);
+            $table->integer('views')->nullable()->default(0);
             $table->enum('status', ['Approve','Pending'])->default('Pending');
             $table->timestamps();
 
@@ -44,6 +43,7 @@ class CreateTempatUsahasTable extends Migration
             $table->foreign('kegiatan_usaha_id')->references('id')->on('kegiatan_usahas');
             $table->foreign('status_kepemilikan_id')->references('id')->on('status_kepemilikans');
             $table->foreign('jenis_investasi_id')->references('id')->on('jenis_investasis');
+            $table->foreign('user_id')->references('id')->on('users');
 
         });
     }

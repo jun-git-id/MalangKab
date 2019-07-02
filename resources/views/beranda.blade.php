@@ -40,15 +40,13 @@
             @foreach($tempatusaha as $itemUsaha)
             <div class="col-lg-3 mt-4 d-flex">
                 <div class="card" style="width: 18rem;">
-                    <img src="{{asset('img/kebun.jpg')}}" class="card-img-top" alt="...">
+                    <img src="{{asset('storage/'. $itemUsaha->foto_tempat_usaha)}}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card titlejjjj</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's content.</p>
+                        <h5 class="card-title">{{$itemUsaha->nama_tempat}}</h5>
+                        <p class="card-text">{{$itemUsaha->deskripsi}}</p>
                         <div class="row ml-0">
-                            <p><i class="fas fa-heart"></i> 8</p>
-                            <p><i class="fas fa-star ml-4"></i> 5.0</p>
+                            <p><i class="fas fa-heart"></i> {{$itemUsaha->like}}</p>
+                            <p><i class="fas fa-star ml-4"></i> {{$itemUsaha->rating}}</p>
                         </div>
                     </div>
                 </div>

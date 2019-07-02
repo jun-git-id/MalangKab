@@ -33,9 +33,9 @@ Route::get('/profile', function () {
     return view('editprofile');
 });
 
-Route::get('/input', function () {
-    return view('input');
-});
+//Route::get('/input', function () {
+//    return view('input');
+//});
 Route::get('/', 'HomeController@index')->name('beranda');
 Route::get('/Tempat', function () {
     return view('TempatUsaha');
@@ -45,8 +45,11 @@ Route::get('/home', 'HomeController@index')->name('beranda');
 Route::get('/editProfile/{id}', 'ProfileController@edit');
 Route::put('/editProfile/{id}', 'ProfileController@update');
 
-Route::get('/beranda', 'HomeController@index')->name('home');
+Route::get('/beranda', 'HomeController@index');
 
-Route::get('/createTempatUsaha', 'TempatUsahaController@create');
-Route::resource('/','TempatUsahaController');
+Route::resource('tempatusaha','TempatUsahaController');
+Route::get('/', 'TempatUsahaController@index');
+Route::get('/input', 'TempatUsahaController@create');
+//Route::get('/', 'TempatUsahaController@store');
+
 //Route::resource('/','ProdukController');

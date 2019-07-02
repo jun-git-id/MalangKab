@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\IzinUsaha;
 use App\TempatUsaha;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+
 
 class TempatUsahaController extends Controller
 {
@@ -13,6 +17,12 @@ class TempatUsahaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index']]);
+
+
+    }
     public function index()
     {
         $tempatusaha = TempatUsaha::all();
@@ -27,7 +37,7 @@ class TempatUsahaController extends Controller
      */
     public function create()
     {
-        return view('createTempatUsaha');
+        return view('input');
     }
 
     /**
@@ -38,33 +48,35 @@ class TempatUsahaController extends Controller
      */
     public function store(Request $request)
     {
-        $img = $request->file('photo');
-        $filename = uniqid() . '.' . $img->getClientOriginalExtension();
+        $img = $request->file('foto_tempat');
+        $filename = uniqid() . '.' . $img->getClientOriginalName();
         $photo = Storage::disk('public')->putFileAs('tempat_usaha', $img, $filename);
-        $photoIzinUsaha = Storage::disk('public')->putFileAs('izin_usaha', $img, $filename);
-
+        $izinUsaha = new IzinUsaha();
         TempatUsaha::create([
             'nama_tempat' => $request->nama_tempat,
             'foto_tempat_usaha' => $photo,
             'alamat' => $request->alamat,
-            'pemilik' => $request->pemilik,
             'no_telp' => $request->no_telp,
             'deskripsi' => $request->deskripsi,
-            'no_izin_usaha' => $request->no_izin_usaha,
-            'foto_izin_usaha' => $photoIzinUsaha,
-            'tgl_izin_berkhir' => $request->tgl_izin_berkhir,
             'koordinat_lokasi' => $request->koordinat_lokasi,
-            'kecamatan_id' => $request->kecamatan_id,
-            'desa_id' => $request->desa_id,
-            'kategori_usaha_id' => $request->kategori_usaha_id,
-            'kegiatan_usaha_id' => $request->kegiatan_usaha_id,
-            'status_kepemilikan_id' => $request->status_kepemilikan_id,
-            'jenis_investasi_id' => $request->jenis_investasi_id,
+            'kecamatan_id' => $request->kecamatan,
+            'izin_usaha_id' => $izinUsaha->tempatUsaha->id,
+            'desa_id' => $request->desa,
+            'user_id'=>Auth::user()->id,
+            'kategori_usaha_id' => $request->kategori_usaha,
+            'kegiatan_usaha_id' => $request->kegiatan_usaha,
+            'status_kepemilikan_id' => $request->status_kepemilikan,
+            'jenis_investasi_id' => $request->jenis_investasi,
             'status' => 2,
-            'created_by'=> Auth::user()->id,
-        ]);
-        return redirect()->back();
 
+        ]);
+        IzinUsaha::create([
+            'no_izin_usaha' => $request->no_izin_usaha,
+            'jenis_izin_usaha_id' => $request->jenis_izin_usaha,
+            'tgl_izin_berakhir' => $request->tgl_izin_berkhir,
+        ]);
+//        return redirect()->back();
+        return redirect('/');
 
     }
 
