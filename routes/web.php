@@ -60,3 +60,6 @@ Route::get('/detailusaha', function () {
 Route::get('/detailproduk', function () {
     return view('detailproduk');
 });
+Route::get('/maps', function () {
+    return view('maps');
+});
