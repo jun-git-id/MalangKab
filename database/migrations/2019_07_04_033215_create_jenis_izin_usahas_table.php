@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIzinUsahasTable extends Migration
+class CreateJenisIzinUsahasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateIzinUsahasTable extends Migration
      */
     public function up()
     {
-        Schema::create('izin_usahas', function (Blueprint $table) {
+        Schema::create('jenis_izin_usahas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('no_izin_usaha');
-            $table->string('jenis_izin_usaha')->nullable();
-            $table->date('tgl_izin_berakhir')->nullable();
-            $table->timestamps();
+            $table->string('jenis_izin_usaha');
         });
+
+        \App\JenisIzinUsaha::insert([
+            'jenis_izin_usaha' => 'test'
+        ]);
     }
 
     /**
@@ -29,6 +30,6 @@ class CreateIzinUsahasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('izin_usahas');
+        Schema::dropIfExists('jenis_izin_usahas');
     }
 }
