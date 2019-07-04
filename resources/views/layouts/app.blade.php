@@ -64,9 +64,9 @@
                       @guest
                           @else
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="#">Tempat</a>
+                          <a class="dropdown-item" href="/Tempat">Tempat</a>
                           <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">Tempat Saya</a>
+                          <a class="dropdown-item" href="/input">Tempat Saya</a>
                           <a class="dropdown-item" href="#">Tempat Favorit</a>
                       </div>
                           @endguest
@@ -153,7 +153,7 @@
 
                     <div class="form-group">
                         <label for="password"><span class="fas fa-eye"></span> Password</label>
-                        <input id="password" type="text" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"  placeholder="Enter password">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"  placeholder="Enter password">
 
                         @error('password')
                         <span class="invalid-feedback" role="alert">

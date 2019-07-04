@@ -44,7 +44,6 @@ class CreateTempatUsahasTable extends Migration
             $table->foreign('status_kepemilikan_id')->references('id')->on('status_kepemilikans');
             $table->foreign('jenis_investasi_id')->references('id')->on('jenis_investasis');
             $table->foreign('user_id')->references('id')->on('users');
-
         });
     }
 

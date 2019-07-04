@@ -142,7 +142,7 @@
                         <label for="formGroupExampleInput">Jenis Izin Usaha</label>
                         <div class="input-group-prepend">
                             <span class="input-group-text no-border-right"><i class="fas fa-clipboard-check"></i></span>
-                            <select name="jenis_izin_usaha" class="custom-select" id="inputGroupSelect01">
+                            <select name="id_jenis_izin_usaha" class="custom-select" id="inputGroupSelect01">
                                 <option selected>Choose...</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>

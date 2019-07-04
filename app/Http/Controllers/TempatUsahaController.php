@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\IzinUsaha;
+use App\JenisIzinUsaha;
 use App\TempatUsaha;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 
 class TempatUsahaController extends Controller
@@ -39,7 +42,16 @@ class TempatUsahaController extends Controller
     {
         return view('input');
     }
-
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'nama_tempat' => ['required', 'string', 'max:255'],
+            'alamat' => ['required', 'string', 'max:255'],
+            'username' => ['required','string','unique:users'],
+            'nik' => ['required','string','unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -51,7 +63,7 @@ class TempatUsahaController extends Controller
         $img = $request->file('foto_tempat');
         $filename = uniqid() . '.' . $img->getClientOriginalName();
         $photo = Storage::disk('public')->putFileAs('tempat_usaha', $img, $filename);
-        $izinUsaha = new IzinUsaha();
+
         TempatUsaha::create([
             'nama_tempat' => $request->nama_tempat,
             'foto_tempat_usaha' => $photo,
@@ -60,7 +72,7 @@ class TempatUsahaController extends Controller
             'deskripsi' => $request->deskripsi,
             'koordinat_lokasi' => $request->koordinat_lokasi,
             'kecamatan_id' => $request->kecamatan,
-            'izin_usaha_id' => $izinUsaha->tempatUsaha->id,
+//            'izin_usaha_id' => $izinUsaha->tempatUsaha->id,
             'desa_id' => $request->desa,
             'user_id'=>Auth::user()->id,
             'kategori_usaha_id' => $request->kategori_usaha,
@@ -70,11 +82,15 @@ class TempatUsahaController extends Controller
             'status' => 2,
 
         ]);
+//        $date = new Carbon();
+//        $inputDate = $request->tgl_izin_berkhir;
         IzinUsaha::create([
             'no_izin_usaha' => $request->no_izin_usaha,
-            'jenis_izin_usaha_id' => $request->jenis_izin_usaha,
-            'tgl_izin_berakhir' => $request->tgl_izin_berkhir,
+            'id_jenis_izin_usaha' => $request->get('id_jenis_izin_usaha'),
+            'tgl_izin_berakhir' => $request->get('tgl_izin_berakhir'),
         ]);
+
+
 //        return redirect()->back();
         return redirect('/');
 
@@ -86,9 +102,10 @@ class TempatUsahaController extends Controller
      * @param  \App\TempatUsaha  $tempatUsaha
      * @return \Illuminate\Http\Response
      */
-    public function show(TempatUsaha $tempatUsaha)
+    public function show($id)
     {
-        //
+        $tempatusaha = TempatUsaha::findOrFail($id);
+        return view('detailusaha',compact('tempatusaha'));
     }
 
     /**
