@@ -49,7 +49,7 @@ Route::get('/beranda', 'HomeController@index');
 
 Route::resource('tempatusaha','TempatUsahaController');
 Route::get('/', 'TempatUsahaController@index');
-Route::get('/input', 'TempatUsahaController@create');
+Route::get('/inputUsaha', 'TempatUsahaController@create');
 Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 
 //Route::get('/', 'TempatUsahaController@store');
@@ -64,4 +64,8 @@ Route::get('/detailproduk', function () {
 });
 Route::get('/maps', function () {
     return view('maps');
+});
+
+Route::get('/inputProduk', function () {
+    return view('inputProduk');
 });

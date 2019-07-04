@@ -18,7 +18,8 @@
                 <label for="formGroupExampleInput">Tambah Foto</label>
                 <div class="form-group inputDnD">
                     <label class="sr-only" for="inputFile">File Upload</label>
-                    <input type="file" name="foto_tempat" class="form-control-file text-primary font-weight-bold py-5" id="inputFile"
+                    <input type="file" name="foto_tempat" class="form-control-file text-primary font-weight-bold py-5"
+                           id="inputFile"
                            accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
                 </div>
             </div>
@@ -58,10 +59,57 @@
                 <label for="formGroupExampleInput">Lokasi Map</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-map-marked-alt"></i></span>
-                    <input name="koordinat_lokasi" type="text" class="form-control no-border-left" id="formGroupExampleInput"
+                    <input name="koordinat_lokasi" type="text" class="form-control no-border-left" id="searchmap"
                            placeholder="Lokasi pada map">
                 </div>
+                <div id="map-canvas" class="mt-3"></div>
             </div>
+
+            <div class="form-group">
+                <label for="">Lat</label>
+                <input type="text" class="form-control input-sm" name="lat" id="lat">
+            </div>
+
+            <div class="form-group">
+                <label for="">Lng</label>
+                <input type="text" class="form-control input-sm" name="lng" id="lng">
+            </div>
+            <script>
+                var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                    center: {
+                        lat: -7.983908,
+                        lng: 112.621391
+                    },
+                    zoom: 15
+                });
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: -7.983908,
+                        lng: 112.621391
+                    },
+                    map: map,
+                    draggable: true
+                });
+                var searchBox = new google.maps.places.SearchBox(document.getElementById('searchmap'));
+                google.maps.event.addListener(searchBox, 'places_changed', function () {
+                    var places = searchBox.getPlaces();
+                    var bounds = new google.maps.LatLngBounds();
+                    var i, place;
+                    for (i = 0; place = places[i]; i++) {
+                        bounds.extend(place.geometry.location);
+                        marker.setPosition(place.geometry.location); //set marker position new...
+                    }
+                    map.fitBounds(bounds);
+                    map.setZoom(15);
+                });
+                google.maps.event.addListener(marker, 'position_changed', function () {
+                    var latlang = marker.getPosition().lat() + '-' + marker.getPosition().lng();
+                    var lng = marker.getPosition().lng();
+                    $('#lat').val(latlang);
+                    $('#lng').val(lng);
+                });
+            </script>
+
             <div class="form-group">
                 <label for="formGroupExampleInput">Deskripsi</label>
                 <div class="input-group-prepend">
@@ -131,7 +179,8 @@
                 <label for="formGroupExampleInput">Nominal</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right">Rp.</span>
-                    <input name="nominal_investasi" type="number" class="form-control no-border-left" id="formGroupExampleInput"
+                    <input name="nominal_investasi" type="number" class="form-control no-border-left"
+                           id="formGroupExampleInput"
                            placeholder="Nominal">
                 </div>
             </div>
@@ -156,7 +205,8 @@
                         <label for="formGroupExampleInput">Nomor Izin Usaha</label>
                         <div class="input-group-prepend">
                             <span class="input-group-text no-border-right">No.</span>
-                            <input name="no_izin_usaha" type="number" class="form-control no-border-left" id="formGroupExampleInput"
+                            <input name="no_izin_usaha" type="number" class="form-control no-border-left"
+                                   id="formGroupExampleInput"
                                    placeholder="nomor">
                         </div>
                     </div>
