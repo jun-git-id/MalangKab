@@ -39,6 +39,14 @@ Route::get('/input', function () {
 Route::get('/Tempat', function () {
     return view('TempatUsaha');
 });
+
+Route::get('/detailp', function () {
+    return view('Detailproduk');
+});
+
+Route::get('/detail2', function () {
+    return view('cobainlagiya');
+});
 Route::get('/home', 'HomeController@index')->name('beranda');
 
 Route::get('/editProfile/{id}', 'ProfileController@edit');
