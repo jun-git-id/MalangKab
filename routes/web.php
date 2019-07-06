@@ -40,7 +40,7 @@ Route::get('/', 'HomeController@index')->name('beranda');
 Route::get('/Tempat', function () {
     return view('TempatUsaha');
 });
-Route::get('/home', 'HomeController@index')->name('beranda');
+Route::get('/', 'HomeController@index')->name('beranda');
 
 Route::get('/editProfile/{id}', 'ProfileController@edit');
 Route::put('/editProfile/{id}', 'ProfileController@update');
@@ -54,7 +54,7 @@ Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 
 //Route::get('/', 'TempatUsahaController@store');
 
-//Route::resource('/','ProdukController');
+//Route::get('/', 'TempatUsahaController@index');
 
 Route::get('/detailusaha', function () {
     return view('detailusaha');

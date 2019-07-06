@@ -8,7 +8,7 @@
             </div>
             <div class="col-lg-6 mt-4">
                 <h3><strong>{{$tempatusaha -> nama_tempat}} </strong></h3>
-                <h5 class="mt-4"><i>{{$tempatusaha -> id}}</i></h5>
+                <h5 class="mt-4"><i>{{$tempatusaha -> user ->nama}}</i></h5>
                 <h5 class="mt-4">{{$tempatusaha -> deskripsi}}</h5>
                 <h5 class="mt-4">{{$tempatusaha -> no_telp}}</h5>
                 <h5 class="mt-4">{{$tempatusaha -> alamat}}</h5>

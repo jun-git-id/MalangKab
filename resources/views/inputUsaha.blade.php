@@ -5,29 +5,48 @@
     <div class="container w-50">
         <form role="form" action="{{route('tempatusaha.store')}}" method="post" enctype="multipart/form-data">
             @csrf
-            {{method_field('POST')}}
+            @if ($errors->any())
+
+                <div class="alert alert-danger alert-dismissible fade show">
+                    @foreach ($errors->all() as $error)
+                        <ul>
+                            <li> {{ $error }} </li>
+                        </ul>
+                    @endforeach
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+            @endif
             <div class="form-group">
                 <label for="formGroupExampleInput">Nama Toko</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-store"></i></span>
-                    <input type="text" name="nama_tempat" class="form-control no-border-left" id="formGroupExampleInput"
-                           placeholder="Nama Toko">
+                    <input type="text" name="nama_tempat"
+                           class="form-control no-border-left"
+                           id="nama_tempat" placeholder="Nama Toko"
+                           value="{{old('nama_tempat')}}" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">Tambah Foto</label>
                 <div class="form-group inputDnD">
                     <label class="sr-only" for="inputFile">File Upload</label>
-                    <input type="file" name="foto_tempat" class="form-control-file text-primary font-weight-bold py-5"
-                           id="inputFile"
-                           accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+                    <div class="text-center">
+                        <img class="w-50" id="imageUpload" alt="">
+                    </div>
+                    <input type="file" name="foto_tempat"
+                           class="form-control-file text-primary font-weight-bold py-5"
+                           accept="image/*" onchange="readURL(this)" data-title="Drag and drop a file" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">Kecamatan</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
-                    <select name="kecamatan" class="custom-select" id="inputGroupSelect01">
+                    <select name="kecamatan" class="custom-select @error('kecamatan') is-invalid @enderror"
+                            id="inputGroupSelect01" required>
                         <option selected>Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -39,7 +58,7 @@
                 <label for="formGroupExampleInput">Desa</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
-                    <select name="desa" class="custom-select" id="inputGroupSelect01">
+                    <select name="desa" class="custom-select" id="inputGroupSelect01" required>
                         <option selected>Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -52,7 +71,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-home"></i></span>
                     <textarea name="alamat" placeholder="Alamat toko" class="form-control no-border-left"
-                              id="formGroupExampleInput"></textarea>
+                              id="formGroupExampleInput" required value="{{old('alamat')}}"></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -115,7 +134,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-info-circle"></i></span>
                     <input name="deskripsi" type="text" class="form-control no-border-left" id="formGroupExampleInput"
-                           placeholder="Deskripsi">
+                           placeholder="Deskripsi" required value="{{old('deskripsi')}}">
                 </div>
             </div>
             <div class="form-group">
@@ -123,7 +142,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-phone"></i></span>
                     <input type="number" name="no_telp" class="form-control no-border-left" id="formGroupExampleInput"
-                           placeholder="Nomor telepon">
+                           placeholder="Nomor telepon" required value="{{old('no_telp')}}">
                 </div>
             </div>
             <h3 class="py-4">Data Tempat Usaha</h3>
@@ -131,7 +150,7 @@
                 <label for="formGroupExampleInput">Kategori Usaha</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
-                    <select name="kategori_usaha" class="custom-select" id="inputGroupSelect01">
+                    <select name="kategori_usaha" class="custom-select" id="inputGroupSelect01" required>
                         <option selected>Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -143,7 +162,7 @@
                 <label for="formGroupExampleInput">Kegiatan Usaha</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-grip-horizontal"></i></span>
-                    <select name="kegiatan_usaha" class="custom-select" id="inputGroupSelect01">
+                    <select name="kegiatan_usaha" class="custom-select" id="inputGroupSelect01" required>
                         <option selected>Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -155,7 +174,7 @@
                 <label for="formGroupExampleInput">Status Kepemilikan</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-people-carry"></i></span>
-                    <select name="status_kepemilikan" class="custom-select" id="inputGroupSelect01">
+                    <select name="status_kepemilikan" class="custom-select" id="inputGroupSelect01" required>
                         <option selected>Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -167,7 +186,7 @@
                 <label for="formGroupExampleInput">Jenis Investasi</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-coins"></i></span>
-                    <select name="jenis_investasi" class="custom-select" id="inputGroupSelect01">
+                    <select name="jenis_investasi" class="custom-select" id="inputGroupSelect01" required>
                         <option selected>Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -191,7 +210,7 @@
                         <label for="formGroupExampleInput">Jenis Izin Usaha</label>
                         <div class="input-group-prepend">
                             <span class="input-group-text no-border-right"><i class="fas fa-clipboard-check"></i></span>
-                            <select name="id_jenis_izin_usaha" class="custom-select" id="inputGroupSelect01">
+                            <select name="id_jenis_izin_usaha" class="custom-select" id="inputGroupSelect01" required>
                                 <option selected>Choose...</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -206,8 +225,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text no-border-right">No.</span>
                             <input name="no_izin_usaha" type="number" class="form-control no-border-left"
-                                   id="formGroupExampleInput"
-                                   placeholder="nomor">
+                                   id="formGroupExampleInput" placeholder="nomor" required
+                                   value="{{old('no_izin_usaha')}}">
                         </div>
                     </div>
                 </div>
@@ -217,7 +236,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text no-border-right"><i class="fas fa-calendar-alt"></i></span>
                             <input name="tgl_izin_berakhir" type="date" class="form-control no-border-left"
-                                   placeholder="">
+                                   placeholder="" required value="{{old('tgl_izin_usaha')}}">
                         </div>
                     </div>
                 </div>

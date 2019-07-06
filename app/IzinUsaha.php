@@ -12,6 +12,6 @@ class IzinUsaha extends Model
 
     public function tempatUsaha()
     {
-        return $this->hasOne(TempatUsaha::class);
+        return $this->hasOne(TempatUsaha::class,'izin_usaha_id','id');
     }
 }

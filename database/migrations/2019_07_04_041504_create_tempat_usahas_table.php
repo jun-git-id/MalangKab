@@ -20,7 +20,7 @@ class CreateTempatUsahasTable extends Migration
             $table->string('alamat');
             $table->string('no_telp');
             $table->string('deskripsi');
-            $table->unsignedInteger('izin_usaha_id')->nullable();
+            $table->unsignedInteger('izin_usaha_id');
             $table->string('koordinat_lokasi');
             $table->unsignedInteger('kecamatan_id');
             $table->unsignedInteger('desa_id');
@@ -28,6 +28,7 @@ class CreateTempatUsahasTable extends Migration
             $table->unsignedInteger('kegiatan_usaha_id');
             $table->unsignedInteger('status_kepemilikan_id');
             $table->unsignedInteger('jenis_investasi_id');
+            $table->integer('nominal_investasi')->default(0)->nullable();
             $table->unsignedInteger("user_id");
             $table->integer("updated_by")->nullable();
             $table->integer('like')->nullable()->default(0);
