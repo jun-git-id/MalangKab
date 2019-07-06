@@ -48,8 +48,8 @@ Route::put('/editProfile/{id}', 'ProfileController@update');
 Route::get('/beranda', 'HomeController@index');
 
 Route::resource('tempatusaha','TempatUsahaController');
-Route::get('/input', 'TempatUsahaController@create');
-Route::get('/', 'TempatUsahaController@store');
+Route::get('/', 'TempatUsahaController@index');
+Route::get('/inputUsaha', 'TempatUsahaController@create');
 Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 
 //Route::get('/', 'TempatUsahaController@store');
@@ -61,4 +61,11 @@ Route::get('/detailusaha', function () {
 });
 Route::get('/detailproduk', function () {
     return view('detailproduk');
+});
+Route::get('/maps', function () {
+    return view('maps');
+});
+
+Route::get('/inputProduk', function () {
+    return view('inputProduk');
 });

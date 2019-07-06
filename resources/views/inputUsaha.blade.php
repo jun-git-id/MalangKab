@@ -40,10 +40,7 @@
                            class="form-control-file text-primary font-weight-bold py-5"
                            accept="image/*" onchange="readURL(this)" data-title="Drag and drop a file" required>
                 </div>
-
-
             </div>
-
             <div class="form-group">
                 <label for="formGroupExampleInput">Kecamatan</label>
                 <div class="input-group-prepend">
@@ -56,9 +53,7 @@
                         <option value="3">Three</option>
                     </select>
                 </div>
-
             </div>
-
             <div class="form-group">
                 <label for="formGroupExampleInput">Desa</label>
                 <div class="input-group-prepend">
@@ -70,7 +65,6 @@
                         <option value="3">Three</option>
                     </select>
                 </div>
-
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">Alamat Toko</label>
@@ -79,18 +73,62 @@
                     <textarea name="alamat" placeholder="Alamat toko" class="form-control no-border-left"
                               id="formGroupExampleInput" required value="{{old('alamat')}}"></textarea>
                 </div>
-
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">Lokasi Map</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-map-marked-alt"></i></span>
-                    <input name="koordinat_lokasi" type="text" class="form-control no-border-left"
-                           id="formGroupExampleInput"
-                           placeholder="Lokasi pada map" required value="{{old('koordinat_lokasi')}}">
+                    <input name="koordinat_lokasi" type="text" class="form-control no-border-left" id="searchmap"
+                           placeholder="Lokasi pada map">
                 </div>
-
+                <div id="map-canvas" class="mt-3"></div>
             </div>
+
+            <div class="form-group">
+                <label for="">Lat</label>
+                <input type="text" class="form-control input-sm" name="lat" id="lat">
+            </div>
+
+            <div class="form-group">
+                <label for="">Lng</label>
+                <input type="text" class="form-control input-sm" name="lng" id="lng">
+            </div>
+            <script>
+                var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                    center: {
+                        lat: -7.983908,
+                        lng: 112.621391
+                    },
+                    zoom: 15
+                });
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: -7.983908,
+                        lng: 112.621391
+                    },
+                    map: map,
+                    draggable: true
+                });
+                var searchBox = new google.maps.places.SearchBox(document.getElementById('searchmap'));
+                google.maps.event.addListener(searchBox, 'places_changed', function () {
+                    var places = searchBox.getPlaces();
+                    var bounds = new google.maps.LatLngBounds();
+                    var i, place;
+                    for (i = 0; place = places[i]; i++) {
+                        bounds.extend(place.geometry.location);
+                        marker.setPosition(place.geometry.location); //set marker position new...
+                    }
+                    map.fitBounds(bounds);
+                    map.setZoom(15);
+                });
+                google.maps.event.addListener(marker, 'position_changed', function () {
+                    var latlang = marker.getPosition().lat() + '-' + marker.getPosition().lng();
+                    var lng = marker.getPosition().lng();
+                    $('#lat').val(latlang);
+                    $('#lng').val(lng);
+                });
+            </script>
+
             <div class="form-group">
                 <label for="formGroupExampleInput">Deskripsi</label>
                 <div class="input-group-prepend">
@@ -98,7 +136,6 @@
                     <input name="deskripsi" type="text" class="form-control no-border-left" id="formGroupExampleInput"
                            placeholder="Deskripsi" required value="{{old('deskripsi')}}">
                 </div>
-
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">Nomor Telepon</label>
@@ -107,7 +144,6 @@
                     <input type="number" name="no_telp" class="form-control no-border-left" id="formGroupExampleInput"
                            placeholder="Nomor telepon" required value="{{old('no_telp')}}">
                 </div>
-
             </div>
             <h3 class="py-4">Data Tempat Usaha</h3>
             <div class="form-group">
@@ -121,7 +157,6 @@
                         <option value="3">Three</option>
                     </select>
                 </div>
-
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">Kegiatan Usaha</label>
@@ -134,7 +169,6 @@
                         <option value="3">Three</option>
                     </select>
                 </div>
-
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">Status Kepemilikan</label>
@@ -147,7 +181,6 @@
                         <option value="3">Three</option>
                     </select>
                 </div>
-
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">Jenis Investasi</label>
@@ -160,7 +193,6 @@
                         <option value="3">Three</option>
                     </select>
                 </div>
-
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">Nominal</label>
@@ -170,7 +202,6 @@
                            id="formGroupExampleInput"
                            placeholder="Nominal">
                 </div>
-
             </div>
             <h3 class="py-4">Detail Izin Usaha</h3>
             <div class="row">
@@ -186,7 +217,6 @@
                                 <option value="3">Three</option>
                             </select>
                         </div>
-
                     </div>
                 </div>
                 <div class="col">
@@ -198,7 +228,6 @@
                                    id="formGroupExampleInput" placeholder="nomor" required
                                    value="{{old('no_izin_usaha')}}">
                         </div>
-
                     </div>
                 </div>
                 <div class="col">
@@ -209,7 +238,6 @@
                             <input name="tgl_izin_berakhir" type="date" class="form-control no-border-left"
                                    placeholder="" required value="{{old('tgl_izin_usaha')}}">
                         </div>
-
                     </div>
                 </div>
             </div>

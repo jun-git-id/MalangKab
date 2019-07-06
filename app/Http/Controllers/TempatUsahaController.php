@@ -41,7 +41,7 @@ class TempatUsahaController extends Controller
      */
     public function create()
     {
-        return view('input');
+        return view('inputUsaha');
     }
 
 
