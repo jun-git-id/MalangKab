@@ -76,8 +76,10 @@
                       </div>
                           @endguest
                   </li>
+                  <li class="nav-item mr-3 mt-lg-0 mt-3">
+                      <a class="nav-link" href="#">Maps</a>
+                  </li>
                   <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
-
                       <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Produk
                       </a>
