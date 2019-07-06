@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+use App\TempatUsaha;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('beranda');
+
+        $products = Product::all();
+        $tempatusaha = TempatUsaha::all();
+
+        return view('beranda', compact(['products','tempatusaha']));
     }
 }

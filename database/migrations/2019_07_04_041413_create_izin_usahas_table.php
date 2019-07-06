@@ -15,7 +15,7 @@ class CreateIzinUsahasTable extends Migration
     {
         Schema::create('izin_usahas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('no_izin_usaha');
+            $table->string('no_izin_usaha')->unique();
             $table->unsignedInteger('id_jenis_izin_usaha');
             $table->date('tgl_izin_berakhir');
             $table->timestamps();

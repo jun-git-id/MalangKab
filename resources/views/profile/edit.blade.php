@@ -17,7 +17,7 @@
 
 {{--                    <figure class="media-object">--}}
 {{--                        @foreach($profile as $item)--}}
-                        <img id="userfoto" class="w-100" src="{{ asset('storage/' . Auth::user()->foto)}}">
+                        <img id="imageUpload" class="w-100" src="{{ asset('storage/' . Auth::user()->foto)}}">
 {{--                            @endforeach--}}
 {{--                    </figure>--}}
                 </div>
