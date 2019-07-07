@@ -16,15 +16,18 @@ class CreateTempatUsahasTable extends Migration
         Schema::create('tempat_usahas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_tempat');
-            $table->string('foto_tempat_usaha')->nullable();
+            $table->string('foto_tempat_usaha');
             $table->string('alamat');
             $table->string('no_telp');
             $table->string('deskripsi');
-            $table->unsignedInteger('izin_usaha_id');
-            $table->string('koordinat_lokasi');
+//            $table->unsignedInteger('izin_usaha_id');
+            $table->string('lokasi');
+            $table->string('lokasi_lat')->nullable();
+            $table->string('lokasi_lang')->nullable();
             $table->unsignedInteger('kecamatan_id');
             $table->unsignedInteger('desa_id');
             $table->unsignedInteger('kategori_usaha_id');
+            $table->unsignedInteger('sub_kategori_usaha_id');
             $table->unsignedInteger('kegiatan_usaha_id');
             $table->unsignedInteger('status_kepemilikan_id');
             $table->unsignedInteger('jenis_investasi_id');
@@ -37,10 +40,11 @@ class CreateTempatUsahasTable extends Migration
             $table->enum('status', ['Approve','Pending'])->default('Pending');
             $table->timestamps();
 
-            $table->foreign('izin_usaha_id')->references('id')->on('izin_usahas');
+//            $table->foreign('izin_usaha_id')->references('id')->on('izin_usahas');
             $table->foreign('kecamatan_id')->references('id')->on('kecamatans');
             $table->foreign('desa_id')->references('id')->on('desas');
             $table->foreign('kategori_usaha_id')->references('id')->on('kategori_usahas');
+            $table->foreign('sub_kategori_usaha_id')->references('id')->on('sub_kategori_usahas');
             $table->foreign('kegiatan_usaha_id')->references('id')->on('kegiatan_usahas');
             $table->foreign('status_kepemilikan_id')->references('id')->on('status_kepemilikans');
             $table->foreign('jenis_investasi_id')->references('id')->on('jenis_investasis');

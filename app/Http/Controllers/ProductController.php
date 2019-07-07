@@ -3,19 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Product;
-use App\TempatUsaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index()
-    {
+//    public function index()
+//    {
 //        $products = Product::all();
-//        $tempatusaha = TempatUsaha::all();
 //
-//        return view('beranda', compact(['products','tempatusaha']));
-    }
+//        return view('beranda', compact('products'));
+//    }
 
     public function create()
     {

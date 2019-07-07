@@ -14,11 +14,13 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/custom.js') }}" defer></script>
     <script src="{{ asset('js/jquery.js') }}" defer></script>
 
     {{--ingat ini--}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAttrDieK4pHmh5qkeWAmNMsBxpTZk-Lg&libraries=places"
             type="text/javascript"></script>
 
     <!-- font-awesome icons -->

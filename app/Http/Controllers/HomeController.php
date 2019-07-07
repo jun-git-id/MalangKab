@@ -27,8 +27,8 @@ class HomeController extends Controller
     {
 
         $products = Product::all();
-        $tempatusaha = TempatUsaha::all();
+        $tempatusaha = TempatUsaha::all()->where('status','=','Approve');
 
-        return view('beranda', compact(['products','tempatusaha']));
+        return view('beranda', compact(['tempatusaha','products']));
     }
 }

@@ -70,64 +70,29 @@
                 <label for="formGroupExampleInput">Alamat Toko</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-home"></i></span>
-                    <textarea name="alamat" placeholder="Alamat toko" class="form-control no-border-left"
-                              id="formGroupExampleInput" required value="{{old('alamat')}}"></textarea>
+                    <textarea name="alamat" placeholder="Alamat toko" value="{{old('alamat')}}" class="form-control no-border-left"
+                              id="formGroupExampleInput" required ></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">Lokasi Map</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-map-marked-alt"></i></span>
-                    <input name="koordinat_lokasi" type="text" class="form-control no-border-left" id="searchmap"
-                           placeholder="Lokasi pada map">
+                    <input name="lokasi" type="text" class="form-control no-border-left" id="searchmap"
+                           placeholder="Lokasi pada map" value="{{old('lokasi')}}">
                 </div>
                 <div id="map-canvas" class="mt-3"></div>
             </div>
 
             <div class="form-group">
                 <label for="">Lat</label>
-                <input type="text" class="form-control input-sm" name="lat" id="lat">
+                <input type="text" class="form-control input-sm" name="lokasi_lat" id="lat">
             </div>
 
             <div class="form-group">
                 <label for="">Lng</label>
-                <input type="text" class="form-control input-sm" name="lng" id="lng">
+                <input type="text" class="form-control input-sm" name="lokasi_lang" id="lng">
             </div>
-            <script>
-                var map = new google.maps.Map(document.getElementById('map-canvas'), {
-                    center: {
-                        lat: -7.983908,
-                        lng: 112.621391
-                    },
-                    zoom: 15
-                });
-                var marker = new google.maps.Marker({
-                    position: {
-                        lat: -7.983908,
-                        lng: 112.621391
-                    },
-                    map: map,
-                    draggable: true
-                });
-                var searchBox = new google.maps.places.SearchBox(document.getElementById('searchmap'));
-                google.maps.event.addListener(searchBox, 'places_changed', function () {
-                    var places = searchBox.getPlaces();
-                    var bounds = new google.maps.LatLngBounds();
-                    var i, place;
-                    for (i = 0; place = places[i]; i++) {
-                        bounds.extend(place.geometry.location);
-                        marker.setPosition(place.geometry.location); //set marker position new...
-                    }
-                    map.fitBounds(bounds);
-                    map.setZoom(15);
-                });
-                google.maps.event.addListener(marker, 'position_changed', function () {
-                    var latlang = marker.getPosition().lat() + '-' + marker.getPosition().lng();
-                    var lng = marker.getPosition().lng();
-                    $('#lat').val(latlang);
-                    $('#lng').val(lng);
-                });
-            </script>
 
             <div class="form-group">
                 <label for="formGroupExampleInput">Deskripsi</label>
@@ -151,6 +116,18 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="kategori_usaha" class="custom-select" id="inputGroupSelect01" required>
+                        <option selected>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput">Sub Kategori Usaha</label>
+                <div class="input-group-prepend">
+                    <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
+                    <select name="sub_kategori_usaha" class="custom-select" id="inputGroupSelect01" required>
                         <option selected>Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -187,7 +164,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-coins"></i></span>
                     <select name="jenis_investasi" class="custom-select" id="inputGroupSelect01" required>
-                        <option selected>Choose...</option>
+                        <option selected value="null">Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -204,6 +181,7 @@
                 </div>
             </div>
             <h3 class="py-4">Detail Izin Usaha</h3>
+            <div class="dynamic-rows">
             <div class="row">
                 <div class="col">
                     <div class="form-group">
@@ -241,9 +219,72 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-info">Tambah Izin Usaha</button>
-            <button type="submit" class="btn btn-info mt-4 w-100">Tambah Toko</button>
+            </div>
+            <button type="button" class="btn btn-primary add">Tambah Izin Usaha</button>
+            <button type="button" class="btn btn-danger remove ml-2">Hapus Izin Usaha</button>
+            <button type="submit" class="btn btn-primary mt-4 w-100">Tambah Toko</button>
 
         </form>
     </div>
+
+    <script type="text/template" id="izin_usaha_rows">
+{{--            <div class="col-lg-4">--}}
+{{--                <p>--}}
+{{--                    <label for="FirstName_{{count}}">{{count}}. First Name</label><br>--}}
+{{--                    <input type="text" name="FirstName" id="FirstName_{{count}}">--}}
+{{--                </p>--}}
+{{--            </div>--}}
+{{--            <div class="col-lg-4">--}}
+{{--                <p>--}}
+{{--                    <label for="LastName_{{count}}">Last Name</label><br>--}}
+{{--                    <input type="text" name="LastName" id="LastName_{{count}}">--}}
+{{--                </p>--}}
+{{--            </div>--}}
+{{--            <div class="col-lg-4">--}}
+{{--                <p>--}}
+{{--                    <label for="EmailAddress_{{count}}">Email Address</label><br>--}}
+{{--                    <input type="text" name="EmailAddress" id="EmailAddress_{{count}}">--}}
+{{--                </p>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Jenis Izin Usaha</label>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text no-border-right"><i class="fas fa-clipboard-check"></i></span>
+                        <select name="id_jenis_izin_usaha" class="custom-select" id="inputGroupSelect01" required>
+                            <option selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Nomor Izin Usaha</label>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text no-border-right">No.</span>
+                        <input name="no_izin_usaha" type="number" class="form-control no-border-left"
+                               id="formGroupExampleInput" placeholder="nomor" required
+                               value="{{old('no_izin_usaha')}}">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Tanggal Izin Berakhir</label>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text no-border-right"><i class="fas fa-calendar-alt"></i></span>
+                        <input name="tgl_izin_berakhir" type="date" class="form-control no-border-left"
+                               placeholder="" required value="{{old('tgl_izin_usaha')}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
 @endsection

@@ -27,12 +27,12 @@ class TempatUsahaController extends Controller
 
     }
 
-    public function index()
-    {
-        $tempatusaha = TempatUsaha::with(['user']);
-
-        return view('beranda', compact('tempatusaha'));
-    }
+//    public function index()
+//    {
+//        $tempatusaha = TempatUsaha::with(['user']);
+//
+//        return view('beranda', compact('tempatusaha'));
+//    }
 
     /**
      * Show the form for creating a new resource.
@@ -41,9 +41,35 @@ class TempatUsahaController extends Controller
      */
     public function create()
     {
-        return view('inputUsaha');
+        return view('tempatUsaha.inputUsaha');
     }
-
+//    protected function validator(Request $request)
+//    {
+//        $validator = Validator::make($request->all(), [
+//            'nama_tempat' => ['required', 'string', 'max:255'],
+//            'alamat' => ['required', 'string', 'max:255'],
+//            'foto_tempat_usaha' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:10000',
+//            'no_telp' => ['required', 'string', 'max:12'],
+//            'deskripsi' => ['required', 'string'],
+//            'lokasi' => ['required', 'string', 'max:255'],
+//            'kecamatan_id' => 'required|array|min:1',
+//            'izin_usaha_id' => 'required|array|min:1',
+//            'desa_id' => 'required|array|min:1',
+//            'kategori_usaha_id' => 'required|array|min:1',
+//            'kegiatan_usaha_id' => 'required|array|min:1',
+//            'status_kepemilikan_id' => 'required|array|min:1',
+//            'jenis_investasi_id' => 'required|array|min:1',
+//            'no_izin_usaha' => 'required|array|min:1',
+//            'id_jenis_izin_usaha' => 'required|array|min:1',
+//            'tgl_izin_berakhir' => ['required','date'],
+//        ]);
+//
+//        if ($validator->fails()) {
+//            return redirect('/inputUsaha')
+//                ->withErrors($validator)
+//                ->withInput();
+//        }
+//    }
 
     /**
      * Store a newly created resource in storage.
@@ -53,53 +79,50 @@ class TempatUsahaController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nama_tempat' => ['required', 'string', 'max:255'],
-            'alamat' => ['required', 'string', 'max:255'],
-            'foto_tempat_usaha' => ['required', 'image','mimes:jpg,jpeg,png,gif, svg','max:10000'],
-            'no_telp' => ['required', 'string', 'max:12'],
-            'deskripsi' => ['required', 'string'],
-            'koordinat_lokasi' => ['required', 'string', 'max:255'],
-            'kecamatan_id' => ['required'],
-            'izin_usaha_id' => ['required'],
-            'desa_id' => ['required'],
-            'kategori_usaha_id' => ['required'],
-            'kegiatan_usaha_id' => ['required'],
-            'status_kepemilikan_id' => ['required'],
-            'jenis_investasi_id' => ['required'],
-            'no_izin_usaha' => ['required','string'],
-            'id_jenis_izin_usaha' => ['required'],
-            'tgl_izin_berakhir' => ['required','date'],
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('/input')
-                ->withErrors($validator)
-                ->withInput();
-        }
+//        $validator = Validator::make($request->all(), [
+//            'nama_tempat' => ['bail','required', 'string', 'max:255'],
+//            'alamat' => ['required', 'string', 'max:255'],
+//            'foto_tempat_usaha' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:10000',
+//            'no_telp' => ['required', 'string', 'max:12'],
+//            'deskripsi' => ['required', 'string'],
+//            'lokasi' => ['required', 'string', 'max:255'],
+//            'kecamatan_id' => 'required|array|min:1',
+//            'izin_usaha_id' => 'required|array|min:1',
+//            'desa_id' => 'required|array|min:1',
+//            'kategori_usaha_id' => 'required|array|min:1',
+//            'kegiatan_usaha_id' => 'required|array|min:1',
+//            'status_kepemilikan_id' => 'required|array|min:1',
+//            'jenis_investasi_id' => 'required|array|min:1',
+//            'no_izin_usaha' => 'required|unique:izin_usahas',
+//            'id_jenis_izin_usaha' => 'required|array|min:1',
+//            'tgl_izin_berakhir' => ['required','date'],
+//        ]);
+//
+//        if ($validator->fails()) {
+//            return redirect('/inputUsaha')
+//                ->withErrors($validator)
+//                ->withInput();
+//        }
 
         $img = $request->file('foto_tempat');
         $filename = uniqid() . '.' . $img->getClientOriginalName();
         $photo = Storage::disk('public')->putFileAs('tempat_usaha', $img, $filename);
 
-        $izinUsaha = IzinUsaha::create([
-            'no_izin_usaha' => $request->no_izin_usaha,
-            'id_jenis_izin_usaha' => $request->get('id_jenis_izin_usaha'),
-            'tgl_izin_berakhir' => $request->get('tgl_izin_berakhir'),
-        ]);
-
-        TempatUsaha::create([
+        $tempatUsaha = TempatUsaha::create([
             'nama_tempat' => $request->nama_tempat,
             'foto_tempat_usaha' => $photo,
             'alamat' => $request->alamat,
             'no_telp' => $request->no_telp,
             'deskripsi' => $request->deskripsi,
-            'koordinat_lokasi' => $request->koordinat_lokasi,
+            'lokasi' => $request->lokasi,
+            'lokasi_lat' => $request->lokasi_lat,
+            'lokasi_lang' => $request->lokasi_lang,
             'kecamatan_id' => $request->kecamatan,
-            'izin_usaha_id' => $izinUsaha->id,
+//            'izin_usaha_id' => $izinUsaha->id,
             'desa_id' => $request->desa,
             'user_id' => Auth::user()->id,
             'kategori_usaha_id' => $request->kategori_usaha,
+            'sub_kategori_usaha_id' => $request->sub_kategori_usaha,
             'kegiatan_usaha_id' => $request->kegiatan_usaha,
             'status_kepemilikan_id' => $request->status_kepemilikan,
             'jenis_investasi_id' => $request->jenis_investasi,
@@ -107,6 +130,14 @@ class TempatUsahaController extends Controller
             'status' => 2,
 
         ]);
+        IzinUsaha::create([
+            'no_izin_usaha' => $request->no_izin_usaha,
+            'id_tempat_usaha' => $tempatUsaha -> id,
+            'id_jenis_izin_usaha' => $request->get('id_jenis_izin_usaha'),
+            'tgl_izin_berakhir' => $request->get('tgl_izin_berakhir'),
+        ]);
+
+
 
         return redirect('/');
 
@@ -121,7 +152,7 @@ class TempatUsahaController extends Controller
     public function show($id)
     {
         $tempatusaha = TempatUsaha::findOrFail($id);
-        return view('detailusaha', compact('tempatusaha'));
+        return view('tempatUsaha.detailusaha', compact('tempatusaha'));
     }
 
     /**
