@@ -64,6 +64,6 @@ Route::get('/inputProduk', function () {
     return view('inputProduk');
 });
 
-Route::get('/usahaSaya', function () {
-    return view('usahaSaya');
-});
+//Route::get('/usahaSaya', function () {
+//    return view('usahaSaya');
+//});

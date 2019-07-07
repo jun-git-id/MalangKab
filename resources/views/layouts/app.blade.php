@@ -56,11 +56,11 @@
                     <a class="nav-link" href="#">Tempat Usaha</a>
                   </li> -->
                   <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
-                      <a class="nav-link dropdown-toggle" href="/input" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Kategori
                       </a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="/input">Hotel</a>
+                              <a class="dropdown-item" href="#">Hotel</a>
                               <a class="dropdown-item" href="/Tempat">Bengkel</a>
                           </div>
                   </li>
@@ -73,7 +73,7 @@
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="/Tempat">Tempat</a>
                           <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="/input">Tempat Saya</a>
+                          <a class="dropdown-item" href="/tempatusaha">Tempat Saya</a>
                           <a class="dropdown-item" href="#">Tempat Favorit</a>
                       </div>
                           @endguest

@@ -11,6 +11,6 @@ class JenisIzinUsaha extends Model
     ];
 
     public function izinUsaha(){
-        return $this->hasMany(IzinUsaha::class);
+        return $this->hasMany(IzinUsaha::class,'id_jenis_izin_usaha','id');
     }
 }

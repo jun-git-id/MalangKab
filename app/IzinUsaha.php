@@ -17,6 +17,6 @@ class IzinUsaha extends Model
         return $this->hasOne(TempatUsaha::class,'izin_usaha_id','id');
     }
     public function jenisIzin(){
-        return $this->belongsTo(JenisIzinUsaha::class);
+        return $this->belongsTo(JenisIzinUsaha::class,'id_jenis_izin_usaha','id');
     }
 }

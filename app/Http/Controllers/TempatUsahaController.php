@@ -27,12 +27,12 @@ class TempatUsahaController extends Controller
 
     }
 
-//    public function index()
-//    {
-//        $tempatusaha = TempatUsaha::with(['user']);
-//
-//        return view('beranda', compact('tempatusaha'));
-//    }
+    public function index()
+    {
+        $tempatusaha = TempatUsaha::all()->where('user_id', '=', Auth::user()->id);
+
+        return view('usahaSaya', compact('tempatusaha'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -132,14 +132,13 @@ class TempatUsahaController extends Controller
         ]);
         IzinUsaha::create([
             'no_izin_usaha' => $request->no_izin_usaha,
-            'id_tempat_usaha' => $tempatUsaha -> id,
+            'id_tempat_usaha' => $tempatUsaha->id,
             'id_jenis_izin_usaha' => $request->get('id_jenis_izin_usaha'),
             'tgl_izin_berakhir' => $request->get('tgl_izin_berakhir'),
         ]);
 
 
-
-        return redirect('/');
+        return redirect('/tempatusaha');
 
     }
 
@@ -161,21 +160,55 @@ class TempatUsahaController extends Controller
      * @param \App\TempatUsaha $tempatUsaha
      * @return \Illuminate\Http\Response
      */
-    public function edit(TempatUsaha $tempatUsaha)
+    public function edit($id)
     {
-        //
+        $tempatusaha = TempatUsaha::findOrFail($id);
+        $izinusaha = IzinUsaha::all()->where('id_tempat_usaha', '=', $id)->first();
+        return view('tempatUsaha.editUsaha', compact(['tempatusaha', 'izinusaha']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\TempatUsaha $tempatUsaha
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, TempatUsaha $tempatUsaha)
+
+    public function update(Request $request, $id)
     {
-        //
+        $tempatUsaha = TempatUsaha::findOrFail($id);
+        $tempatUsaha->nama_tempat = $request->nama_tempat;
+
+        $tempatUsaha->alamat = $request->alamat;
+        $tempatUsaha->no_telp = $request->no_telp;
+        $tempatUsaha->deskripsi = $request->deskripsi;
+        $tempatUsaha->lokasi = $request->lokasi;
+        $tempatUsaha->lokasi_lat = $request->lokasi_lat;
+        $tempatUsaha->lokasi_lang = $request->lokasi_lang;
+        $tempatUsaha->kecamatan_id = $request->kecamatan;
+//            'izin_usaha_id' => $izinUsaha->id,
+        $tempatUsaha->desa_id = $request->desa;
+        $tempatUsaha->user_id = Auth::user()->id;
+        $tempatUsaha->kategori_usaha_id = $request->kategori_usaha;
+        $tempatUsaha->sub_kategori_usaha_id = $request->sub_kategori_usaha;
+        $tempatUsaha->kegiatan_usaha_id = $request->kegiatan_usaha;
+        $tempatUsaha->status_kepemilikan_id = $request->status_kepemilikan;
+        $tempatUsaha->jenis_investasi_id = $request->jenis_investasi;
+        $tempatUsaha->nominal_investasi = $request->nominal_investasi;
+        $tempatUsaha->status = 2;
+        if ($request->hasFile('foto_tempat')) {
+            $img = $request->file('foto_tempat');
+            $filename = uniqid() . '.' . $img->getClientOriginalName();
+            $photo = Storage::disk('public')->putFileAs('tempat_usaha', $img, $filename);
+            $tempatUsaha->foto_tempat_usaha = $photo;
+            Storage::delete('public/' . $tempatUsaha->photo);
+
+        }
+
+        $izinUsaha = IzinUsaha::all()->where('id_tempat_usaha', '=', $id)->first();
+        $izinUsaha->no_izin_usaha = $request->no_izin_usaha;
+        $izinUsaha->id_tempat_usaha = $tempatUsaha->id;
+        $izinUsaha->id_jenis_izin_usaha = $request->get('id_jenis_izin_usaha');
+        $izinUsaha->tgl_izin_berakhir = $request->get('tgl_izin_berakhir');
+
+        $tempatUsaha->save();
+        $izinUsaha->save();
+
+        return redirect('/tempatusaha')->with('status', 'Tempat Usaha successfully updated');
     }
 
     /**
@@ -184,8 +217,15 @@ class TempatUsahaController extends Controller
      * @param \App\TempatUsaha $tempatUsaha
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TempatUsaha $tempatUsaha)
+    public function destroy($id)
     {
-        //
+        $tempatUsaha = TempatUsaha::findOrFail($id);
+        $izinusaha = IzinUsaha::all()->where('id_tempat_usaha', '=', $id)->first();
+        Storage::delete('public/' . $tempatUsaha->foto_tempat_usaha);
+        $izinusaha->delete();
+        $tempatUsaha->delete();
+
+
+        return redirect('tempatusaha')->with('success', 'deleted');
     }
 }
