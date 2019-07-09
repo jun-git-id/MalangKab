@@ -47,10 +47,10 @@
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="kecamatan" class="custom-select @error('kecamatan') is-invalid @enderror"
                             id="inputGroupSelect01" required>
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected value="0">Pilih Kecamatan</option>
+                        @foreach($kecamatan as $item)
+                            <option value="{{$item->id}}">{{$item->nama_kecamatan}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -59,10 +59,10 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="desa" class="custom-select" id="inputGroupSelect01" required>
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected value="0">Pilih Desa</option>
+                        @foreach($desa as $item)
+                            <option value="{{$item->id}}">{{$item->nama_desa}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -70,8 +70,9 @@
                 <label for="formGroupExampleInput">Alamat Toko</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-home"></i></span>
-                    <textarea name="alamat" placeholder="Alamat toko" value="{{old('alamat')}}" class="form-control no-border-left"
-                              id="formGroupExampleInput" required ></textarea>
+                    <textarea name="alamat" placeholder="Alamat toko" value="{{old('alamat')}}"
+                              class="form-control no-border-left"
+                              id="formGroupExampleInput" required></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -116,10 +117,10 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="kategori_usaha" class="custom-select" id="inputGroupSelect01" required>
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected value="0">Pilih Kategori Usaha</option>
+                        @foreach($kategoriUsaha as $item)
+                            <option value="{{$item->id}}">{{$item->nama_kategori_usaha}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -128,10 +129,10 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="sub_kategori_usaha" class="custom-select" id="inputGroupSelect01" required>
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected value="0">Pilih Sub Kategori Usaha</option>
+                        @foreach($subKategori as $item)
+                            <option value="{{$item->id}}">{{$item->sub_kategori_usaha}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -140,10 +141,11 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-grip-horizontal"></i></span>
                     <select name="kegiatan_usaha" class="custom-select" id="inputGroupSelect01" required>
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected value="0">Pilih Kegiatan Usaha</option>
+
+                        @foreach($kegiatanUsaha as $item)
+                            <option value="{{$item->id}}">{{$item->nama_kegiatan_usaha}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -152,10 +154,10 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-people-carry"></i></span>
                     <select name="status_kepemilikan" class="custom-select" id="inputGroupSelect01" required>
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected value="0">Pilih Status Kepemilikan</option>
+                        @foreach($statusKepemilikan as $item)
+                            <option value="{{$item->id}}">{{$item->status_kepemilikan}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -164,10 +166,10 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-coins"></i></span>
                     <select name="jenis_investasi" class="custom-select" id="inputGroupSelect01" required>
-                        <option selected value="null">Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected value="0">Pilih Jenis Investasi</option>
+                        @foreach($jenisInvestasi as $item)
+                            <option value="{{$item->id}}">{{$item->jenis_investasi}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -182,43 +184,46 @@
             </div>
             <h3 class="py-4">Detail Izin Usaha</h3>
             <div class="dynamic-rows">
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Jenis Izin Usaha</label>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text no-border-right"><i class="fas fa-clipboard-check"></i></span>
-                            <select name="id_jenis_izin_usaha" class="custom-select" id="inputGroupSelect01" required>
-                                <option selected>Choose...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Jenis Izin Usaha</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text no-border-right"><i
+                                            class="fas fa-clipboard-check"></i></span>
+                                <select name="id_jenis_izin_usaha" class="custom-select" id="inputGroupSelect01"
+                                        required>
+                                    <option selected value="0">Pilih Jenis Izin Usaha</option>
+                                    @foreach($jenisIzinUsaha as $item)
+                                        <option value="{{$item->id}}">{{$item->jenis_izin_usaha}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Nomor Izin Usaha</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text no-border-right">No.</span>
+                                <input name="no_izin_usaha" type="text" class="form-control no-border-left"
+                                       id="formGroupExampleInput" placeholder="nomor" required
+                                       value="{{old('no_izin_usaha')}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Tanggal Izin Berakhir</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text no-border-right"><i
+                                            class="fas fa-calendar-alt"></i></span>
+                                <input name="tgl_izin_berakhir" type="date" class="form-control no-border-left"
+                                       placeholder="" required value="{{old('tgl_izin_usaha')}}">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Nomor Izin Usaha</label>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text no-border-right">No.</span>
-                            <input name="no_izin_usaha" type="number" class="form-control no-border-left"
-                                   id="formGroupExampleInput" placeholder="nomor" required
-                                   value="{{old('no_izin_usaha')}}">
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Tanggal Izin Berakhir</label>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text no-border-right"><i class="fas fa-calendar-alt"></i></span>
-                            <input name="tgl_izin_berakhir" type="date" class="form-control no-border-left"
-                                   placeholder="" required value="{{old('tgl_izin_usaha')}}">
-                        </div>
-                    </div>
-                </div>
-            </div>
             </div>
             <button type="button" class="btn btn-primary add">Tambah Izin Usaha</button>
             <button type="button" class="btn btn-danger remove ml-2">Hapus Izin Usaha</button>
@@ -228,25 +233,25 @@
     </div>
 
     <script type="text/template" id="izin_usaha_rows">
-{{--            <div class="col-lg-4">--}}
-{{--                <p>--}}
-{{--                    <label for="FirstName_{{count}}">{{count}}. First Name</label><br>--}}
-{{--                    <input type="text" name="FirstName" id="FirstName_{{count}}">--}}
-{{--                </p>--}}
-{{--            </div>--}}
-{{--            <div class="col-lg-4">--}}
-{{--                <p>--}}
-{{--                    <label for="LastName_{{count}}">Last Name</label><br>--}}
-{{--                    <input type="text" name="LastName" id="LastName_{{count}}">--}}
-{{--                </p>--}}
-{{--            </div>--}}
-{{--            <div class="col-lg-4">--}}
-{{--                <p>--}}
-{{--                    <label for="EmailAddress_{{count}}">Email Address</label><br>--}}
-{{--                    <input type="text" name="EmailAddress" id="EmailAddress_{{count}}">--}}
-{{--                </p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        {{--            <div class="col-lg-4">--}}
+        {{--                <p>--}}
+        {{--                    <label for="FirstName_{{count}}">{{count}}. First Name</label><br>--}}
+        {{--                    <input type="text" name="FirstName" id="FirstName_{{count}}">--}}
+        {{--                </p>--}}
+        {{--            </div>--}}
+        {{--            <div class="col-lg-4">--}}
+        {{--                <p>--}}
+        {{--                    <label for="LastName_{{count}}">Last Name</label><br>--}}
+        {{--                    <input type="text" name="LastName" id="LastName_{{count}}">--}}
+        {{--                </p>--}}
+        {{--            </div>--}}
+        {{--            <div class="col-lg-4">--}}
+        {{--                <p>--}}
+        {{--                    <label for="EmailAddress_{{count}}">Email Address</label><br>--}}
+        {{--                    <input type="text" name="EmailAddress" id="EmailAddress_{{count}}">--}}
+        {{--                </p>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
 
 
         <div class="row">
