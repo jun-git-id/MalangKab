@@ -3,15 +3,14 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <form class="d-flex">
-                <input class="form-control col-lg-10" type="text" placeholder="Cari..." required>
+            <form class="d-flex col-lg form">
+                <input class="form-control col-10" type="text" placeholder="Cari..." required>
                 <input class="button col-2" type="button" value="Cari">
             </form>
-        </div>
-    </div>
+
     <div class="container">
-        <div class="row ml-4">
-            <div class="form-group w-25 mr-5">
+        <div class="row">
+            <div class="form-group w-25 col-lg-4 d-flex">
                 <select class="form-control" id="exampleFormControlSelect1">
                     <option disabled selected hidden>Pilih Kecamatan</option>
                     <option>Semua</option>
@@ -20,7 +19,7 @@
                     <option>5</option>
                 </select>
             </div>
-            <div class="form-group w-25 ml-5 mr-5">
+            <div class="form-group w-25 col-lg-4 d-flex">
                 <select class="form-control" id="exampleFormControlSelect1">
                     <option disabled selected hidden>Pilih Desa</option>
                     <option>Semua</option>
@@ -29,7 +28,7 @@
                     <option>5</option>
                 </select>
             </div>
-            <div class="form-group w-25 ml-5">
+            <div class="form-group w-25 col-lg-4 d-flex">
                 <select class="form-control" id="exampleFormControlSelect1">
                     <option disabled selected hidden>Pilih Kategori</option>
                     <option>Semua</option>
@@ -190,5 +189,6 @@
                 </div>
             </div>
 
-
+        </div>
+    </div>
 @endsection

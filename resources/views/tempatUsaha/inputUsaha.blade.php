@@ -3,6 +3,7 @@
 @section('content')
 
     <div class="container w-50">
+
         <form role="form" action="{{route('tempatusaha.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             @if ($errors->any())
