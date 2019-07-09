@@ -37,9 +37,9 @@
 
 </head>
 
-<body style="background-color: #f2f6fc">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Malang Marketplace</a>
+<body style="background-color: white">
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <a class="navbar-brand" style="color: white" href="/">Malang Marketplace</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -50,13 +50,13 @@
               <ul class="navbar-nav ml-lg-auto text-center">
 
                   <li class="nav-item mr-3 mt-lg-0 mt-3">
-                      <a class="nav-link" href="/">Beranda <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" style="color: white" href="/">Beranda <span class="sr-only">(current)</span></a>
                   </li>
                   <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Tempat Usaha</a>
                   </li> -->
                   <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Kategori
                       </a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -65,7 +65,7 @@
                           </div>
                   </li>
                   <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
-                      <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a class="nav-link" style="color: white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Tempat Usaha
                       </a>
                       @guest
@@ -79,10 +79,10 @@
                           @endguest
                   </li>
                   <li class="nav-item mr-3 mt-lg-0 mt-3">
-                      <a class="nav-link" href="#">Maps</a>
+                      <a class="nav-link" style="color: white" href="#">Maps</a>
                   </li>
                   <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
-                      <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a class="nav-link" style="color: white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Produk
                       </a>
                       @guest
@@ -98,16 +98,16 @@
                   </li>
                   @guest
                       <li class="nav-item mr-3 mt-lg-0 mt-3">
-                          <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#">Login</a>
+                          <a class="nav-link" data-toggle="modal" data-target="#exampleModal" style="color: white" href="#">Login</a>
                       </li>
                       @if (Route::has('register'))
                           <li class="nav-item mr-3 mt-lg-0 mt-3">
-                              <a class="nav-link" href="/register">Daftar</a>
+                              <a class="nav-link" style="color: white" href="/register">Daftar</a>
                           </li>
                       @endif
                   @else
                       <li class="nav-item dropdown">
-                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          <a id="navbarDropdown" class="nav-link dropdown-toggle" style="color: white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                               {{ Auth::user()->username }} <span class="caret"></span>
                           </a>
 
@@ -190,8 +190,8 @@
 @yield('content')
 </main>
 
-<div class="cpy-right text-center py-4">
-    <p class="text-black-50">© 2019 Marketplace Kab.Malang. All rights reserved </p>
+<div class="cpy-right text-center py-2 mt-5 ">
+    <p class="text-white mt-2">© 2019 Marketplace Kab.Malang. All rights reserved </p>
 </div>
 </body>
 

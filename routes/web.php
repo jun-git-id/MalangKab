@@ -67,3 +67,15 @@ Route::get('/inputProduk', function () {
 //Route::get('/usahaSaya', function () {
 //    return view('usahaSaya');
 //});
+Route::get('/usahaFavorit', function () {
+    return view('usahaFavorit');
+});
+Route::get('/produk', function () {
+    return view('produk');
+});
+Route::get('/produkSaya', function () {
+    return view('produkSaya');
+});
+Route::get('/produkFavorit', function () {
+    return view('produkFavorit');
+});
