@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -10,13 +10,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{asset('img/sawah.jpg')}}" class="d-block w-100 tales" alt="Sawah di desa">
+                    <img src="{{asset('img/sawah.jpg')}}" class="d-block w-100 slidenya" alt="Sawah di desa">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{asset('img/kebun.jpg')}}" class="d-block w-100 tales" alt="Kebun di desa">
+                    <img src="{{asset('img/kebun.jpg')}}" class="d-block w-100 slidenya" alt="Kebun di desa">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{asset('img/usaha.jpg')}}" class="d-block w-100 tales" alt="Bekerja">
+                    <img src="{{asset('img/usaha.jpg')}}" class="d-block w-100 slidenya" alt="Bekerja">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -29,8 +29,8 @@
             </a>
         </div>
     </div>
-    <div class="container mt-4">
-        <h3>Tempat Usaha</h3>
+    <div class="container mt-5 ">
+        <h3>Tempat Usaha <a href="/Tempat" class="right" style="font-size: 18px" >Lihat semua</a></h3>
     </div>
 
     {{--card--}}
@@ -64,8 +64,8 @@
             @endif
             </div>
         </div>
-    <div class="container mt-4">
-        <h3>Produk</h3>
+    <div class="container mt-5">
+        <h3>Produk<a href="#" class="right" style="font-size: 18px" >Lihat semua</a></h3>
     </div>
     <div class="container ">
         <div class="row">
