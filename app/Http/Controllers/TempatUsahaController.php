@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Desa;
 use App\IzinUsaha;
+use App\JenisInvestasi;
 use App\JenisIzinUsaha;
+use App\KategoriUsaha;
+use App\Kecamatan;
+use App\KegiatanUsaha;
+use App\StatusKepemilikan;
+use App\SubKategoriUsaha;
 use App\TempatUsaha;
 use App\User;
 use Carbon\Carbon;
@@ -41,7 +48,16 @@ class TempatUsahaController extends Controller
      */
     public function create()
     {
-        return view('tempatUsaha.inputUsaha');
+        $kecamatan = Kecamatan::all();
+        $desa = Desa::all();
+        $kategoriUsaha = KategoriUsaha::all();
+        $subKategori = SubKategoriUsaha::all();
+        $kegiatanUsaha = KegiatanUsaha::all();
+        $statusKepemilikan = StatusKepemilikan::all();
+        $jenisInvestasi = JenisInvestasi::all();
+        $jenisIzinUsaha = JenisIzinUsaha::all();
+        return view('tempatUsaha.inputUsaha',compact('kecamatan','desa','kategoriUsaha','subKategori','kegiatanUsaha',
+            'statusKepemilikan','jenisInvestasi','jenisIzinUsaha'));
     }
 //    protected function validator(Request $request)
 //    {
