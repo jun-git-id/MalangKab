@@ -17,7 +17,7 @@ class CreateIzinUsahasTable extends Migration
             $table->increments('id');
             $table->string('no_izin_usaha')->unique();
             $table->unsignedInteger('id_jenis_izin_usaha');
-            $table->unsignedInteger('id_tempat_usaha');
+            $table->unsignedInteger('id_tempat_usaha')->nullable();
             $table->date('tgl_izin_berakhir');
             $table->timestamps();
 
