@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-//    public function index()
-//    {
-//        $products = Product::all();
-//
-//        return view('beranda', compact('products'));
-//    }
+    public function index()
+    {
+        $products = Product::all();
+
+        return view('produk', compact('products'));
+    }
 
     public function create()
     {

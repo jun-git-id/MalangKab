@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-4">
-        <h3>Produk Saya <a href="#" class="right btn btn-outline-info" >Tambah Produk</a></h3>
+        <h3>Produk Saya <a href="{{route('products.create')}}" class="right btn btn-outline-info" >Tambah Produk</a></h3>
     </div>
 
     <div class="container ">

@@ -47,9 +47,13 @@ Route::put('/editProfile/{id}', 'ProfileController@update');
 Route::get('/', 'HomeController@index');
 
 Route::resource('tempatusaha','TempatUsahaController');
-Route::get('/inputUsaha', 'TempatUsahaController@create');
+Route::get('/tempat-usaha-saya','TempatUsahaController@tempatUsahaSaya');
+Route::post('tempatusaha/create/fetch', 'TempatUsahaController@subKategori')->name('dynamicdependent.fetch');
 Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 Route::resource('kecamatan','KecamatanController');
+
+Route::resource('products','ProductController');
+
 Route::get('/detailusaha', function () {
     return view('detailusaha');
 });

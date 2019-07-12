@@ -117,7 +117,7 @@
                 <label for="formGroupExampleInput">Kategori Usaha</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
-                    <select name="kategori_usaha" class="custom-select" id="inputGroupSelect01" required>
+                    <select name="kategori_usaha" class="custom-select dynamic" id="kategori" data-dependent="kategori" required>
                         <option selected value="0">Pilih Kategori Usaha</option>
                         @foreach($kategoriUsaha as $item)
                             <option value="{{$item->id}}">{{$item->nama_kategori_usaha}}</option>
@@ -128,12 +128,13 @@
             <div class="form-group">
                 <label for="formGroupExampleInput">Sub Kategori Usaha</label>
                 <div class="input-group-prepend">
-                    <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
-                    <select name="sub_kategori_usaha" class="custom-select" id="inputGroupSelect01" required>
-                        <option selected value="0">Pilih Sub Kategori Usaha</option>
-                        @foreach($subKategori as $item)
-                            <option value="{{$item->id}}">{{$item->sub_kategori_usaha}}</option>
-                        @endforeach
+                    <span class="input-group-text no-border-right dynamic"><i class="fas fa-list-ul"></i></span>
+                    <select name="sub_kategori_usaha" class="custom-select" id="subKategori" data-dependent="subKategori" required>
+{{--                        <option selected value="0">Pilih Sub Kategori Usaha</option>--}}
+{{--                        @foreach($subKategori as $item)--}}
+{{--                            <option value="{{$item->id}}">{{$item->sub_kategori_usaha}}</option>--}}
+{{--                        @endforeach--}}
+                        <option value=""></option>
                     </select>
                 </div>
             </div>
@@ -275,4 +276,35 @@
             </div>
         </div>
     </script>
+    <script>
+        $(document).ready(function(){
+
+            $('.dynamic').change(function(){
+                if($(this).val() != '')
+                {
+                    var select = $(this).attr("id");
+                    var value = $(this).val();
+                    var dependent = $(this).data('dependent');
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{ route('dynamicdependent.fetch') }}",
+                        method:"POST",
+                        data:{select:select, value:value, _token:_token, dependent:dependent},
+                        success:function(result)
+                        {
+                            $('#'+dependent).html(result);
+                        }
+
+                    })
+                }
+            });
+
+            $('#kategori').change(function(){
+                $('#subKategori').val('');
+
+            });
+
+        });
+    </script>
+
 @endsection
