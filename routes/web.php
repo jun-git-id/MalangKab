@@ -41,6 +41,18 @@ Route::get('/Tempat', function () {
     return view('TempatUsaha');
 });
 
+Route::get('/detailp', function () {
+    return view('Detailproduk');
+});
+
+Route::get('/detail2', function () {
+    return view('cobainlagiya');
+});
+Route::get('/detail3', function () {
+    return view('cobaindetail');
+});
+Route::get('/home', 'HomeController@index')->name('beranda');
+
 Route::get('/editProfile/{id}', 'ProfileController@edit');
 Route::put('/editProfile/{id}', 'ProfileController@update');
 
