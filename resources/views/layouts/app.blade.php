@@ -11,17 +11,6 @@
     <title>{{ config('app.name', 'Malang Marketplace') }}
     </title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/custom.js') }}" defer></script>
-    <script src="{{ asset('js/jquery.js') }}" defer></script>
-
-    {{--ingat ini--}}
-    <script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeM7wY1YRzynn4DNyFk1RhhBfpsihr3nM&libraries=places"
-            type="text/javascript"></script>
-
     <!-- font-awesome icons -->
     <link href="{{asset('css/fontawesome-all.min.css')}}" rel="stylesheet">
     <!-- Fonts -->
@@ -34,7 +23,26 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/custom.js') }}" defer></script>
+    <script src="{{ asset('js/jquery.js') }}" defer></script>
 
+    {{--ingat ini--}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeM7wY1YRzynn4DNyFk1RhhBfpsihr3nM&libraries=places"
+            type="text/javascript"></script>
+
+    <script src="/js/swal.min.js"></script>
+
+    {{--    dropzone--}}
+    <link rel="stylesheet" href="{{ asset('css/dropzone.min.css') }}">
+    <script src="{{ asset('js/dropzone.js') }}"></script>
+    <script type='text/javascript'>
+        window.Laravel = '<?php echo json_encode([
+            'csrfToken' => csrf_token(),]); ?>'
+    </script>
 </head>
 
 <body style="background-color: white">
@@ -67,37 +75,40 @@
                 </div>
             </li>
             <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
-                <a class="nav-link" style="color: white" href="{{route('tempatusaha.index')}}" id="navbarDropdown"  data-toggle="@guest dropdown @endguest"
+                <a class="nav-link" style="color: white" href="{{route('tempatusaha.index')}}" id="navbarDropdown"
+                   data-toggle="dropdown"
                    role="button" aria-haspopup="true" aria-expanded="false">
                     Tempat Usaha
                 </a>
-                @guest
-                @else
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{route('tempatusaha.index')}}">Tempat</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{route('tempatusaha.index')}}">Tempat</a>
+                    @guest
+                    @else
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/tempat-usaha-saya">Tempat Saya</a>
                         <a class="dropdown-item" href="usahaFavorit">Tempat Favorit</a>
-                    </div>
+                </div>
                 @endguest
             </li>
             <li class="nav-item mr-3 mt-lg-0 mt-3">
                 <a class="nav-link" style="color: white" href="/maps">Maps</a>
             </li>
             <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
-                <a class="nav-link" style="color: white" href="{{route('products.index')}}" id="navbarDropdown" role="button"
-                   data-toggle="@guest dropdown @endguest" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" style="color: white" href="{{route('products.index')}}" id="navbarDropdown"
+                   role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Produk
                 </a>
-                @guest
-                @else
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{route('products.index')}}">Produk</a>
+                    @guest
+                    @else
 
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/produk">Produk</a>
+
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/produkSaya">Produk Saya</a>
+                        <a class="dropdown-item" href="/produk-saya">Produk Saya</a>
                         <a class="dropdown-item" href="/produkFavorit">Produk Favorit</a>
-                    </div>
+                </div>
                 @endguest
 
             </li>
@@ -111,7 +122,7 @@
                     </li>
                 @endif
             @else
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown mr-5">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" style="color: white" href="#" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->username }} <span class="caret"></span>

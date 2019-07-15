@@ -53,6 +53,10 @@ Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 Route::resource('kecamatan','KecamatanController');
 
 Route::resource('products','ProductController');
+Route::get('/produk-saya','ProductController@produkSaya');
+Route::post('upload-image', 'ProductController@uploadImage')->name('upload.image');
+Route::delete('delete-image/{id}', 'ProductController@deleteImage')->name('delete.image');
+
 
 Route::get('/detailusaha', function () {
     return view('detailusaha');
@@ -77,9 +81,9 @@ Route::get('/usahaFavorit', function () {
 Route::get('/produk', function () {
     return view('produk');
 });
-Route::get('/produkSaya', function () {
-    return view('produkSaya');
-});
+//Route::get('/produkSaya', function () {
+//    return view('produkSaya');
+//});
 Route::get('/produkFavorit', function () {
     return view('produkFavorit');
 });

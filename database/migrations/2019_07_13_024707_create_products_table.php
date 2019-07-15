@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('deskripsi');
             $table->integer('harga');
             $table->integer('stok');
-            $table->string('foto');
+            $table->unsignedInteger('unit_product_id');
             $table->unsignedInteger('jenis_produk_id');
             $table->unsignedInteger('tempat_usaha_id');
             $table->integer('like')->nullable()->default(0);
@@ -28,7 +28,8 @@ class CreateProductsTable extends Migration
             $table->timestamps();
 
             $table->foreign('jenis_produk_id')->references('id')->on('jenis_produks');
-            $table->foreign('tempat_usaha_id')->references('id')->on('tempat_usahas');
+            $table->foreign('tempat_usaha_id')->references('id')->on('tempat_usahas')->onDelete('cascade');
+            $table->foreign('unit_product_id')->references('id')->on('unit_products');
 
         });
     }

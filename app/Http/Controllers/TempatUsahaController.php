@@ -43,7 +43,7 @@ class TempatUsahaController extends Controller
 
     public function tempatUsahaSaya()
     {
-        $tempatusaha = TempatUsaha::all()->where('user_id', '=', Auth::user()->id);
+        $tempatusaha = TempatUsaha::where('user_id', '=', Auth::user()->id)->get();
 
         return view('usahaSaya', compact('tempatusaha'));
     }
@@ -59,7 +59,7 @@ class TempatUsahaController extends Controller
         $desa = Desa::all();
         $kategoriUsaha = KategoriUsaha::all();
         $kategoriUsahaId = KategoriUsaha::get('id');
-        $subKategori = SubKategoriUsaha::where('id_kategori_usaha', '=', $kategoriUsahaId)->get();
+        $subKategori = SubKategoriUsaha::all();
         $kegiatanUsaha = KegiatanUsaha::all();
         $statusKepemilikan = StatusKepemilikan::all();
         $jenisInvestasi = JenisInvestasi::all();
@@ -284,6 +284,6 @@ class TempatUsahaController extends Controller
         $tempatUsaha->delete();
 
 
-        return redirect('tempatusaha')->with('success', 'deleted');
+        return route('tempatusaha.index');
     }
 }
