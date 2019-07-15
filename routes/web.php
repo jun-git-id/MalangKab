@@ -36,7 +36,7 @@ Route::get('/profile', function () {
 //Route::get('/input', function () {
 //    return view('input');
 //});
-Route::get('/', 'HomeController@index')->name('beranda');
+//Route::get('/', 'HomeController@index')->name('beranda');
 Route::get('/Tempat', function () {
     return view('TempatUsaha');
 });
@@ -56,18 +56,46 @@ Route::get('/home', 'HomeController@index')->name('beranda');
 Route::get('/editProfile/{id}', 'ProfileController@edit');
 Route::put('/editProfile/{id}', 'ProfileController@update');
 
-Route::get('/beranda', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
 Route::resource('tempatusaha','TempatUsahaController');
-Route::get('/', 'TempatUsahaController@index');
-Route::get('/input', 'TempatUsahaController@create');
-//Route::get('/', 'TempatUsahaController@store');
+Route::get('/tempat-usaha-saya','TempatUsahaController@tempatUsahaSaya');
+Route::post('tempatusaha/create/fetch', 'TempatUsahaController@subKategori')->name('dynamicdependent.fetch');
+Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
+Route::resource('kecamatan','KecamatanController');
 
-//Route::resource('/','ProdukController');
+Route::resource('products','ProductController');
+Route::get('/produk-saya','ProductController@produkSaya');
+Route::post('upload-image', 'ProductController@uploadImage')->name('upload.image');
+Route::delete('delete-image/{id}', 'ProductController@deleteImage')->name('delete.image');
+
 
 Route::get('/detailusaha', function () {
     return view('detailusaha');
 });
 Route::get('/detailproduk', function () {
     return view('detailproduk');
+});
+Route::get('/maps', function () {
+    return view('maps');
+});
+
+Route::get('/inputProduk', function () {
+    return view('inputProduk');
+});
+
+//Route::get('/usahaSaya', function () {
+//    return view('usahaSaya');
+//});
+Route::get('/usahaFavorit', function () {
+    return view('usahaFavorit');
+});
+Route::get('/produk', function () {
+    return view('produk');
+});
+//Route::get('/produkSaya', function () {
+//    return view('produkSaya');
+//});
+Route::get('/produkFavorit', function () {
+    return view('produkFavorit');
 });

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+use App\TempatUsaha;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +15,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['index']]);
+
     }
 
     /**
@@ -23,6 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('beranda');
+
+        $products = Product::all();
+        $tempatusaha = TempatUsaha::all()->where('status','=','Approve');
+
+        return view('beranda', compact(['tempatusaha','products']));
     }
 }

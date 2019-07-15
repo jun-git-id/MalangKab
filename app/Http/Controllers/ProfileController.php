@@ -50,6 +50,6 @@ class ProfileController extends Controller
 
         $profile->save();
 
-        return redirect('/editProfile/'.$id)->with('status', 'Villa successfully updated');
+        return redirect('/editProfile/'.$id)->with('status', 'Profile successfully updated');
     }
 }

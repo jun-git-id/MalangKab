@@ -9,4 +9,8 @@ class Desa extends Model
     protected $fillable = [
         'nama_desa'
     ];
+
+    public function tempatUsaha(){
+        return $this->hasMany(TempatUsaha::class);
+    }
 }

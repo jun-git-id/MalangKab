@@ -4,15 +4,18 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mt-4 d-flex">
-                <img src="{{asset('img/kebun.jpg')}}" alt="..." class="img-thumbnail">
+                <img src="{{asset('storage/'. $tempatusaha -> foto_tempat_usaha)}}" alt="..." class="img-detail-thumbnail">
             </div>
             <div class="col-lg-6 mt-4">
-                <h3><strong>Nama Tempat Usaha </strong></h3>
-                <h5 class="mt-4">Nama Pemilik</h5>
-                <h5 class="mt-4">Deskripsi</h5>
-                <h5 class="mt-4">Nomor telepon</h5>
-                <h5 class="mt-4">Alamat tempat usaha</h5>
+                <h3><strong>{{$tempatusaha -> nama_tempat}} </strong></h3>
+                <h5 class="mt-4"><i>{{$tempatusaha -> user ->nama}}</i></h5>
+                <h5 class="mt-4">{{$tempatusaha -> deskripsi}}</h5>
+                <h5 class="mt-4">{{$tempatusaha -> no_telp}}</h5>
+                <h5 class="mt-4">{{$tempatusaha -> alamat}}</h5>
                 <h5 class="mt-4">Maps</h5>
+                <div class="card">
+                    <img src="{{asset('img/maps.png')}}" class="" style="height: 200px" alt="">
+                </div>
             </div>
         </div>
     </div>

@@ -6226,6 +6226,7 @@ a.close.disabled {
   position: relative;
   width: 100%;
   overflow: hidden;
+  max-height:500px !important
 }
 
 .carousel-inner::after {
@@ -6568,7 +6569,7 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-  background-color: #f8f9fa !important;
+  background-color: #5682a3 !important;
 }
 
 a.bg-light:hover, a.bg-light:focus,
