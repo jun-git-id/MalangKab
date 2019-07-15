@@ -22,9 +22,12 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::all();
-
-        return view('produk', compact('products'));
+//        $products = Product::all();
+//
+//        return view('produk', compact('products'));
+        return view('produk', [
+            'products' => Product::with(['productimage'])->get(),
+        ]);
     }
 
     public function produkSaya()
@@ -71,10 +74,21 @@ class ProductController extends Controller
         ]);
     }
 
-    public function edit(Product $product)
+    public function edit($id)
     {
-        $images = $product->productimage()->get();
-        dd($images);
+        $products = Product::findOrFail($id);
+        return view('editProduk',compact('products'));
+    }
+
+    public function update(Request $request, Product $product)
+    {
+
+        $product->update($request->all());
+
+        $product->productimage()->syncWithoutDetaching($request['product_images']);
+
+        Session::flash('success', 'Berhasil');
+        return redirect()->back();
     }
 
     public function deleteImage($id)

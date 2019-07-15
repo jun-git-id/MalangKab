@@ -48,7 +48,7 @@
                             <div class="col-lg-3 mt-4 d-flex">
                                 <div class="card" style="width: 18rem;">
                                     <a href="/detailproduk/{{$itemProduct->id}}">
-                                        <img src="{{asset('storage/'. $itemProduct->foto)}}"
+                                        <img src="{{ asset('storage/' . $itemProduct->image) }}"
                                              class="card-img-top py-2 card-img-container" alt="...">
                                     </a>
                                     <div class="card-body">

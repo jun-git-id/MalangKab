@@ -26,6 +26,6 @@ class Product extends Model
     }
     public function getImageAttribute()
     {
-        return ($this->productimage[0]->path . '/' . $this->productimage[0]->filename);
+        return ($this->productimage[0]->path . $this->productimage[0]->filename);
     }
 }
