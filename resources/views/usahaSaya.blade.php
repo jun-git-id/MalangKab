@@ -12,42 +12,18 @@
                     <div class="col-lg-3 mt-4 d-flex">
                         <div class="card" style="width: 18rem;">
                             <a href="/detailusaha/{{$itemUsaha->id}}">
-                                <img src="{{asset('storage/'. $itemUsaha->foto_tempat_usaha)}}" class="card-img-top py-2 card-img-container"  alt="...">
+                                <img src="{{asset('storage/'. $itemUsaha->foto_tempat_usaha)}}" class="card-img-top py-2 card-img-container mr-2 ml-2"   alt="...">
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title">{{$itemUsaha->nama_tempat}}</h5>
                                 <p class="card-text">{{$itemUsaha->deskripsi}}</p>
                                 <div class="row ml-0">
                                     <p>
-                                        <a href="{{route('tempatusaha.edit', $itemUsaha->id)}}" class="btn btn-outline-info mr-5 ml-2">Edit</a>
+                                        <a href="{{route('tempatusaha.edit',$itemUsaha->id)}}" class="btn btn-outline-info mr-5 ml-2">Edit</a>
                                     </p>
                                     <p>
-                                    <form action="{{ route('tempatusaha.destroy', $itemUsaha->id)}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" class="btn btn-outline-info ml-4" data-toggle="modal" data-target="#deleteUsaha">Hapus</button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="deleteUsaha" tabindex="-1" role="dialog" aria-labelledby="deleteUsahaModal" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="deleteUsahaModal"Hapus Tempat usaha</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Apakah anda yakin akan menghapus tempat usaha anda?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        <button class="btn btn-outline-info ml-4" onclick="deleteProduct('{{ $itemUsaha->id }}','{{ $itemUsaha->name }}')">Hapus
+                                        </button>
                                     </p>
                                 </div>
                             </div>
@@ -65,4 +41,34 @@
 
         </div>
     </div>
+    <script>
+
+        function deleteProduct(tempatUsahaId, namaTempat) {
+            swal({
+                title: "Apa anda yakin?",
+                text: "Anda Menghapus Product " + namaTempat,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete => {
+                if (willDelete) {
+                    let theUrl = "{{ route('tempatusaha.destroy', ':tempatUsahaId') }}";
+                    theUrl = theUrl.replace(":tempatUsahaId", tempatUsahaId);
+                    $.ajax({
+                        type: 'POST',
+                        url: theUrl,
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            _method: "delete"},
+                        success: function (data) {
+                            window.location.href = data;
+                        },
+                        error: function (data) {
+                            swal("Oops", "We couldn't connect to the server!", "error");
+                        }
+                    });
+                }
+            }));
+        }
+    </script>
 @endsection

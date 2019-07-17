@@ -3,18 +3,17 @@
 @section('content')
 
     <div class="container w-50">
-        <form role="form" action="{{route('tempatusaha.store')}}" method="post" enctype="multipart/form-data">
+        <form role="form" action="{{route('products.store')}}" method="post" enctype="multipart/form-data" id="thisproduct">
             @csrf
-            {{method_field('POST')}}
             <div class="form-group">
                 <label for="formGroupExampleInput">Jenis Produk / Layanan</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
-                    <select name="jenis_produk" class="custom-select" id="inputGroupSelect01">
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select name="jenis_produk_id" class="custom-select" id="inputGroupSelect01">
+                        <option selected>Pilih Jenis Produk</option>
+                        @foreach($jenisProduk as $item)
+                        <option value="{{$item -> id}}">{{$item -> jenis_produk}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -22,11 +21,16 @@
                 <label for="formGroupExampleInput">Pilih Tempat Usaha</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
-                    <select name="jenis_usaha" class="custom-select" id="inputGroupSelect01">
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select name="tempat_usaha_id" class="custom-select" id="inputGroupSelect01">
+                        <option selected>Pilih tempat usaha</option>
+                        @if($tempatUsaha ->count())
+                        @foreach($tempatUsaha as $item)
+                            <option value="{{$item -> id}}">{{$item -> nama_tempat}}</option>
+                        @endforeach
+                            @else
+                            <option value="">Tidak ada</option>
+
+                        @endif
                     </select>
                 </div>
             </div>
@@ -42,20 +46,16 @@
                 <label for="formGroupExampleInput">Deskripsi</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-info-circle"></i></span>
-                    <textarea name="deskripsi_produk" type="text" class="form-control no-border-left" id="formGroupExampleInput"
-                              placeholder="Deskripsi"></textarea>
+                    <input name="deskripsi" type="text" class="form-control no-border-left" id="formGroupExampleInput"
+                              placeholder="Deskripsi">
                 </div>
             </div>
             <div class="form-group">
-                <label for="formGroupExampleInput">Tambah Foto</label>
-                <div class="form-group inputDnD">
-                    <label class="sr-only" for="inputFile">File Upload</label>
-                    <input type="file" name="foto_produk" class="form-control-file text-primary font-weight-bold py-5"
-                           id="inputFile"
-                           accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
-                </div>
+                <label for="dropzone">Upload Image <a href="#" data-toggle="image-kesenian"
+                                                      title="Upload Foto Product mu! (multiple image)"><i
+                                class="fa fa-info-circle"></i></a></label>
+                <div id="file" class="dropzone"></div>
             </div>
-
 
             <div class="form-group">
                 <label for="formGroupExampleInput">Harga</label>
@@ -69,11 +69,11 @@
                 <label for="formGroupExampleInput">Unit Produk</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
-                    <select name="unit_produk" class="custom-select" id="inputGroupSelect01">
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select name="unit_product_id" class="custom-select" id="inputGroupSelect01">
+                        <option selected>Pilih unit</option>
+                        @foreach($unit as $item)
+                            <option value="{{$item -> id}}">{{$item -> unit_product}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -88,5 +88,44 @@
             <button type="submit" class="btn btn-info mt-4 w-100">Tambah Produk</button>
 
         </form>
+
     </div>
+    <script type="text/javascript">
+        let drop = new Dropzone('#file', {
+            addRemoveLinks: true,
+            url: '{{ route('upload.image') }}',
+            headers: {
+                'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
+            },
+
+        });
+
+        drop.on("success", function (file, res) {
+            file.id = res.id;
+            $("#thisproduct").append($('<input type="hidden" ' + 'name="product_images[]" ' + 'value="' + res.id + '" id="image' + res.id + '">'))
+        });
+
+
+        drop.on('removedfile', function (file) {
+            axios.delete('/delete-image/' + file.id)
+                .then(function (response) {
+                    console.log(response.status);
+                    $('#image' + file.id).remove();
+                })
+                .catch(function (error) {
+                });
+        });
+
+        function tambah() {
+            $('#input_video').before($('#form-clone').clone());
+        }
+
+        $("body").on("click", ".remove", function () {
+            $(this).closest(".form-group").remove();
+        });
+
+    </script>
 @endsection
+
+
+

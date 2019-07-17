@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row">
-        <form class="d-flex">
+        <form class="d-flex form">
             <input class="form-control col-lg-10" type="text" placeholder="Cari..." required>
             <input class="button col-2" type="button" value="Cari">
         </form>
@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <form action="/maps">
+    <form action="/maps" class="form">
             <div id="map-canvas"></div>
 
         <div class="form-group mt-5">

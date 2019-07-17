@@ -41,15 +41,36 @@ Route::get('/Tempat', function () {
     return view('TempatUsaha');
 });
 
+Route::get('/detailp', function () {
+    return view('Detailproduk');
+});
+
+Route::get('/detail2', function () {
+    return view('cobainlagiya');
+});
+Route::get('/detail3', function () {
+    return view('cobaindetail');
+});
+Route::get('/home', 'HomeController@index')->name('beranda');
+
 Route::get('/editProfile/{id}', 'ProfileController@edit');
 Route::put('/editProfile/{id}', 'ProfileController@update');
 
 Route::get('/', 'HomeController@index');
 
 Route::resource('tempatusaha','TempatUsahaController');
-Route::get('/inputUsaha', 'TempatUsahaController@create');
+Route::get('/tempat-usaha-saya','TempatUsahaController@tempatUsahaSaya');
+Route::get('/json-subkategori','TempatUsahaController@subKategori');
+Route::get('/json-desa','TempatUsahaController@desa');
 Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 Route::resource('kecamatan','KecamatanController');
+
+Route::resource('products','ProductController');
+Route::get('/produk-saya','ProductController@produkSaya');
+Route::post('upload-image', 'ProductController@uploadImage')->name('upload.image');
+Route::delete('delete-image/{id}', 'ProductController@deleteImage')->name('delete.image');
+
+
 Route::get('/detailusaha', function () {
     return view('detailusaha');
 });
@@ -73,9 +94,9 @@ Route::get('/usahaFavorit', function () {
 Route::get('/produk', function () {
     return view('produk');
 });
-Route::get('/produkSaya', function () {
-    return view('produkSaya');
-});
+//Route::get('/produkSaya', function () {
+//    return view('produkSaya');
+//});
 Route::get('/produkFavorit', function () {
     return view('produkFavorit');
 });

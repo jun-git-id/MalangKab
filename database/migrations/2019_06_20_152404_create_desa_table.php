@@ -15,10 +15,15 @@ class CreateDesaTable extends Migration
     {
         Schema::create('desas', function (Blueprint $table) {
             $table->Increments('id');
+            $table->unsignedInteger('kecamatan_id');
             $table->string('nama_desa');
+
+            $table->foreign('kecamatan_id')->references('id')->on('kecamatans');
         });
+
         Desa::insert([
-            'nama_desa' => 'dampit'
+            'nama_desa' => 'dampit',
+            'kecamatan_id' => 1,
         ]);
     }
 
