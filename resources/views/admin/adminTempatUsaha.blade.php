@@ -31,14 +31,30 @@
                             <td>Tiger Nixon</td>
                             <td>System Architect</td>
                             <td>Edinburgh</td>
-                            <td>61</td>
+                            <td>
+                                <a href="#"
+                                   class="btn btn-primary btn-xs dataTable">
+                                    <i class="fas fa-pencil-alt mr-2"></i>Ubah</a>
+                                <button onclick=""
+                                        class="btn btn-danger btn-xs dataTable">
+                                    <i class="fas fa-trash-alt mr-2"></i>Hapus
+                                </button>
+                            </td>
 
                         </tr>
                         <tr>
                             <td>Garrett Winters</td>
                             <td>Accountant</td>
                             <td>Tokyo</td>
-                            <td>63</td>
+                            <td>
+                                <a href="#"
+                                   class="btn btn-primary btn-xs dataTable">
+                                    <i class="fas fa-pencil-alt mr-2"></i>Ubah</a>
+                                <button onclick=""
+                                        class="btn btn-danger btn-xs dataTable">
+                                    <i class="fas fa-trash-alt mr-2"></i>Hapus
+                                </button>
+                            </td>
 
                         </tr>
                         </tbody>

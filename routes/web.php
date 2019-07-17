@@ -100,7 +100,7 @@ Route::get('/produk', function () {
 Route::get('/produkFavorit', function () {
     return view('produkFavorit');
 });
-Route::get('/adminDasboard', function () {
+Route::get('/admin', function () {
     return view('admin.dasboard');
 });
 Route::get('/adminTempatUsaha', function () {
