@@ -79,3 +79,9 @@ Route::get('/produkSaya', function () {
 Route::get('/produkFavorit', function () {
     return view('produkFavorit');
 });
+Route::get('/adminDasboard', function () {
+    return view('admin.dasboard');
+});
+Route::get('/adminTempatUsaha', function () {
+    return view('admin.adminTempatUsaha');
+});
