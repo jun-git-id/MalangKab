@@ -13,8 +13,7 @@
                 <h5 class="mt-4">{{$tempatusaha -> no_telp}}</h5>
                 <h5 class="mt-4">{{$tempatusaha -> alamat}}</h5>
                 <h5 class="mt-4">Maps</h5>
-                <div class="card">
-                    <img src="{{asset('img/maps.png')}}" class="" style="height: 200px" alt="">
+                <div id="map-canvas">
                 </div>
             </div>
         </div>
