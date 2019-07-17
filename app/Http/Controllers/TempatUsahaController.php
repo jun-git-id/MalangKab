@@ -17,6 +17,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -68,34 +70,18 @@ class TempatUsahaController extends Controller
             'statusKepemilikan', 'jenisInvestasi', 'jenisIzinUsaha'));
     }
 
+    public function subKategori(){
+        $kategori_id = Input::get('id');
+        $subKategori = SubKategoriUsaha::where('id_kategori_usaha','=',$kategori_id)->get();
 
-//    protected function validator(Request $request)
-//    {
-//        $validator = Validator::make($request->all(), [
-//            'nama_tempat' => ['required', 'string', 'max:255'],
-//            'alamat' => ['required', 'string', 'max:255'],
-//            'foto_tempat_usaha' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:10000',
-//            'no_telp' => ['required', 'string', 'max:12'],
-//            'deskripsi' => ['required', 'string'],
-//            'lokasi' => ['required', 'string', 'max:255'],
-//            'kecamatan_id' => 'required|array|min:1',
-//            'izin_usaha_id' => 'required|array|min:1',
-//            'desa_id' => 'required|array|min:1',
-//            'kategori_usaha_id' => 'required|array|min:1',
-//            'kegiatan_usaha_id' => 'required|array|min:1',
-//            'status_kepemilikan_id' => 'required|array|min:1',
-//            'jenis_investasi_id' => 'required|array|min:1',
-//            'no_izin_usaha' => 'required|array|min:1',
-//            'id_jenis_izin_usaha' => 'required|array|min:1',
-//            'tgl_izin_berakhir' => ['required','date'],
-//        ]);
-//
-//        if ($validator->fails()) {
-//            return redirect('/inputUsaha')
-//                ->withErrors($validator)
-//                ->withInput();
-//        }
-//    }
+        return response()->json($subKategori);
+    }
+    public function desa(){
+        $kecamatan_id = Input::get('id');
+        $desa = Desa::where('kecamatan_id','=',$kecamatan_id)->get();
+
+        return response()->json($desa);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -105,30 +91,6 @@ class TempatUsahaController extends Controller
      */
     public function store(Request $request)
     {
-//        $validator = Validator::make($request->all(), [
-//            'nama_tempat' => ['bail','required', 'string', 'max:255'],
-//            'alamat' => ['required', 'string', 'max:255'],
-//            'foto_tempat_usaha' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:10000',
-//            'no_telp' => ['required', 'string', 'max:12'],
-//            'deskripsi' => ['required', 'string'],
-//            'lokasi' => ['required', 'string', 'max:255'],
-//            'kecamatan_id' => 'required|array|min:1',
-//            'izin_usaha_id' => 'required|array|min:1',
-//            'desa_id' => 'required|array|min:1',
-//            'kategori_usaha_id' => 'required|array|min:1',
-//            'kegiatan_usaha_id' => 'required|array|min:1',
-//            'status_kepemilikan_id' => 'required|array|min:1',
-//            'jenis_investasi_id' => 'required|array|min:1',
-//            'no_izin_usaha' => 'required|unique:izin_usahas',
-//            'id_jenis_izin_usaha' => 'required|array|min:1',
-//            'tgl_izin_berakhir' => ['required','date'],
-//        ]);
-//
-//        if ($validator->fails()) {
-//            return redirect('/inputUsaha')
-//                ->withErrors($validator)
-//                ->withInput();
-//        }
 
         $img = $request->file('foto_tempat');
         $filename = uniqid() . '.' . $img->getClientOriginalName();
@@ -171,7 +133,7 @@ class TempatUsahaController extends Controller
         IzinUsaha::insert($insert_data);
 
 
-        return redirect('/tempatusaha');
+        return redirect('/tempat-usaha-saya');
 
     }
 

@@ -12,7 +12,7 @@
                     <div class="col-lg-3 mt-4 d-flex">
                         <div class="card" style="width: 18rem;">
                             <a href="/detailusaha/{{$itemUsaha->id}}">
-                                <img src="{{asset('storage/'. $itemUsaha->foto_tempat_usaha)}}" class="card-img-top py-2 card-img-container"  alt="...">
+                                <img src="{{asset('storage/'. $itemUsaha->foto_tempat_usaha)}}" class="card-img-top py-2 card-img-container mr-2 ml-2"   alt="...">
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title">{{$itemUsaha->nama_tempat}}</h5>

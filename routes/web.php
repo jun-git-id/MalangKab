@@ -60,7 +60,8 @@ Route::get('/', 'HomeController@index');
 
 Route::resource('tempatusaha','TempatUsahaController');
 Route::get('/tempat-usaha-saya','TempatUsahaController@tempatUsahaSaya');
-Route::post('tempatusaha/create/fetch', 'TempatUsahaController@subKategori')->name('dynamicdependent.fetch');
+Route::get('/json-subkategori','TempatUsahaController@subKategori');
+Route::get('/json-desa','TempatUsahaController@desa');
 Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 Route::resource('kecamatan','KecamatanController');
 

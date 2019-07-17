@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\ImageProduct;
 
+use App\JenisProduk;
 use App\Product;
 use App\TempatUsaha;
+use App\UnitProduct;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,15 +18,10 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index']]);
-
-
     }
 
     public function index()
     {
-//        $products = Product::all();
-//
-//        return view('produk', compact('products'));
         return view('produk', [
             'products' => Product::with(['productimage'])->get(),
         ]);
@@ -33,14 +30,21 @@ class ProductController extends Controller
     public function produkSaya()
     {
         $tempatUsaha = TempatUsaha::where('user_id', '=', Auth::user()->id)->first();
-        $products = Product::where('tempat_usaha_id', '=', $tempatUsaha->id)->get();
-        return view('produkSaya', ['products' => $products]);
+        if ($tempatUsaha){
+            $products = Product::where('tempat_usaha_id', '=', $tempatUsaha->id)->get();
 
+        }else{
+            $products = Product::all()->where('tempat_usaha_id', '=', $tempatUsaha);
+        }
+        return view('produkSaya', ['products' => $products]);
     }
 
     public function create()
     {
-        return view('inputProduk');
+        $jenisProduk = JenisProduk::all();
+        $unit = UnitProduct::all();
+        $tempatUsaha = TempatUsaha::where('user_id', '=', Auth::user()->id)->get();
+        return view('inputProduk',compact('jenisProduk','unit','tempatUsaha'));
     }
 
     public function store(Request $request)

@@ -11,16 +11,16 @@
     <title>{{ config('app.name', 'Malang Marketplace') }}
     </title>
 
-    <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/active.js"></script>
+{{--    <!-- jQuery (Necessary for All JavaScript Plugins) -->--}}
+{{--    <script src="js/jquery/jquery-2.2.4.min.js"></script>--}}
+{{--    <!-- Popper js -->--}}
+{{--    <script src="js/popper.min.js"></script>--}}
+{{--    <!-- Bootstrap js -->--}}
+{{--    <script src="js/bootstrap.min.js"></script>--}}
+{{--    <!-- Plugins js -->--}}
+{{--    <script src="js/plugins.js"></script>--}}
+{{--    <!-- Active js -->--}}
+{{--    <script src="js/active.js"></script>--}}
 
     <!-- font-awesome icons -->
     <link href="{{asset('css/fontawesome-all.min.css')}}" rel="stylesheet">
@@ -87,8 +87,7 @@
             </li>
             <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
                 <a class="nav-link" style="color: white" href="{{route('tempatusaha.index')}}" id="navbarDropdown"
-                   data-toggle="dropdown"
-                   role="button" aria-haspopup="true" aria-expanded="false">
+                   data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     Tempat Usaha
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

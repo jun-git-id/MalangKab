@@ -10,10 +10,10 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="jenis_produk_id" class="custom-select" id="inputGroupSelect01">
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected>Pilih Jenis Produk</option>
+                        @foreach($jenisProduk as $item)
+                        <option value="{{$item -> id}}">{{$item -> jenis_produk}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -22,10 +22,15 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="tempat_usaha_id" class="custom-select" id="inputGroupSelect01">
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected>Pilih tempat usaha</option>
+                        @if($tempatUsaha ->count())
+                        @foreach($tempatUsaha as $item)
+                            <option value="{{$item -> id}}">{{$item -> nama_tempat}}</option>
+                        @endforeach
+                            @else
+                            <option value="">Tidak ada</option>
+
+                        @endif
                     </select>
                 </div>
             </div>
@@ -47,7 +52,7 @@
             </div>
             <div class="form-group">
                 <label for="dropzone">Upload Image <a href="#" data-toggle="image-kesenian"
-                                                      title="Upload Image Kesenianmu! (multiple image)"><i
+                                                      title="Upload Foto Product mu! (multiple image)"><i
                                 class="fa fa-info-circle"></i></a></label>
                 <div id="file" class="dropzone"></div>
             </div>
@@ -65,10 +70,10 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="unit_product_id" class="custom-select" id="inputGroupSelect01">
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected>Pilih unit</option>
+                        @foreach($unit as $item)
+                            <option value="{{$item -> id}}">{{$item -> unit_product}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

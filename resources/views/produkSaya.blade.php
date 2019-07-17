@@ -10,7 +10,7 @@
             @if($products->count())
                 @foreach($products as $item)
                     <div class="col-lg-3 mt-4 d-flex">
-                        <div class="card" style="width: 18rem;">
+                        <div class="card">
                             <a href="/detailproduk/{{$item->id}}">
                                 <img src="{{asset('storage/'. $item->image)}}"
                                      class="card-img-top py-2 card-img-container" alt="...">
