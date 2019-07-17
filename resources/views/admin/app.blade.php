@@ -57,14 +57,14 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="/adminTempatUsaha">Tempat Usaha</a>
-                    <a class="collapse-item" href="#">Kecamatan</a>
-                    <a class="collapse-item" href="#">Desa</a>
-                    <a class="collapse-item" href="#">Kategori Usaha</a>
-                    <a class="collapse-item" href="#">Sub Kategori Usaha</a>
-                    <a class="collapse-item" href="#">Kegiatan Usaha</a>
-                    <a class="collapse-item" href="#">Status Kepemilikan</a>
-                    <a class="collapse-item" href="#">Jenis Investasi</a>
-                    <a class="collapse-item" href="#">Jenis Produk</a>
+                    <a class="collapse-item" href="/adminKecamatan">Kecamatan</a>
+                    <a class="collapse-item" href="/adminDesa">Desa</a>
+                    <a class="collapse-item" href="/adminKategoriUsaha">Kategori Usaha</a>
+                    <a class="collapse-item" href="/adminSubKategoriUsaha">Sub Kategori Usaha</a>
+                    <a class="collapse-item" href="/adminKegiatanUsaha">Kegiatan Usaha</a>
+                    <a class="collapse-item" href="/adminStatusKepemilikan">Status Kepemilikan</a>
+                    <a class="collapse-item" href="/adminJenisInvestasi">Jenis Investasi</a>
+                    <a class="collapse-item" href="/adminJenisProduk">Jenis Produk</a>
                 </div>
             </div>
         </li>
