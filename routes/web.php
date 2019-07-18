@@ -62,6 +62,8 @@ Route::resource('tempatusaha','TempatUsahaController');
 Route::get('/tempat-usaha-saya','TempatUsahaController@tempatUsahaSaya');
 Route::get('/json-subkategori','TempatUsahaController@subKategori');
 Route::get('/json-desa','TempatUsahaController@desa');
+Route::get('/json-filterKecamatan','TempatUsahaController@filterKecamatan');
+
 Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 Route::resource('kecamatan','KecamatanController');
 

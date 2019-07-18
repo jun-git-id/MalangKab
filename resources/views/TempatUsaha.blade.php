@@ -3,18 +3,18 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <form class="d-flex col-lg ml-2 form">
-                <input class="form-control col-10" type="text" placeholder="Cari..." required>
-                <input class="button col-2" type="button" value="Cari">
+            <form action="{{route('tempatusaha.index')}}" class="d-flex col-lg ml-2 form">
+                <input class="form-control col-10" name="keywords" type="text" placeholder="Cari..." required>
+                <input class="button col-2" type="submit" value="Cari">
             </form>
 
     <div class="container">
         <div class="row">
             <div class="form-group w-25 col-lg-4 d-flex">
-                <select class="form-control" id="exampleFormControlSelect1">
+                <select name="kecamatan_id" id="kecamatan" class="form-control" id="exampleFormControlSelect1">
                     <option disabled selected hidden>Pilih Kecamatan</option>
                     <option>Semua</option>
-                    <option>3</option>
+                    <option value="1">3</option>
                     <option>4</option>
                     <option>5</option>
                 </select>
@@ -72,4 +72,7 @@
 
         </div>
     </div>
+
+            <script>
+
 @endsection

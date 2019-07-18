@@ -33,12 +33,19 @@ class TempatUsahaController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index']]);
-
-
     }
 
-    public function index(){
+    public function index(Request $request){
         $tempatusaha = TempatUsaha::all()->where('status', '=', 'Approve');
+        $keywords = $request->get('keywords');
+
+        if ($keywords) {
+            $tempatusaha = TempatUsaha::where([
+                ['status', '=', 'Approve'],
+                ['nama_tempat', 'LIKE', "%$keywords%"],
+            ])->get();
+
+        }
 
         return view('TempatUsaha', compact('tempatusaha'));
     }
@@ -68,6 +75,17 @@ class TempatUsahaController extends Controller
         $jenisIzinUsaha = JenisIzinUsaha::all();
         return view('tempatUsaha.inputUsaha', compact('kecamatan', 'desa', 'kategoriUsaha', 'subKategori', 'kegiatanUsaha',
             'statusKepemilikan', 'jenisInvestasi', 'jenisIzinUsaha'));
+    }
+
+    public function filterKecamatan(Request $request){
+        $kecamatan_id = $request->get('kecamatan_id');
+
+            $tempatusaha = TempatUsaha::where([
+                ['status', '=', 'Approve'],
+                ['kecamatan_id', '=', $kecamatan_id],
+            ])->get();
+
+        return response()->json($tempatusaha);
     }
 
     public function subKategori(){
