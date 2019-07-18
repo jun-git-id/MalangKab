@@ -205,7 +205,7 @@
                                                      id="remember" {{ old('remember') ? 'checked' : '' }}>Remember
                             Me</label>
                     </div>
-                    <button type="submit" class="btn btn-success btn-block"><span
+                    <button type="submit" class="btn btn-block" style="background-color: #5682a3; color: white" ><span
                                 class="glyphicon glyphicon-off"></span> Login
                     </button>
                 </form>
@@ -216,7 +216,6 @@
         </div>
 
     </div>
-</div>
 </div>
 
 

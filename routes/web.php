@@ -102,3 +102,33 @@ Route::get('/produk', function () {
 Route::get('/produkFavorit', function () {
     return view('produkFavorit');
 });
+Route::get('/admin', function () {
+    return view('admin.dasboard');
+});
+Route::get('/adminTempatUsaha', function () {
+    return view('admin.adminTempatUsaha');
+});
+Route::get('/adminSubKategoriUsaha', function () {
+    return view('admin.adminSubKategoriUsaha');
+});
+Route::get('/adminKegiatanUsaha', function () {
+    return view('admin.adminKegiatanUsaha');
+});
+Route::get('/adminStatusKepemilikan', function () {
+    return view('admin.adminStatusKepemilikan');
+});
+Route::get('/adminJenisInvestasi', function () {
+    return view('admin.adminJenisInvestasi');
+});
+Route::get('/adminJenisProduk', function () {
+    return view('admin.adminJenisProduk');
+});
+Route::get('/adminKecamatan', function () {
+    return view('admin.adminKecamatan');
+});
+Route::get('/adminDesa', function () {
+    return view('admin.adminDesa');
+});
+Route::get('/adminKategoriUsaha', function () {
+    return view('admin.adminKategoriUsaha');
+});
