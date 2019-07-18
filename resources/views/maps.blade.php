@@ -12,7 +12,7 @@
     </div>
     <div class="container">
         <div class="row ml-4">
-            <div class="form-group w-25 mr-5">
+            <div class="form-group w-25 mr-3">
                 <select class="form-control" id="exampleFormControlSelect1">
                     <option disabled selected hidden>Pilih Kecamatan</option>
                     <option>Semua</option>
@@ -21,7 +21,7 @@
                     <option>5</option>
                 </select>
             </div>
-            <div class="form-group w-25 ml-5 mr-5">
+            <div class="form-group w-25 ml-4 mr-4">
                 <select class="form-control" id="exampleFormControlSelect1">
                     <option disabled selected hidden>Pilih Desa</option>
                     <option>Semua</option>
@@ -30,7 +30,7 @@
                     <option>5</option>
                 </select>
             </div>
-            <div class="form-group w-25 ml-5">
+            <div class="form-group w-25 ml-4 mr-4">
                 <select class="form-control" id="exampleFormControlSelect1">
                     <option disabled selected hidden>Pilih Kategori</option>
                     <option>Semua</option>
@@ -39,28 +39,16 @@
                     <option>5</option>
                 </select>
             </div>
+            <div class="form-group mr-4 ml-4">
+                <button type="button" class="btn btn-primary">Submit</button>
+            </div>
         </div>
     </div>
 
     <form action="/maps" class="form">
             <div id="map-canvas"></div>
 
-        <div class="form-group mt-5">
-            <label for="">Lat</label>
-            <input type="text" class="form-control input-sm" name="lat" id="lat">
-        </div>
-
-        <div class="form-group">
-            <label for="">Lng</label>
-            <input type="text" class="form-control input-sm" name="lng" id="lng">
-        </div>
-
-        <button class="btn btn-info" style="color: white; background-color:
-#5682a3">Save</button>
     </form>
-    </div>
-
-    </div>
 
     <script>
         var map = new google.maps.Map(document.getElementById('map-canvas'), {

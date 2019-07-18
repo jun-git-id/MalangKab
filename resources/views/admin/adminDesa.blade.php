@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="card-body">
                 <div class="col-md-12 mb-4">
-                    <a href="#" class="btn btn-primary btn-sm ">
+                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
                         <i class="fas fa-plus mr-2"></i>
                         Tambah Desa
                     </a>
@@ -58,6 +58,29 @@
         </div>
     </div>
     <!-- /.container-fluid -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Desa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label>Nama Desa</label>
+                    <input type="text" class="form-control" placeholder="masukkan nama desa" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Tambah</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
     <script>
         $('#data-table').DataTable({
