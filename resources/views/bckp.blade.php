@@ -1,19 +1,19 @@
+<!-- ini buat nyimpen kode :3 -->
 @extends('layouts.app')
 
 @section('content')
 
-             
-
-
         <!-- <<<<<<<<<<<<<<<<<<<< Single Product Details Area Start >>>>>>>>>>>>>>>>>>>>>>>>> -->
-        <section class="single_product_details_area section_padding_0_100">
-            <div class="container">
+        <!-- <div class="single_product_details_area section_padding_0_100"> -->
+    <div class="container">    
+        <div class="container mt-5">
                 <div class="row">
+                <div>
 
-                    <div class="col-12 col-md-4">
+                </div>
+                    <div class="col-12 col-md-3">
                         <div class="single_product_thumb">
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-
                                 <ol class="carousel-indicators">
                                     <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product-img/product-9.jpg);">
                                     </li>
@@ -51,14 +51,14 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-9" >
                         <div class="single_product_desc">
 
                             <h4 class="title"><a href="#">Long Yellow Dress</a></h4>
 
                             <h4 class="price">$ 39.99</h4>
 
-                            <p class="available">Available: <span class="text-muted">In Stock</span></p>
+                            <p class="available">Status: <span class="text-muted">Sudah Terverifikasi</span></p>
 
                             <div class="single_product_ratings mb-15">
                                 <i class="fa fa-star" aria-hidden="true"></i>
@@ -70,7 +70,15 @@
 
 
 
-                            
+                            <!-- Add to Cart Form inicuma dicoba ya ges -->
+                            <!-- <form class="cart clearfix mb-50 d-flex" method="post">
+                                <div class="quantity">
+                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                    <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
+                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                </div>
+                                <button type="submit" name="addtocart" value="5" class="btn cart-submit d-block">Add to cart</button>
+                            </form>
 
                             <div id="accordion" role="tablist">
                                 <div class="card">
@@ -109,7 +117,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        
         <!-- <<<<<<<<<<<<<<<<<<<< Single Product Details Area End >>>>>>>>>>>>>>>>>>>>>>>>> -->
 
         <!-- ****** Quick View Modal Area Start ****** -->
@@ -143,7 +151,7 @@
                                             <a href="#">View Full Product Details</a>
                                         </div>
                                         <!-- Add to Cart Form -->
-                                        <!-- <form class="cart" method="post">
+                                        <form class="cart" method="post">
                                             <div class="quantity">
                                                 <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
 
@@ -151,10 +159,10 @@
 
                                                 <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                             </div>
-                                            <button type="submit" name="addtocart" value="5" class="cart-submit">Add to cart</button> -->
+                                            <button type="submit" name="addtocart" value="5" class="cart-submit">Add to cart</button>
                                             <!-- Wishlist -->
-                                            <!-- <div class="modal_pro_wishlist">
-                                                <a href="wishlist.html" target="_blank"><i class="ti-heart"></i></a> -->
+                                            <div class="modal_pro_wishlist">
+                                                <a href="wishlist.html" target="_blank"><i class="ti-heart"></i></a>
                                             </div>
                                             <!-- Compare -->
                                             <div class="modal_pro_compare">
@@ -162,14 +170,14 @@
                                             </div>
                                         </form>
 
-                                        <!-- <div class="share_wf mt-30">
+                                        <div class="share_wf mt-30">
                                             <p>Share With Friend</p>
                                             <div class="_icon">
                                                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                                                 <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
                                                 <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -178,51 +186,23 @@
                     </div>
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
         <!-- ****** Quick View Modal Area End ****** -->
 
-        <section class="you_may_like_area clearfix">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section_heading text-center">
-                            <h2>related Products</h2>
-                        </div>
-                    </div>
-                </div>
-                    <div class="col-lg-3 mt-4 d-flex">
-                        <div class="card" style="width: 18rem;">
-                            <a href="#">
-                                <img src="#" class="card-img-top py-2 card-img-container"  alt="...">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title">Coba</h5>
-                                <p class="card-text">ihiiww</p>
-                                <div class="row ml-0">
-                                    <p><i class="fas fa-heart"></i> 8</p>
-                                    <p><i class="fas fa-star ml-4"></i> 4</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    </section>
-                
+    </div>
     <!-- /.wrapper end -->
-    <!-- klo sama hkiki dsini dimatiin -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- <script src="js/jquery/jquery-2.2.4.min.js"></script> -->
     <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
+    <!-- <script src="js/popper.min.js"></script> -->
     <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
+    <!-- <script src="js/bootstrap.min.js"></script> -->
     <!-- Plugins js -->
     <script src="js/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
 
-<!-- </body> -->
+<!-- </body>
 
-</html>
-@endsection
+</html> -->

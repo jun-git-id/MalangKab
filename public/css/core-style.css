@@ -1630,6 +1630,7 @@ ul li {
     margin-bottom: 100px;
     margin-top: 0px;
     position: relative;
+    /* width: 100px; */
 }
 
 .single_product_thumb .carousel-indicators {
