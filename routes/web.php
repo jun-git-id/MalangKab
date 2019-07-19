@@ -48,9 +48,7 @@ Route::get('/detailp', function () {
 Route::get('/detail2', function () {
     return view('cobainlagiya');
 });
-Route::get('/detail3', function () {
-    return view('cobaindetail');
-});
+
 Route::get('/home', 'HomeController@index')->name('beranda');
 
 Route::get('/editProfile/{id}', 'ProfileController@edit');
