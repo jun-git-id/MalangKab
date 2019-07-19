@@ -35,6 +35,13 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+          <!-- Core Style CSS -->
+    <link rel="stylesheet" href="css/core-style.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Responsive CSS -->
+    <link href="css/responsive.css" rel="stylesheet">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/custom.js') }}" defer></script>
