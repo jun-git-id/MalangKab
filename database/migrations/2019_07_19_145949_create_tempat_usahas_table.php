@@ -27,7 +27,8 @@ class CreateTempatUsahasTable extends Migration
             $table->unsignedInteger('kecamatan_id');
             $table->unsignedInteger('desa_id');
             $table->unsignedInteger('kategori_usaha_id');
-            $table->unsignedInteger('sub_kategori_usaha_id');
+            $table->unsignedInteger('sektor_usaha_id');
+            $table->unsignedInteger('sub_sektor_usaha_id');
             $table->unsignedInteger('kegiatan_usaha_id');
             $table->unsignedInteger('status_kepemilikan_id');
             $table->unsignedInteger('jenis_investasi_id');
@@ -44,7 +45,8 @@ class CreateTempatUsahasTable extends Migration
             $table->foreign('kecamatan_id')->references('id')->on('kecamatans');
             $table->foreign('desa_id')->references('id')->on('desas');
             $table->foreign('kategori_usaha_id')->references('id')->on('kategori_usahas');
-            $table->foreign('sub_kategori_usaha_id')->references('id')->on('sub_kategori_usahas');
+            $table->foreign('sektor_usaha_id')->references('id')->on('sektor_usahas');
+            $table->foreign('sub_sektor_usaha_id')->references('id')->on('sub_sektor_usahas');
             $table->foreign('kegiatan_usaha_id')->references('id')->on('kegiatan_usahas');
             $table->foreign('status_kepemilikan_id')->references('id')->on('status_kepemilikans');
             $table->foreign('jenis_investasi_id')->references('id')->on('jenis_investasis');

@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Desa;
 use App\ImageProduct;
 
 use App\JenisProduk;
+use App\KategoriUsaha;
+use App\Kecamatan;
 use App\Product;
 use App\TempatUsaha;
 use App\UnitProduct;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,26 +22,77 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index']]);
+        $this->middleware('auth', ['except' => ['index', 'desa']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('produk', [
-            'products' => Product::with(['productimage'])->get(),
-        ]);
+
+        $products = Product::with(['productimage'])->get();
+        $kecamatan = Kecamatan::all();
+        $desa = Desa::all();
+        $jenis = JenisProduk::all();
+        $keywords = $request->get('keywords');
+
+        if ($keywords) {
+            $products = Product::with(['productimage'])->where([
+                ['nama_produk', 'LIKE', "%$keywords%"],
+            ])->get();
+
+        }
+
+        $kecamatan_id = $request->get('kecamatan');
+
+        $desa_id = $request->get('desa');
+        $jenis_id = $request->get('jenis');
+
+        if ($jenis_id) {
+            $products = Product::with('provider')->where('jenis_produk_id', '=', $jenis_id)->select('*')->whereIn('tempat_usaha_id', function ($query) {
+                $query->select('id')->from('tempat_usahas')->where([
+                    ['status', '=', 'Approve']]);
+            })->get();
+        } else {
+            $products = Product::with('provider')->select('*')->whereIn('tempat_usaha_id', function ($query) use ($request) {
+                if ($request->get('kecamatan')) {
+                    $query->select('id')->from('tempat_usahas')->where([
+                        ['status', '=', 'Approve'],
+                        ['kecamatan_id', '=', $request->get('kecamatan')],
+                    ]);
+                }
+                if ($request->get('desa')) {
+                    $query->select('id')->from('tempat_usahas')->where([
+                        ['status', '=', 'Approve'],
+                        ['desa_id', '=', $request->get('desa')],
+                    ]);
+                }
+                $query->select('id')->from('tempat_usahas')->where([
+                    ['status', '=', 'Approve']]);
+            })->get();
+        }
+
+
+        return view('produk', compact(['products', 'kecamatan', 'desa', 'jenis']));
+
     }
 
     public function produkSaya()
     {
         $tempatUsaha = TempatUsaha::where('user_id', '=', Auth::user()->id)->first();
-        if ($tempatUsaha){
+        if ($tempatUsaha) {
             $products = Product::where('tempat_usaha_id', '=', $tempatUsaha->id)->get();
 
-        }else{
+        } else {
             $products = Product::all()->where('tempat_usaha_id', '=', $tempatUsaha);
         }
         return view('produkSaya', ['products' => $products]);
+    }
+
+    public function desa()
+    {
+        $kecamatan_id = Input::get('id');
+        $desa = Desa::where('kecamatan_id', '=', $kecamatan_id)->get();
+
+        return response()->json($desa);
     }
 
     public function create()
@@ -44,7 +100,7 @@ class ProductController extends Controller
         $jenisProduk = JenisProduk::all();
         $unit = UnitProduct::all();
         $tempatUsaha = TempatUsaha::where('user_id', '=', Auth::user()->id)->get();
-        return view('inputProduk',compact('jenisProduk','unit','tempatUsaha'));
+        return view('inputProduk', compact('jenisProduk', 'unit', 'tempatUsaha'));
     }
 
     public function store(Request $request)
@@ -81,7 +137,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $products = Product::findOrFail($id);
-        return view('editProduk',compact('products'));
+        return view('editProduk', compact('products'));
     }
 
     public function update(Request $request, Product $product)

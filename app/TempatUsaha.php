@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class TempatUsaha extends Model
 {
     protected $fillable = ['nama_tempat', 'foto_tempat_usaha', 'alamat', 'pemilik', 'no_telp', 'deskripsi', 'izin_usaha_id',
-        'id_jenis_izin_usaha', 'tgl_izin_berkhir', 'lokasi', 'lokasi_lat', 'lokasi_lang', 'kecamatan_id', 'desa_id', 'kategori_usaha_id', 'sub_kategori_usaha_id',
+        'id_jenis_izin_usaha', 'tgl_izin_berkhir', 'lokasi', 'lokasi_lat', 'lokasi_lang', 'kecamatan_id', 'desa_id', 'kategori_usaha_id','sektor_usaha_id', 'sub_sektor_usaha_id',
         'kegiatan_usaha_id', 'status_kepemilikan_id', 'nominal_investasi', 'user_id', 'jenis_investasi_id', 'like', 'rating', 'views', 'status'];
 
     public function izinUsaha()
     {
         return $this->belongsTo(IzinUsaha::class, 'izin_usaha_id', 'id');
     }
-
+public function provider(){
+        return $this->hasMany(Product::class, 'tempat_usaha_id','id');
+}
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -34,9 +36,13 @@ class TempatUsaha extends Model
     {
         return $this->belongsTo(KategoriUsaha::class);
     }
-    public function subKategoriUsaha()
+    public function sektorUsaha()
     {
-        return $this->belongsTo(SubKategoriUsaha::class);
+        return $this->belongsTo(SektorUsaha::class);
+    }
+    public function subSektorUsaha()
+    {
+        return $this->belongsTo(SubSektorUsaha::class);
     }
     public function kegiatanUsaha()
     {

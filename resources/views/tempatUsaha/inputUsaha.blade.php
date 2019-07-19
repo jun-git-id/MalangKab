@@ -126,11 +126,23 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="formGroupExampleInput">Sub Kategori Usaha</label>
+                <label for="formGroupExampleInput">Sektor Usaha</label>
+                <div class="input-group-prepend">
+                    <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
+                    <select name="sektor_usaha" class="custom-select dynamic" id="sektor" data-dependent="sektor" required>
+                        <option selected value="0">Pilih Sektor Usaha</option>
+                        @foreach($sektorUsaha as $item)
+                            <option value="{{$item->id}}">{{$item->nama_sektor_usaha}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput">Sub Sektor Usaha</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right dynamic"><i class="fas fa-list-ul"></i></span>
-                    <select name="sub_kategori_usaha" class="custom-select" id="subKategori" data-dependent="subKategori" required>
-                        <option selected value="">Pilih Sub Kategori Usaha</option>
+                    <select name="sub_sektor_usaha" class="custom-select" id="subSektor" data-dependent="subSektor" required>
+                        <option selected value="">Pilih Sub Sektor Usaha</option>
 {{--                        @foreach($subKategori as $item)--}}
 {{--                            <option value="{{$item->id}}">{{$item->sub_kategori_usaha}}</option>--}}
 {{--                        @endforeach--}}
@@ -277,16 +289,16 @@
         </div>
     </script>
     <script type="text/javascript">
-        $('#kategori').on('change', function(e){
+        $('#sektor').on('change', function(e){
             console.log(e);
             var kategori_id = e.target.value;
-            $.get('/json-subkategori?id=' + kategori_id,function(data) {
+            $.get('/json-subSektor?id=' + kategori_id,function(data) {
                 console.log(data);
-                $('#subKategori').empty();
-                $('#subKategori').append('<option value="0" disable="true" selected="true">Pilih Sub Kategori Usaha</option>');
+                $('#subSektor').empty();
+                $('#subSektor').append('<option value="0" disable="true" selected="true">Pilih Sub Sektor Usaha</option>');
 
-                $.each(data, function(index, subKategoriObj){
-                    $('#subKategori').append('<option value="'+ subKategoriObj.id +'">'+ subKategoriObj.sub_kategori_usaha +'</option>');
+                $.each(data, function(index, subSektorObj){
+                    $('#subSektor').append('<option value="'+ subSektorObj.id +'">'+ subSektorObj.sub_sektor_usaha +'</option>');
                 })
             });
         });

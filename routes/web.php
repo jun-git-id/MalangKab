@@ -60,7 +60,7 @@ Route::get('/', 'HomeController@index');
 
 Route::resource('tempatusaha','TempatUsahaController');
 Route::get('/tempat-usaha-saya','TempatUsahaController@tempatUsahaSaya');
-Route::get('/json-subkategori','TempatUsahaController@subKategori');
+Route::get('/json-subSektor','TempatUsahaController@subSektor');
 Route::get('/json-desa','TempatUsahaController@desa');
 Route::get('/json-filterKecamatan','TempatUsahaController@filterKecamatan');
 
@@ -68,6 +68,7 @@ Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 Route::resource('kecamatan','KecamatanController');
 
 Route::resource('products','ProductController');
+Route::get('/json-desa','ProductController@desa');
 Route::get('/produk-saya','ProductController@produkSaya');
 Route::post('upload-image', 'ProductController@uploadImage')->name('upload.image');
 Route::delete('delete-image/{id}', 'ProductController@deleteImage')->name('delete.image');
@@ -78,6 +79,9 @@ Route::get('/detailusaha', function () {
 });
 Route::get('/detailproduk', function () {
     return view('detailproduk');
+});
+Route::get('/detailproduk1', function () {
+    return view('cobaindetail_bckp');
 });
 Route::get('/maps', function () {
     return view('maps');

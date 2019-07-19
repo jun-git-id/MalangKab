@@ -9,8 +9,9 @@ use App\JenisIzinUsaha;
 use App\KategoriUsaha;
 use App\Kecamatan;
 use App\KegiatanUsaha;
+use App\SektorUsaha;
 use App\StatusKepemilikan;
-use App\SubKategoriUsaha;
+use App\SubSektorUsaha;
 use App\TempatUsaha;
 use App\User;
 use Carbon\Carbon;
@@ -35,8 +36,11 @@ class TempatUsahaController extends Controller
         $this->middleware('auth', ['except' => ['index']]);
     }
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $tempatusaha = TempatUsaha::all()->where('status', '=', 'Approve');
+        $kecamatan = Kecamatan::all();
+        $sektor = SektorUsaha::all();
         $keywords = $request->get('keywords');
 
         if ($keywords) {
@@ -47,7 +51,21 @@ class TempatUsahaController extends Controller
 
         }
 
-        return view('TempatUsaha', compact('tempatusaha'));
+        $kecamatan_id = $request->get('kecamatan');
+        $desa_id = $request->get('desa');
+        $sektor_id = $request->get('sektor');
+
+        if ($kecamatan_id && $desa_id && $sektor_id){
+            $tempatusaha = TempatUsaha::where([
+                ['status', '=', 'Approve'],
+                ['kecamatan_id', '=', $kecamatan_id],
+                ['desa_id','=',$desa_id],
+                ['sektor_usaha_id','=',$sektor_id],
+            ])->get();
+        }
+
+
+        return view('TempatUsaha', compact('tempatusaha','kecamatan','sektor'));
     }
 
     public function tempatUsahaSaya()
@@ -68,35 +86,41 @@ class TempatUsahaController extends Controller
         $desa = Desa::all();
         $kategoriUsaha = KategoriUsaha::all();
         $kategoriUsahaId = KategoriUsaha::get('id');
-        $subKategori = SubKategoriUsaha::all();
+        $sektorUsaha = SektorUsaha::all();
+        $subSektor = SubSektorUsaha::all();
         $kegiatanUsaha = KegiatanUsaha::all();
         $statusKepemilikan = StatusKepemilikan::all();
         $jenisInvestasi = JenisInvestasi::all();
         $jenisIzinUsaha = JenisIzinUsaha::all();
-        return view('tempatUsaha.inputUsaha', compact('kecamatan', 'desa', 'kategoriUsaha', 'subKategori', 'kegiatanUsaha',
+        return view('tempatUsaha.inputUsaha', compact('kecamatan', 'desa', 'kategoriUsaha','sektorUsaha', 'subSektor', 'kegiatanUsaha',
             'statusKepemilikan', 'jenisInvestasi', 'jenisIzinUsaha'));
     }
 
-    public function filterKecamatan(Request $request){
+    public function filterKecamatan(Request $request)
+    {
         $kecamatan_id = $request->get('kecamatan_id');
 
-            $tempatusaha = TempatUsaha::where([
-                ['status', '=', 'Approve'],
-                ['kecamatan_id', '=', $kecamatan_id],
-            ])->get();
+        $tempatusaha = TempatUsaha::where([
+            ['status', '=', 'Approve'],
+            ['kecamatan_id', '=', $kecamatan_id],
+        ])->get();
 
-        return response()->json($tempatusaha);
+        return view('TempatUsaha', compact('tempatusaha'));
+
     }
 
-    public function subKategori(){
-        $kategori_id = Input::get('id');
-        $subKategori = SubKategoriUsaha::where('id_kategori_usaha','=',$kategori_id)->get();
+    public function subSektor()
+    {
+        $sektor_id = Input::get('id');
+        $subSektor = SubSektorUsaha::where('id_sektor_usaha', '=', $sektor_id)->get();
 
-        return response()->json($subKategori);
+        return response()->json($subSektor);
     }
-    public function desa(){
+
+    public function desa()
+    {
         $kecamatan_id = Input::get('id');
-        $desa = Desa::where('kecamatan_id','=',$kecamatan_id)->get();
+        $desa = Desa::where('kecamatan_id', '=', $kecamatan_id)->get();
 
         return response()->json($desa);
     }
@@ -127,7 +151,8 @@ class TempatUsahaController extends Controller
             'desa_id' => $request->desa,
             'user_id' => Auth::user()->id,
             'kategori_usaha_id' => $request->kategori_usaha,
-            'sub_kategori_usaha_id' => $request->sub_kategori_usaha,
+            'sektor_usaha_id' => $request->sektor_usaha,
+            'sub_sektor_usaha_id' => $request->sub_sektor_usaha,
             'kegiatan_usaha_id' => $request->kegiatan_usaha,
             'status_kepemilikan_id' => $request->status_kepemilikan,
             'jenis_investasi_id' => $request->jenis_investasi,
@@ -180,13 +205,14 @@ class TempatUsahaController extends Controller
         $kecamatan = Kecamatan::all();
         $desa = Desa::all();
         $kategoriUsaha = KategoriUsaha::all();
-        $subKategori = SubKategoriUsaha::all();
+        $sektorUsaha = SektorUsaha::all();
+        $subSektor = SubSektorUsaha::all();
         $kegiatanUsaha = KegiatanUsaha::all();
         $statusKepemilikan = StatusKepemilikan::all();
         $jenisInvestasi = JenisInvestasi::all();
         $jenisIzinUsaha = JenisIzinUsaha::all();
         $izinusaha = IzinUsaha::all()->where('id_tempat_usaha', '=', $id);
-        return view('tempatUsaha.editUsaha', compact('tempatusaha', 'izinusaha', 'kecamatan', 'desa', 'kategoriUsaha', 'subKategori', 'kegiatanUsaha',
+        return view('tempatUsaha.editUsaha', compact('tempatusaha', 'izinusaha', 'kecamatan', 'desa', 'kategoriUsaha','sektorUsaha', 'subSektor', 'kegiatanUsaha',
             'statusKepemilikan', 'jenisInvestasi', 'jenisIzinUsaha'));
     }
 
@@ -206,7 +232,8 @@ class TempatUsahaController extends Controller
         $tempatUsaha->desa_id = $request->desa;
         $tempatUsaha->user_id = Auth::user()->id;
         $tempatUsaha->kategori_usaha_id = $request->kategori_usaha;
-        $tempatUsaha->sub_kategori_usaha_id = $request->sub_kategori_usaha;
+        $tempatUsaha->sektor_usaha_id = $request->sektor_usaha;
+        $tempatUsaha->sub_sektor_usaha_id = $request->sub_sektor_usaha;
         $tempatUsaha->kegiatan_usaha_id = $request->kegiatan_usaha;
         $tempatUsaha->status_kepemilikan_id = $request->status_kepemilikan;
         $tempatUsaha->jenis_investasi_id = $request->jenis_investasi;
@@ -243,8 +270,7 @@ class TempatUsahaController extends Controller
         }
 
 
-
-        return redirect('/tempatusaha')->with('status', 'Tempat Usaha successfully updated');
+        return redirect('/tempat-usaha-saya')->with('status', 'Tempat Usaha successfully updated');
     }
 
     /**
@@ -257,7 +283,7 @@ class TempatUsahaController extends Controller
     {
         $tempatUsaha = TempatUsaha::findOrFail($id);
         $izinusaha = IzinUsaha::where('id_tempat_usaha', '=', $id)->get();
-        foreach ($izinusaha as $i){
+        foreach ($izinusaha as $i) {
             $i->delete();
         }
         Storage::delete('public/' . $tempatUsaha->foto_tempat_usaha);

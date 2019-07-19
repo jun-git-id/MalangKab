@@ -50,7 +50,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="kecamatan" class="custom-select @error('kecamatan') is-invalid @enderror"
-                            id="inputGroupSelect01" required>
+                            id="kecamatan" required>
                         <option selected
                                 value="{{$tempatusaha -> kecamatan -> id}}">{{$tempatusaha -> kecamatan -> nama_kecamatan}}</option>
                         @foreach($kecamatan as $item)
@@ -63,7 +63,7 @@
                 <label for="formGroupExampleInput">Desa</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
-                    <select name="desa" class="custom-select" id="inputGroupSelect01" required>
+                    <select name="desa" class="custom-select" id="desa" required>
                         <option selected
                                 value="{{$tempatusaha -> desa -> id}}">{{$tempatusaha -> desa -> nama_desa}}</option>
                         @foreach($desa as $item)
@@ -134,15 +134,29 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="formGroupExampleInput">Sub Kategori Usaha</label>
+                <label for="formGroupExampleInput">Sektor Usaha</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
-                    <select name="sub_kategori_usaha" class="custom-select" id="inputGroupSelect01" required>
+                    <select name="sektor_usaha" class="custom-select dynamic" id="sektor" data-dependent="sektor" required>
                         <option selected
-                                value="{{$tempatusaha -> subKategoriUsaha -> id}}">{{$tempatusaha->subKategoriUsaha -> sub_kategori_usaha}}</option>
-                        @foreach($subKategori as $item)
-                            <option value="{{$item->id}}">{{$item->sub_kategori_usaha}}</option>
+                                value="{{$tempatusaha -> sektorUsaha -> id}}">{{$tempatusaha->sektorUsaha->nama_sektor_usaha}}</option>
+                        @foreach($sektorUsaha as $item)
+                            <option value="{{$item->id}}">{{$item->nama_sektor_usaha}}</option>
                         @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput">Sub Sektor Usaha</label>
+                <div class="input-group-prepend">
+                    <span class="input-group-text no-border-right dynamic"><i class="fas fa-list-ul"></i></span>
+                    <select name="sub_sektor_usaha" class="custom-select" id="subSektor" data-dependent="subSektor" required>
+                        <option selected
+                                value="{{$tempatusaha -> subSektorUsaha -> id}}">{{$tempatusaha->subSektorUsaha->sub_sektor_usaha}}</option>
+                        {{--                        @foreach($subKategori as $item)--}}
+                        {{--                            <option value="{{$item->id}}">{{$item->sub_kategori_usaha}}</option>--}}
+                        {{--                        @endforeach--}}
+                        {{--                        <option value=""></option>--}}
                     </select>
                 </div>
             </div>
@@ -298,5 +312,34 @@
             </div>
         </div>
 
+    </script>
+    <script type="text/javascript">
+        $('#sektor').on('change', function(e){
+            console.log(e);
+            var kategori_id = e.target.value;
+            $.get('/json-subSektor?id=' + kategori_id,function(data) {
+                console.log(data);
+                $('#subSektor').empty();
+                $('#subSektor').append('<option value="0" disable="true" selected="true">Pilih Sub Sektor Usaha</option>');
+
+                $.each(data, function(index, subSektorObj){
+                    $('#subSektor').append('<option value="'+ subSektorObj.id +'">'+ subSektorObj.sub_sektor_usaha +'</option>');
+                })
+            });
+        });
+
+        $('#kecamatan').on('change', function(e){
+            console.log(e);
+            var kategori_id = e.target.value;
+            $.get('/json-desa?id=' + kategori_id,function(data) {
+                console.log(data);
+                $('#desa').empty();
+                $('#desa').append('<option value="0" disable="true" selected="true">Pilih Desa</option>');
+
+                $.each(data, function(index, desaObj){
+                    $('#desa').append('<option value="'+ desaObj.id +'">'+ desaObj.nama_desa +'</option>');
+                })
+            });
+        });
     </script>
 @endsection

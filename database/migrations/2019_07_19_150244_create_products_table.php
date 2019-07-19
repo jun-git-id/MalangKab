@@ -30,7 +30,6 @@ class CreateProductsTable extends Migration
             $table->foreign('jenis_produk_id')->references('id')->on('jenis_produks');
             $table->foreign('tempat_usaha_id')->references('id')->on('tempat_usahas')->onDelete('cascade');
             $table->foreign('unit_product_id')->references('id')->on('unit_products');
-
         });
     }
 

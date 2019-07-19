@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SubKategoriUsaha extends Model
+class SubSektorUsaha extends Model
 {
     protected $fillable = [
-      'sub_kategori_usaha','id_kategori_usaha'
+      'sub_sektor_usaha','id_sektor_usaha'
     ];
     public function tempatUsaha(){
         return $this->hasMany(TempatUsaha::class);

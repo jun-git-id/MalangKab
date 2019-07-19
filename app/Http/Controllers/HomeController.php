@@ -27,8 +27,11 @@ class HomeController extends Controller
     public function index()
     {
 
-        $products = Product::all();
-        $tempatusaha = TempatUsaha::all()->where('status','=','Approve');
+        $products = Product::with(['provider'])->select('*')->whereIn('tempat_usaha_id',function ($query){
+            $query->select('id')->from('tempat_usahas')->where([
+                ['status', '=', 'Approve']]);
+        })->paginate(4);
+        $tempatusaha = TempatUsaha::where('status','=','Approve')->paginate(4);
 
         return view('beranda', compact(['tempatusaha','products']));
     }

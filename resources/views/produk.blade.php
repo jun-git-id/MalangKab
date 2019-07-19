@@ -3,45 +3,42 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <form class="d-flex form">
-                <input class="form-control col-lg-10" type="text" placeholder="Cari..." required>
-                <input class="button col-2" type="button" value="Cari">
+            <form action="{{route('products.index')}}" class="d-flex form">
+                <input name="keywords" class="form-control col-lg-10" type="text" placeholder="Cari..." required>
+                <input class="button col-2" type="submit" value="Cari">
             </form>
         </div>
     </div>
 
     <div class="container">
-        <div class="row ml-4">
+        <form class="row ml-4">
             <div class="form-group w-25 mr-3">
-                <select class="form-control" id="exampleFormControlSelect1">
+                <form action="{{route('products.index')}}">
+
+                <select name="kecamatan" id="kecamatan" class="form-control">
                     <option disabled selected hidden>Pilih Kecamatan</option>
-                    <option>Semua</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    @foreach($kecamatan as $item)
+                        <option value="{{$item -> id}}">{{$item -> nama_kecamatan}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="form-group w-25 ml-4 mr-4">
-                <select class="form-control" id="exampleFormControlSelect1">
+                <select name="desa" id="desa" class="form-control" >
                     <option disabled selected hidden>Pilih Desa</option>
-                    <option>Semua</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
                 </select>
             </div>
             <div class="form-group w-25 ml-4 mr-4">
-                <select class="form-control" id="exampleFormControlSelect1">
+                <select name="jenis" class="form-control" id="jenis">
                     <option disabled selected hidden>Pilih Kategori</option>
-                    <option>Semua</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    @foreach($jenis as $item)
+                        <option value="{{$item -> id}}">{{$item -> jenis_produk}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="form-group mr-4 ml-4">
-                <button type="button" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
+        </form>
         </div>
     </div>
 
@@ -80,4 +77,19 @@
     </div>
     </div>
 
+    <script>
+        $('#kecamatan').on('change', function(e){
+            console.log(e);
+            var kategori_id = e.target.value;
+            $.get('/json-desa?id=' + kategori_id,function(data) {
+                console.log(data);
+                $('#desa').empty();
+                $('#desa').append('<option value="0" disable="true" selected="true">Pilih Desa</option>');
+
+                $.each(data, function(index, desaObj){
+                    $('#desa').append('<option value="'+ desaObj.id +'">'+ desaObj.nama_desa+'</option>');
+                })
+            });
+        });
+    </script>
 @endsection
