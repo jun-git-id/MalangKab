@@ -152,6 +152,14 @@
 	  width: 100%;
 	  height: 350px;
   }
+  #map-index{
+      width: 100%;
+      height: 400px;
+  }
+  #input-map{
+      width: 100%;
+      height: 350px;
+  }
   #maps-detail{
       width: 100%;
       height: 350px;

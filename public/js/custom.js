@@ -27,7 +27,7 @@ function readURL(input) {
 }
 
 // maps
-var map = new google.maps.Map(document.getElementById('map-canvas'), {
+var map = new google.maps.Map(document.getElementById('input-map'), {
     center: {
         lat: -7.983908,
         lng: 112.621391
@@ -105,3 +105,4 @@ function removeRows(){
 }
 
 // addRows();
+

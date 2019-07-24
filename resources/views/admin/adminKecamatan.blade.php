@@ -70,37 +70,40 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <form action="{{route('kecamatan.store')}}" method="post" role="form">
+                        @csrf
                     <label>Nama Kecamatan</label>
-                    <input type="text" class="form-control" placeholder="masukkan nama kecamatan" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" name="nama_kecamatan" class="form-control" placeholder="masukkan nama kecamatan" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Tambah</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
 @endsection
     <script>
-        $('#data-table').DataTable({
-            "columnDefs": [{
-                "targets": 6,
-                "orderable": false
-            }],
-            "responsive": true,
-            "pageLength": 10,
-            "language": {
-                "lengthMenu": "Tampilkan _MENU_ per halaman",
-                "zeroRecords": "Tidak ada data",
-                "info": "Tampilkan _PAGE_ dari _PAGES_ halaman",
-                "infoEmpty": "",
-                "search": "Cari Data :",
-                "infoFiltered": "(filtered from _MAX_ total records)",
-                "paginate": {
-                    "previous": "Sebelumnya",
-                    "next": "Selanjutnya"
-                }
-            }
-        });
+        // $('#data-table').DataTable({
+        //     "columnDefs": [{
+        //         "targets": 6,
+        //         "orderable": false
+        //     }],
+        //     "responsive": true,
+        //     "pageLength": 10,
+        //     "language": {
+        //         "lengthMenu": "Tampilkan _MENU_ per halaman",
+        //         "zeroRecords": "Tidak ada data",
+        //         "info": "Tampilkan _PAGE_ dari _PAGES_ halaman",
+        //         "infoEmpty": "",
+        //         "search": "Cari Data :",
+        //         "infoFiltered": "(filtered from _MAX_ total records)",
+        //         "paginate": {
+        //             "previous": "Sebelumnya",
+        //             "next": "Selanjutnya"
+        //         }
+        //     }
+        // });
     </script>
 

@@ -9,6 +9,7 @@ use App\JenisIzinUsaha;
 use App\KategoriUsaha;
 use App\Kecamatan;
 use App\KegiatanUsaha;
+use App\Product;
 use App\SektorUsaha;
 use App\StatusKepemilikan;
 use App\SubSektorUsaha;
@@ -33,7 +34,7 @@ class TempatUsahaController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index']]);
+        $this->middleware('auth', ['except' => ['index','show']]);
     }
 
     public function index(Request $request)
@@ -43,13 +44,7 @@ class TempatUsahaController extends Controller
         $sektor = SektorUsaha::all();
         $keywords = $request->get('keywords');
 
-        if ($keywords) {
-            $tempatusaha = TempatUsaha::where([
-                ['status', '=', 'Approve'],
-                ['nama_tempat', 'LIKE', "%$keywords%"],
-            ])->get();
 
-        }
 
         $kecamatan_id = $request->get('kecamatan');
         $desa_id = $request->get('desa');
@@ -62,9 +57,33 @@ class TempatUsahaController extends Controller
                 ['desa_id','=',$desa_id],
                 ['sektor_usaha_id','=',$sektor_id],
             ])->get();
+        }elseif ($kecamatan_id && $desa_id){
+            $tempatusaha = TempatUsaha::where([
+                ['status', '=', 'Approve'],
+                ['kecamatan_id', '=', $kecamatan_id],
+                ['desa_id','=',$desa_id],
+            ])->get();
+        } elseif($kecamatan_id) {
+            $tempatusaha = TempatUsaha::where([
+                ['status', '=', 'Approve'],
+                ['kecamatan_id', '=', $kecamatan_id],
+            ])->get();
+        }elseif($sektor_id){
+            $tempatusaha = TempatUsaha::where([
+                ['status', '=', 'Approve'],
+                ['sektor_usaha_id','=',$sektor_id],
+            ])->get();
+        }else{
+            $tempatusaha = TempatUsaha::all()->where('status', '=', 'Approve');
         }
 
+        if ($keywords) {
+            $tempatusaha = TempatUsaha::where([
+                ['status', '=', 'Approve'],
+                ['nama_tempat', 'LIKE', "%$keywords%"],
+            ])->get();
 
+        }
         return view('TempatUsaha', compact('tempatusaha','kecamatan','sektor'));
     }
 
@@ -72,7 +91,7 @@ class TempatUsahaController extends Controller
     {
         $tempatusaha = TempatUsaha::where('user_id', '=', Auth::user()->id)->get();
 
-        return view('usahaSaya', compact('tempatusaha'));
+        return view('tempatUsaha.usahaSaya', compact('tempatusaha'));
     }
 
     /**
@@ -190,7 +209,8 @@ class TempatUsahaController extends Controller
     public function show($id)
     {
         $tempatusaha = TempatUsaha::findOrFail($id);
-        return view('tempatUsaha.detailusaha', compact('tempatusaha'));
+        $products = Product::where('tempat_usaha_id','=', $tempatusaha->id)->paginate(4);
+        return view('tempatUsaha.detailusaha', compact('tempatusaha','products'));
     }
 
     /**
