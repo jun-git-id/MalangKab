@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('content')
-
 <div class="container">
     <h2>Carousel Example</h2>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
