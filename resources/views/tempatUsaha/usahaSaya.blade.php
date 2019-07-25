@@ -17,6 +17,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{$itemUsaha->nama_tempat}}</h5>
                                 <p class="card-text">{{$itemUsaha->deskripsi}}</p>
+                                <div class="empat"> Mikro</div>
                                 <div class="row ml-0">
                                     <p>
                                         <a href="{{route('tempatusaha.edit',$itemUsaha->id)}}" class="btn btn-outline-info mr-5 ml-2">Edit</a>

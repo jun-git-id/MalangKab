@@ -81,9 +81,9 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-map-marked-alt"></i></span>
                     <input name="lokasi" type="text" class="form-control no-border-left" id="searchmap"
-                           placeholder="Lokasi pada map" value="{{old('lokasi')}}">
+                           placeholder="Lokasi pada map" value="{{old('lokasi')}}" required>
                 </div>
-                <div id="map-canvas" class="mt-3"></div>
+                <div id="input-map" class="mt-3"></div>
             </div>
 
             <div class="form-group">

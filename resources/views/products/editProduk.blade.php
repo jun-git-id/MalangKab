@@ -3,16 +3,17 @@
 @section('content')
 
     <div class="container w-50">
-        <form role="form" action="{{route('products.store')}}" method="post" enctype="multipart/form-data" id="thisproduct">
+        <form role="form" action="{{route('products.update', $products->id)}}" method="post" enctype="multipart/form-data" id="thisproduct">
             @csrf
+            @method('put')
             <div class="form-group">
                 <label for="formGroupExampleInput">Jenis Produk / Layanan</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="jenis_produk_id" class="custom-select" id="inputGroupSelect01">
-                        <option selected>Pilih Jenis Produk</option>
+                        <option selected value="{{$products -> jenis_produk_id}}">{{$products->jenis -> jenis_produk}}</option>
                         @foreach($jenisProduk as $item)
-                        <option value="{{$item -> id}}">{{$item -> jenis_produk}}</option>
+                            <option value="{{$item -> id}}">{{$item -> jenis_produk}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -22,12 +23,12 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="tempat_usaha_id" class="custom-select" id="inputGroupSelect01">
-                        <option selected>Pilih tempat usaha</option>
+                        <option selected value="{{$products -> provider -> id}}">{{$products -> provider -> nama_tempat}}</option>
                         @if($tempatUsaha ->count())
-                        @foreach($tempatUsaha as $item)
-                            <option value="{{$item -> id}}">{{$item -> nama_tempat}}</option>
-                        @endforeach
-                            @else
+                            @foreach($tempatUsaha as $item)
+                                <option value="{{$item -> id}}">{{$item -> nama_tempat}}</option>
+                            @endforeach
+                        @else
                             <option value="">Tidak ada</option>
 
                         @endif
@@ -39,7 +40,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-info-circle"></i></span>
                     <input name="nama_produk" type="text" class="form-control no-border-left" id="formGroupExampleInput"
-                           placeholder="Nama Produk">
+                           value="{{$products -> nama_produk}}" placeholder="Nama Produk">
                 </div>
             </div>
             <div class="form-group">
@@ -47,12 +48,12 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-info-circle"></i></span>
                     <input name="deskripsi" type="text" class="form-control no-border-left" id="formGroupExampleInput"
-                              placeholder="Deskripsi">
+                           value="{{$products -> deskripsi}}"  placeholder="Deskripsi">
                 </div>
             </div>
             <div class="form-group">
                 <label for="dropzone">Upload Image <a href="#" data-toggle="image-kesenian"
-                                                      title="Upload Foto Product mu! (multiple image)"><i
+                                                      title="Upload Image Kesenianmu! (multiple image)"><i
                                 class="fa fa-info-circle"></i></a></label>
                 <div id="file" class="dropzone"></div>
             </div>
@@ -62,7 +63,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right">Rp.</span>
                     <input type="number" name="harga" class="form-control no-border-left" id="formGroupExampleInput"
-                           placeholder="Harga">
+                           value="{{$products -> harga}}"    placeholder="Harga">
                 </div>
             </div>
             <div class="form-group">
@@ -70,7 +71,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="unit_product_id" class="custom-select" id="inputGroupSelect01">
-                        <option selected>Pilih unit</option>
+                        <option selected value="{{$products -> unit -> id}}">{{$products -> unit -> unit_product}} </option>
                         @foreach($unit as $item)
                             <option value="{{$item -> id}}">{{$item -> unit_product}}</option>
                         @endforeach
@@ -82,10 +83,10 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-info-circle"></i></span>
                     <input name="stok" type="number" class="form-control no-border-left" id="formGroupExampleInput"
-                           placeholder="Stok">
+                           value="{{$products -> stok}}"  placeholder="Stok">
                 </div>
             </div>
-            <button type="submit" class="btn btn-info mt-4 w-100">Tambah Produk</button>
+            <button type="submit" class="btn btn-info mt-4 w-100">Update Produk</button>
 
         </form>
 
@@ -99,6 +100,17 @@
             },
 
         });
+
+        var mockFile = null;
+
+        @if($products->productimage)
+                @foreach($products->productimage as $item)
+            mockFile = {id: '{{ $item->id }}', name: '{{ $item->filename }}', size: '{{ $item->size }}'};
+        drop.options.addedfile.call(drop, mockFile);
+        drop.options.thumbnail.call(drop, mockFile, '{{ asset('storage/' . $item->path . $item->filename)  }}');
+
+        @endforeach
+        @endif
 
         drop.on("success", function (file, res) {
             file.id = res.id;
@@ -114,14 +126,6 @@
                 })
                 .catch(function (error) {
                 });
-        });
-
-        function tambah() {
-            $('#input_video').before($('#form-clone').clone());
-        }
-
-        $("body").on("click", ".remove", function () {
-            $(this).closest(".form-group").remove();
         });
 
     </script>

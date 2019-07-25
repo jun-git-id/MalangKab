@@ -24,6 +24,13 @@ class Product extends Model
     public function provider(){
         return $this->belongsTo(TempatUsaha::class,'tempat_usaha_id','id');
     }
+    public function jenis(){
+        return $this->belongsTo(JenisProduk::class,'jenis_produk_id','id');
+    }
+    public function unit(){
+        return $this->belongsTo(UnitProduct::class,'unit_product_id','id');
+    }
+
     public function getImageAttribute()
     {
         return ($this->productimage[0]->path . $this->productimage[0]->filename);

@@ -22,7 +22,7 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'desa']]);
+        $this->middleware('auth', ['except' => ['index', 'desa','show']]);
     }
 
     public function index(Request $request)
@@ -34,12 +34,6 @@ class ProductController extends Controller
         $jenis = JenisProduk::all();
         $keywords = $request->get('keywords');
 
-        if ($keywords) {
-            $products = Product::with(['productimage'])->where([
-                ['nama_produk', 'LIKE', "%$keywords%"],
-            ])->get();
-
-        }
 
         $kecamatan_id = $request->get('kecamatan');
 
@@ -70,6 +64,12 @@ class ProductController extends Controller
             })->get();
         }
 
+        if ($keywords) {
+            $products = Product::with(['productimage'])->where([
+                ['nama_produk', 'LIKE', "%$keywords%"],
+            ])->get();
+
+        }
 
         return view('produk', compact(['products', 'kecamatan', 'desa', 'jenis']));
 
@@ -84,7 +84,7 @@ class ProductController extends Controller
         } else {
             $products = Product::all()->where('tempat_usaha_id', '=', $tempatUsaha);
         }
-        return view('produkSaya', ['products' => $products]);
+        return view('products.produkSaya', ['products' => $products]);
     }
 
     public function desa()
@@ -100,7 +100,7 @@ class ProductController extends Controller
         $jenisProduk = JenisProduk::all();
         $unit = UnitProduct::all();
         $tempatUsaha = TempatUsaha::where('user_id', '=', Auth::user()->id)->get();
-        return view('inputProduk', compact('jenisProduk', 'unit', 'tempatUsaha'));
+        return view('products.inputProduk', compact('jenisProduk', 'unit', 'tempatUsaha'));
     }
 
     public function store(Request $request)
@@ -108,7 +108,7 @@ class ProductController extends Controller
         $product = Product::create($request->all());
 
         $product->productimage()->sync($request['product_images']);
-        return redirect()->back();
+        return redirect('/produk-saya');
 
     }
 
@@ -134,10 +134,20 @@ class ProductController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $products = Product::with(['productimage'])->findOrFail($id);
+        $relatedProducts = Product::where('jenis_produk_id','=',$products->jenis_produk_id)->paginate(4);
+        return view('products.detailProduk',compact('products','relatedProducts'));
+    }
+
     public function edit($id)
     {
         $products = Product::findOrFail($id);
-        return view('editProduk', compact('products'));
+        $jenisProduk = JenisProduk::all();
+        $unit = UnitProduct::all();
+        $tempatUsaha = TempatUsaha::where('user_id', '=', Auth::user()->id)->get();
+        return view('products.editProduk', compact('products','jenisProduk', 'unit', 'tempatUsaha'));
     }
 
     public function update(Request $request, Product $product)
@@ -148,7 +158,7 @@ class ProductController extends Controller
         $product->productimage()->syncWithoutDetaching($request['product_images']);
 
         Session::flash('success', 'Berhasil');
-        return redirect()->back();
+        return redirect('/produk-saya');
     }
 
     public function deleteImage($id)

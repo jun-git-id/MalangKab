@@ -46,7 +46,7 @@ Route::get('/detailp', function () {
 });
 
 Route::get('/detail2', function () {
-    return view('cobainlagiya');
+    return view('products.detailProduk');
 });
 
 Route::get('/home', 'HomeController@index')->name('beranda');
@@ -66,24 +66,28 @@ Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 Route::resource('kecamatan','KecamatanController');
 
 Route::resource('products','ProductController');
+Route::get('/detailproduk/{id}','ProductController@show');
+
 Route::get('/json-desa','ProductController@desa');
 Route::get('/produk-saya','ProductController@produkSaya');
 Route::post('upload-image', 'ProductController@uploadImage')->name('upload.image');
 Route::delete('delete-image/{id}', 'ProductController@deleteImage')->name('delete.image');
 
+Route::resource('maps','MapController');
+Route::get('/json-maps','MapController@maps');
+Route::get('/json-subSektor','MapController@subSektor');
+Route::get('/json-desa','MapController@desa');
 
 Route::get('/detailusaha', function () {
     return view('detailusaha');
 });
-Route::get('/detailproduk', function () {
-    return view('detailproduk');
-});
+
 Route::get('/detailproduk1', function () {
     return view('cobaindetail_bckp');
 });
-Route::get('/maps', function () {
-    return view('maps');
-});
+//Route::get('/maps', function () {
+//    return view('maps');
+//});
 
 Route::get('/inputProduk', function () {
     return view('inputProduk');
@@ -93,7 +97,7 @@ Route::get('/inputProduk', function () {
 //    return view('usahaSaya');
 //});
 Route::get('/usahaFavorit', function () {
-    return view('usahaFavorit');
+    return view('tempatUsaha.usahaFavorit');
 });
 Route::get('/produk', function () {
     return view('produk');
@@ -102,7 +106,7 @@ Route::get('/produk', function () {
 //    return view('produkSaya');
 //});
 Route::get('/produkFavorit', function () {
-    return view('produkFavorit');
+    return view('products.produkFavorit');
 });
 Route::get('/admin', function () {
     return view('admin.dasboard');

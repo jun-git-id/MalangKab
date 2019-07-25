@@ -16,6 +16,7 @@ class CreateKecamatanTable extends Migration
         Schema::create('kecamatans', function (Blueprint $table) {
             $table->Increments('id');
             $table->string('nama_kecamatan');
+            $table -> timestamps();
         });
 
         Kecamatan::insert([
