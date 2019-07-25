@@ -8,8 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Malang Marketplace') }}
-    </title>
+    <title>Marketplace Kab Malang</title>
 
 {{--    <!-- jQuery (Necessary for All JavaScript Plugins) -->--}}
 {{--    <script src="js/jquery/jquery-2.2.4.min.js"></script>--}}
@@ -148,6 +147,9 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        @if(Auth::user()->role_id == 1 ||Auth::user()->role_id == 2 )
+                            <a class="dropdown-item" href="/admin">Konsole Admin</a>
+                        @endif
                         <a class="dropdown-item" href="/editProfile/{{Auth::user()->id}}">
                             {{ __('Edit Profile') }}
                         </a>

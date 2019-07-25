@@ -27,11 +27,6 @@ use Illuminate\Support\Facades\Validator;
 
 class TempatUsahaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index','show']]);
@@ -39,7 +34,7 @@ class TempatUsahaController extends Controller
 
     public function index(Request $request)
     {
-        $tempatusaha = TempatUsaha::all()->where('status', '=', 'Approve');
+        $tempatusaha = TempatUsaha::where('status', '=', 'Approve')->paginate(15);
         $kecamatan = Kecamatan::all();
         $sektor = SektorUsaha::all();
         $keywords = $request->get('keywords');
@@ -56,32 +51,32 @@ class TempatUsahaController extends Controller
                 ['kecamatan_id', '=', $kecamatan_id],
                 ['desa_id','=',$desa_id],
                 ['sektor_usaha_id','=',$sektor_id],
-            ])->get();
+            ])->paginate(15);
         }elseif ($kecamatan_id && $desa_id){
             $tempatusaha = TempatUsaha::where([
                 ['status', '=', 'Approve'],
                 ['kecamatan_id', '=', $kecamatan_id],
                 ['desa_id','=',$desa_id],
-            ])->get();
+            ])->paginate(15);
         } elseif($kecamatan_id) {
             $tempatusaha = TempatUsaha::where([
                 ['status', '=', 'Approve'],
                 ['kecamatan_id', '=', $kecamatan_id],
-            ])->get();
+            ])->paginate(15);
         }elseif($sektor_id){
             $tempatusaha = TempatUsaha::where([
                 ['status', '=', 'Approve'],
                 ['sektor_usaha_id','=',$sektor_id],
-            ])->get();
+            ])->paginate(15);
         }else{
-            $tempatusaha = TempatUsaha::all()->where('status', '=', 'Approve');
+            $tempatusaha = TempatUsaha::where('status', '=', 'Approve')->paginate(15);
         }
 
         if ($keywords) {
             $tempatusaha = TempatUsaha::where([
                 ['status', '=', 'Approve'],
                 ['nama_tempat', 'LIKE', "%$keywords%"],
-            ])->get();
+            ])->paginate(15);
 
         }
         return view('TempatUsaha', compact('tempatusaha','kecamatan','sektor'));
@@ -89,7 +84,7 @@ class TempatUsahaController extends Controller
 
     public function tempatUsahaSaya()
     {
-        $tempatusaha = TempatUsaha::where('user_id', '=', Auth::user()->id)->get();
+        $tempatusaha = TempatUsaha::where('user_id', '=', Auth::user()->id)->paginate(15);
 
         return view('tempatUsaha.usahaSaya', compact('tempatusaha'));
     }

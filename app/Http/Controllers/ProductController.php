@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 
-        $products = Product::with(['productimage'])->get();
+        $products = Product::with(['productimage'])->paginate(20);
         $kecamatan = Kecamatan::all();
         $desa = Desa::all();
         $jenis = JenisProduk::all();
@@ -44,7 +44,7 @@ class ProductController extends Controller
             $products = Product::with('provider')->where('jenis_produk_id', '=', $jenis_id)->select('*')->whereIn('tempat_usaha_id', function ($query) {
                 $query->select('id')->from('tempat_usahas')->where([
                     ['status', '=', 'Approve']]);
-            })->get();
+            })->paginate(20);
         } else {
             $products = Product::with('provider')->select('*')->whereIn('tempat_usaha_id', function ($query) use ($request) {
                 if ($request->get('kecamatan')) {
@@ -61,13 +61,13 @@ class ProductController extends Controller
                 }
                 $query->select('id')->from('tempat_usahas')->where([
                     ['status', '=', 'Approve']]);
-            })->get();
+            })->paginate(20);
         }
 
         if ($keywords) {
             $products = Product::with(['productimage'])->where([
                 ['nama_produk', 'LIKE', "%$keywords%"],
-            ])->get();
+            ])->paginate(20);
 
         }
 
