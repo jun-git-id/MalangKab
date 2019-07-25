@@ -129,12 +129,15 @@ Route::get('/adminJenisInvestasi', function () {
 Route::get('/adminJenisProduk', function () {
     return view('admin.adminJenisProduk');
 });
-Route::get('/adminKecamatan', function () {
-    return view('admin.adminKecamatan');
-});
+//Route::get('/adminKecamatan', function () {
+////    return view('admin.adminKecamatan');
+////});
 Route::get('/adminDesa', function () {
     return view('admin.adminDesa');
 });
 Route::get('/adminKategoriUsaha', function () {
     return view('admin.adminKategoriUsaha');
 });
+Route::resource('adminKecamatan','KecamatanController');
+Route::get ( '/adminKecamatan', 'KecamatanController@readItem' );
+Route::post ( '/addKecamatan', 'KecamatanController@addItem' );
