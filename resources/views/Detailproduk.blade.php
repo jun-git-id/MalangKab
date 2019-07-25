@@ -11,7 +11,7 @@
 <body>
 
 <div class="container">
-  <h2>Carousel Example</h2>  
+  <h2>Carousel Example</h2>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -29,7 +29,7 @@
       <div class="item">
         <img src="img/kebun.jpg" alt="Chicago" style="width:30%;">
       </div>
-    
+
       <div class="item">
         <img src="img/kebun.jpg" alt="New york" style="width:30%;">
       </div>
