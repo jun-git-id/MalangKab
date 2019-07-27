@@ -23,7 +23,7 @@
                                         <a href="{{route('tempatusaha.edit',$itemUsaha->id)}}" class="btn btn-outline-info mr-5 ml-2">Edit</a>
                                     </p>
                                     <p>
-                                        <button class="btn btn-outline-info ml-4" onclick="deleteProduct('{{ $itemUsaha->id }}','{{ $itemUsaha->name }}')">Hapus
+                                        <button class="btn btn-outline-info ml-4" onclick="deleteProduct('{{ $itemUsaha->id }}','{{ $itemUsaha->nama_tempat }}')">Hapus
                                         </button>
                                     </p>
                                 </div>

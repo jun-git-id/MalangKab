@@ -50,6 +50,7 @@ Route::get('/detail2', function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('beranda');
+Route::get('/','HomeController@kategori');
 
 Route::get('/editProfile/{id}', 'ProfileController@edit');
 Route::put('/editProfile/{id}', 'ProfileController@update');
@@ -62,8 +63,18 @@ Route::get('/json-subSektor','TempatUsahaController@subSektor');
 Route::get('/json-desa','TempatUsahaController@desa');
 Route::get('/json-filterKecamatan','TempatUsahaController@filterKecamatan');
 
+Route::get('/ajax-adminTempatUsaha','TempatUsahaController@adminIndex')->name('usaha.adminIndex');
+Route::get('/ajax-adminTempatUsaha/{id}','TempatUsahaController@adminEdit');
+Route::post('/ajax-adminTempatUsaha/update','TempatUsahaController@adminUpdate')->name('usaha.adminUpdate');
+Route::delete('/ajax-adminTempatUsaha/delete/{id}','TempatUsahaController@adminDestroy')->name('usaha.adminDestroy');
+Route::get('/adminTempatUsaha','TempatUsahaController@admin');
+
+Route::resource('adminDesa','DesaController');
+
 Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
-Route::resource('kecamatan','KecamatanController');
+Route::resource('adminKecamatan','KecamatanController');
+Route::post('adminKecamatan/store', 'KecamatanController@store');
+Route::get('adminKecamatan/delete/{id}', 'KecamatanController@destroy');
 
 Route::resource('products','ProductController');
 Route::get('/detailproduk/{id}','ProductController@show');
@@ -111,9 +122,7 @@ Route::get('/produkFavorit', function () {
 Route::get('/admin', function () {
     return view('admin.dasboard');
 });
-Route::get('/adminTempatUsaha', function () {
-    return view('admin.adminTempatUsaha');
-});
+
 Route::get('/adminSubKategoriUsaha', function () {
     return view('admin.adminSubKategoriUsaha');
 });
@@ -132,12 +141,10 @@ Route::get('/adminJenisProduk', function () {
 //Route::get('/adminKecamatan', function () {
 ////    return view('admin.adminKecamatan');
 ////});
-Route::get('/adminDesa', function () {
-    return view('admin.adminDesa');
-});
+//Route::get('/adminDesa', function () {
+//    return view('admin.adminDesa');
+//});
 Route::get('/adminKategoriUsaha', function () {
     return view('admin.adminKategoriUsaha');
 });
-Route::resource('adminKecamatan','KecamatanController');
-Route::get ( '/adminKecamatan', 'KecamatanController@readItem' );
-Route::post ( '/addKecamatan', 'KecamatanController@addItem' );
+

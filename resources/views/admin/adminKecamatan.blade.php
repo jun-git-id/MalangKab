@@ -10,61 +10,20 @@
         <div class="card-body">
             <div class="card-body">
                 <div class="col-md-12 mb-4">
-                    <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#exampleModal">
+                    <a href="javascript:void(0)" class="btn btn-primary btn-sm " id="createNewKecamatan">
                         <i class="fas fa-plus mr-2"></i>
                         Tambah Kecamatan
                     </a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered dataTable" id="table" width="100%" cellspacing="0">
+                    <table class="table table-bordered data-table dataTable float-left" id="laravel_datatable">
                         <thead>
                         <tr>
-                            <th>Nama Kecamatan </th>
-                            <th width="20%">Aksi</th>
+                            <th>Nama Kecamatan</th>
+                            <th width="30%">Action</th>
                         </tr>
                         </thead>
-                        @foreach($kecamatan as $item)
-                            <tr class="item{{$item->id}}">
-                                <td>{{$item->id}}</td>
-                                <td>{{$item->kecamatan}}</td>
-                                <td><button class="edit-modal btn btn-info" data-id="{{$item->id}}"
-                                            data-name="{{$item->kecamatan}}">
-                                        <i class="fas fa-pencil-alt mr-2"></i> Ubah
-                                    </button>
-                                    <button class="delete-modal btn btn-danger" data-id="{{$item->id}}"
-                                            data-name="{{$item->kecamatan}}">
-                                        <i class="fas fa-trash-alt mr-2"></i>Hapus
-                                    </button></td>
-                            </tr>
-                        @endforeach
-
                         <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>
-                                <a href="#"
-                                   class="btn btn-primary btn-xs dataTable">
-                                    <i class="fas fa-pencil-alt mr-2"></i>Ubah</a>
-                                <button onclick=""
-                                        class="btn btn-danger btn-xs dataTable">
-                                    <i class="fas fa-trash-alt mr-2"></i>Hapus
-                                </button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>
-                                <a href="#"
-                                   class="btn btn-primary btn-xs dataTable">
-                                    <i class="fas fa-pencil-alt mr-2"></i>Ubah</a>
-                                <button onclick=""
-                                        class="btn btn-danger btn-xs dataTable">
-                                    <i class="fas fa-trash-alt mr-2"></i>Hapus
-                                </button>
-                            </td>
-
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -74,73 +33,137 @@
     <!-- /.container-fluid -->
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+
+    <div class="modal fade" id="ajaxModel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kecamatan</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h4 class="modal-title" id="modelHeading"></h4>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('kecamatan.store')}}">
-                    <label>Nama Kecamatan</label>
-                    <input type="text" name="kecamatan" class="form-control" placeholder="masukkan nama kecamatan" aria-label="Username" aria-describedby="basic-addon1">
+                    <form id="kecamatanForm" name="kecamatanForm" class="form-horizontal">
+                        <input hidden id="id" name="id">
+
+                        <div class="form-group">
+                            <label for="nama_kecamatan" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="nama_kecamatan" name="nama_kecamatan"
+                                       placeholder="Masukan Kecamatan" value="" maxlength="50" required="">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary" id="add">Tambah</button>
-                </div>
-                </form>
             </div>
         </div>
     </div>
 
-    <script>
-        $("#add").click(function() {
 
-            $.ajax({
-                type: 'post',
-                url: '/addKecamatan',
-                data: {
-                    '_token': $('input[name=_token]').val(),
-                    'name': $('input[name=kecamatan]').val()
-                },
-                success: function(data) {
-                    if ((data.errors)) {
-                        $('.error').removeClass('hidden');
-                        $('.error').text(data.errors.name);
-                    } else {
-                        $('.error').remove();
-                        $('#table').append("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.name + "</td><td><button class='edit-modal btn btn-info' data-id='" + data.id + "' data-name='" + data.name + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-name='" + data.name + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
-                    }
-                },
+
+
+    <script type="text/javascript">
+        $(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
+
+            var table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('adminKecamatan.index') }}",
+                columns: [
+                    {data: 'nama_kecamatan', name: 'nama_kecamatan'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+
+            $('#createNewKecamatan').click(function () {
+                $('#saveBtn').val("create-kecamatan");
+                $('#id').val();
+                $('#kecamatanForm').trigger("reset");
+                $('#modelHeading').html("Tambah Kecamatan Baru");
+                $('#ajaxModel').modal('show');
+            });
+
+            $('tbody').on('click', '.edit', function () {
+                var id = $(this).data('id');
+
+                $.get("{{ route('adminKecamatan.index') }}" + '/' + id + '/edit', function (data) {
+                    $('#ajaxModel').modal('show');
+                    $('#modelHeading').html("Edit Product");
+                    $('#saveBtn').val("edit-kecamatan");
+                    $('#id').val(data.id);
+                    $('#nama_kecamatan').val(data.nama_kecamatan);
+                })
+
+            });
+
+            $('#saveBtn').click(function (e) {
+                e.preventDefault();
+                $(this).html('Sending..');
+                $.ajax({
+
+                    data: $('#kecamatanForm').serialize(),
+                    url: "{{ route('adminKecamatan.store') }}",
+                    type: "POST",
+                    dataType: 'json',
+
+                    success: function (data) {
+                        $('#kecamatanForm').trigger("reset");
+                        $('#ajaxModel').modal('hide');
+                        table.draw();
+
+                    },
+
+                    error: function (data) {
+                        console.log('Error:', data);
+                        $('#saveBtn').html('Save Changes');
+                    }
+
+                });
+
+            });
+
+
+            $('body').on('click', '.delete', function () {
+                var product_id = $(this).data("id");
+                // confirm("Are You sure want to delete !");
+                swal({
+                    title: "Apa anda yakin?",
+                    text: "Anda Menghapus Kecamatan ini",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete => {
+                    if (willDelete) {
+                        $.ajax({
+
+                            type: "DELETE",
+                            url: "{{ route('adminKecamatan.store') }}" + '/' + product_id,
+
+                            success: function (data) {
+                                table.draw();
+                            },
+
+                            error: function (data) {
+                                console.log('Error:', data);
+                            }
+                        });
+                    }
+                }));
+
+            });
+
+
         });
     </script>
 @endsection
 
-    <script>
-        $('#data-table').DataTable({
-            "columnDefs": [{
-                "targets": 6,
-                "orderable": false
-            }],
-            "responsive": true,
-            "pageLength": 10,
-            "language": {
-                "lengthMenu": "Tampilkan _MENU_ per halaman",
-                "zeroRecords": "Tidak ada data",
-                "info": "Tampilkan _PAGE_ dari _PAGES_ halaman",
-                "infoEmpty": "",
-                "search": "Cari Data :",
-                "infoFiltered": "(filtered from _MAX_ total records)",
-                "paginate": {
-                    "previous": "Sebelumnya",
-                    "next": "Selanjutnya"
-                }
-            }
-        });
-    </script>
+
 

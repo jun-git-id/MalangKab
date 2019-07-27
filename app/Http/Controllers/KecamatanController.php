@@ -6,6 +6,8 @@ use App\Http\Resources\KecamatanResource;
 use App\Kecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect, Illuminate\Support\Facades\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class KecamatanController extends Controller
 {
@@ -13,44 +15,53 @@ class KecamatanController extends Controller
     {
         $this->middleware('auth', ['except' => ['index']]);
     }
-//    public function index(){
-//
-////        $kecamatan = Kecamatan::all();
-////        return view('tempatUsaha.inputUsaha',compact('kecamatan'));
-//    }
-//
-//    public function create(){
-//        return view('admin.adminKecamatan');
-//    }
-//    public function store(Request $request){
-//        $kecamatan  = Kecamatan::create($request->all());
-//
-//        return view('admin.adminKecamatan',compact('kecamatan'));
-//    }
-    public function addItem(Request $request){
-        $rules = array (
-            'nama_kecamatan' => 'required'
-        );
-        $validator = Validator::make ( Input::all (), $rules );
-        if ($validator->fails ())
-            return Response::json ( array (
 
-                'errors' => $validator->getMessageBag ()->toArray ()
-            ) );
-        else {
-            $kecamatan = new adminKecamatan ();
-            $kecamatan->nama_kecamatan = $request->nama_kecamatan;
-            $kecamatan->save ();
-            return response ()->json ( $kecamatan );
-        }
-    }
-    public function readItem(){
-        $kecamatan = Kecamatan::all ();
-        return view ( 'welcome' )->withData ( $kecamatan );
-    }
-
-    public function edit()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+
+            $data = Kecamatan::latest()->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs dataTable"><i class="fas fa-pencil-alt mr-2"></i>Ubah</a>';
+
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="delete btn btn-danger btn-xs dataTable"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>';
+
+                    return $btn;
+
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+
+        }
+
+        return view('admin.adminKecamatan');
+    }
+
+    public function store(Request $request)
+    {
+
+        $kecamatanId = $request->id;
+        $kecamatan = Kecamatan::updateOrCreate(['id' => $kecamatanId],
+            ['nama_kecamatan' => $request->nama_kecamatan]);
+        return response()->json($kecamatan);
+
+    }
+
+//    public function readItem(){
+//        $kecamatan = Kecamatan::all ();
+//        return view ( 'admin.adminKecamatan' ,compact('kecamatan'));
+//    }
+
+    public function edit($id)
+    {
+        $where = array('id' => $id);
+        $kecamatan = Kecamatan::where($where)->first();
+
+        return response()->json($kecamatan);
 
     }
 
@@ -59,8 +70,11 @@ class KecamatanController extends Controller
 
     }
 
-    public function destroy()
+    public function destroy($id)
     {
+        $kecamatan = Kecamatan::where('id', $id)->delete();
+        return response()->json($kecamatan);
+
 
     }
 

@@ -4,6 +4,7 @@
 <head>
 
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -23,6 +24,31 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('css/admin/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/admin/style.css')}}" rel="stylesheet">
+
+<!-- Bootstrap core JavaScript-->
+    <script src="{{asset('js/jquery.js')}}"></script>
+    <script src="{{asset('js/admin/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{asset('js/admin/jquery.easing.min.js')}}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{asset('js/admin/sb-admin-2.min.js')}}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{asset('js/admin/Chart.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{asset('js/admin/chart-area-demo.js')}}"></script>
+    <script src="{{asset('js/admin/chart-pie-demo.js')}}"></script>
+
+{{--    datatables--}}
+    <link  href="{{asset('css/admin/datatables.css')}}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="{{asset('js/datatables.min.js')}}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <script src="/js/swal.min.js"></script>
 
 </head>
 
@@ -57,7 +83,7 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="/adminTempatUsaha">Tempat Usaha</a>
-                    <a class="collapse-item" href="/adminKecamatan">Kecamatan</a>
+                    <a class="collapse-item" href="{{route('adminKecamatan.index')}}">Kecamatan</a>
                     <a class="collapse-item" href="/adminDesa">Desa</a>
                     <a class="collapse-item" href="/adminKategoriUsaha">Kategori Usaha</a>
                     <a class="collapse-item" href="/adminSubKategoriUsaha">Sub Kategori Usaha</a>
@@ -137,23 +163,6 @@
         </div>
     </div>
 </div>
-
-<!-- Bootstrap core JavaScript-->
-<script src="js/admin/jquery.min.js"></script>
-<script src="js/admin/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="js/admin/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="js/admin/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="js/admin/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="js/admin/chart-area-demo.js"></script>
-<script src="js/admin/chart-pie-demo.js"></script>
 
 </body>
 

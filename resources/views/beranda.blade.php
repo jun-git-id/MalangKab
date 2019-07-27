@@ -80,7 +80,7 @@
                                 <h5 class="card-title">{{$itemProduct->nama_produk}}</h5>
                                 <p class="card-text">{{$itemProduct->deskripsi}}</p>
                                 <div class="row ml-0">
-                                    <p><i class="fas fa-heart"></i> {{$itemProduct->like}}</p>
+                                    <p id="totalLike"><i id="like" class="fas fa-heart"></i> </p>
                                     <p><i class="fas fa-star ml-4"></i> {{$itemProduct->rating}}</p>
                                 </div>
                             </div>
@@ -97,5 +97,10 @@
             @endif
         </div>
     </div>
-
+    <script>
+        $('#like').on('click', function () {
+            var i = 1;
+            $('#totalLike').append(i++);
+        })
+    </script>
 @endsection

@@ -9,54 +9,18 @@
         </div>
         <div class="card-body">
             <div class="card-body">
-                <div class="col-md-12 mb-4">
-                    <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#exampleModal">
-                        <i class="fas fa-plus mr-2"></i>
-                        Tambah Tempat Usaha
-                    </a>
-                </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered dataTable data-table" id="dataTable" width="100%"
+                           cellspacing="0">
                         <thead>
                         <tr>
                             <th>Nama Tempat Usaha</th>
-                            <th>Nama Pemilik</th>
                             <th>Status</th>
                             <th width="20%">Aksi</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>
-                                <a href="#"
-                                   class="btn btn-primary btn-xs dataTable">
-                                    <i class="fas fa-pencil-alt mr-2"></i>Ubah</a>
-                                <button onclick=""
-                                        class="btn btn-danger btn-xs dataTable">
-                                    <i class="fas fa-trash-alt mr-2"></i>Hapus
-                                </button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>
-                                <a href="#"
-                                   class="btn btn-primary btn-xs dataTable">
-                                    <i class="fas fa-pencil-alt mr-2"></i>Ubah</a>
-                                <button onclick=""
-                                        class="btn btn-danger btn-xs dataTable">
-                                    <i class="fas fa-trash-alt mr-2"></i>Hapus
-                                </button>
-                            </td>
-
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -66,52 +30,221 @@
     <!-- /.container-fluid -->
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <!-- Modal -->
+
+    <div class="modal fade" id="ajaxModel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Tempat Usaha</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h4 class="modal-title" id="modelHeading"></h4>
                 </div>
                 <div class="modal-body">
-                    <label>Nama Tempat Usaha</label>
-                    <input type="text" class="form-control mb-4" placeholder="masukkan nama tempat usaha" aria-label="Username" aria-describedby="basic-addon1">
-                    <label>Nama Pemilik Usaha</label>
-                    <input type="text" class="form-control mb-4" placeholder="masukkan nama pemilik usaha" aria-label="Username" aria-describedby="basic-addon1">
-                    <label>Status</label>
-                    <input type="text" class="form-control" placeholder="status" aria-label="Username" aria-describedby="basic-addon1">
+                    <form id="usahaForm" name="usahaForm" class="form-horizontal">
+                        <input hidden id="id" name="id">
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Tambah</button>
+                        <div class="form-group">
+                            <label for="nama_tempat" class="col-sm-12 control-label">Nama Tempat Usaha</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="nama_tempat" name="nama_tempat"
+                                       disabled value="{{$usaha->nama_tempat}}" maxlength="50" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama_pemilik" class="col-sm-12 control-label">Nama Pemilik</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="nama_pemilik" name="nama_pemilik"
+                                       disabled value="{{$usaha->user->nama}}" maxlength="50" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="deskripsi" class="col-sm-12 control-label">Deskripsi</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="deskripsi" name="deskripsi"
+                                       disabled value="{{$usaha->deskripsi}}" maxlength="50" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="foto_tempat" class="col-sm-12 control-label">Foto Tempat Usaha</label>
+                            <div class="col-sm-12 text-center">
+                                <img id="foto_tempat" src="{{asset('storage/'.$usaha->foto_tempat_usaha)}}" alt=""
+                                     width="50%">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat" class="col-sm-12 control-label">Alamat</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="alamat" name="alamat"
+                                       disabled value="{{$usaha->alamat}}" maxlength="50" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="notelp" class="col-sm-12 control-label">No. Telpon</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="notelp" name="notelp"
+                                       disabled value="{{$usaha->no_telp}}" maxlength="50" required="">
+                            </div>
+                        </div>
+                        @if($izinusaha ->count())
+                            @foreach($izinusaha as $i => $item)
+                                <div class="ml-1 form-group row">
+                                    <label for="izin_usaha" class="col-sm-12 control-label">Izin Usaha {{$i+1}} </label>
+                                    <div class="col-sm-6">
+                                        <p>{{$item->jenisIzin->jenis_izin_usaha}}</p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="izin_usaha[]" name="izin_usaha[]"
+                                               disabled value="{{$item->no_izin_usaha}}" maxlength="50" required="">
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="form-group">
+                                <label for="izin_usaha" class="col-sm-12 control-label">Izin Usaha</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="izin_usaha[]" name="izin_usaha[]"
+                                           disabled value="" maxlength="50" required="">
+                                </div>
+                            </div>
+                        @endif
+
+                        <div class="form-group">
+                            <label for="status" class="col-sm-12 control-label">Status</label>
+                            <select id="status" name="status[]" class="status custom-select ml-1">
+                                <option selected="true" value="{{$usaha -> status}}">{{$usaha->status}}</option>
+                                <option value="Approve">Approve</option>
+                                <option value="Pending">Pending</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-    <script>
-        $('#data-table').DataTable({
-            "columnDefs": [{
-                "targets": 6,
-                "orderable": false
-            }],
-            "responsive": true,
-            "pageLength": 10,
-            "language": {
-                "lengthMenu": "Tampilkan _MENU_ per halaman",
-                "zeroRecords": "Tidak ada data",
-                "info": "Tampilkan _PAGE_ dari _PAGES_ halaman",
-                "infoEmpty": "",
-                "search": "Cari Data :",
-                "infoFiltered": "(filtered from _MAX_ total records)",
-                "paginate": {
-                    "previous": "Sebelumnya",
-                    "next": "Selanjutnya"
+
+    <script type="text/javascript">
+        $(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            }
+            });
+
+            var table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('usaha.adminIndex') }}",
+                columns: [
+                    {data: 'nama_tempat', name: 'nama_tempat'},
+                    {data: 'status', name: 'status'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+
+
+            $('tbody').on('click', '.edit', function () {
+                var id = $(this).data('id');
+
+                $.get("{{ url('/ajax-adminTempatUsaha') }}" + '/' + id, function (data) {
+                    $('#ajaxModel').modal('show');
+                    $('#modelHeading').html("Edit Usaha");
+                    $('#saveBtn').val("edit-usaha");
+                    $('#id').val(data.id);
+                    $('.status').val(data.status);
+
+                })
+
+            });
+
+            $('#saveBtn').click(function (e) {
+                e.preventDefault();
+                $(this).html('Sending..');
+                $.ajax({
+
+                    data: $('#usahaForm').serialize(),
+                    url: "{{ route('usaha.adminUpdate') }}",
+                    type: "POST",
+                    dataType: 'json',
+
+                    success: function (data) {
+                        $('#usahaForm').trigger("reset");
+                        $('#ajaxModel').modal('hide');
+                        table.draw();
+
+                    },
+
+                    error: function (data) {
+                        console.log('Error:', data);
+                        $('#saveBtn').html('Save Changes');
+                    }
+
+                });
+
+            });
+
+
+            $('body').on('click', '.delete', function () {
+                var product_id = $(this).data("id");
+                // confirm("Are You sure want to delete !");
+                swal({
+                    title: "Apa anda yakin?",
+                    text: "Anda Menghapus Kecamatan ini",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete => {
+                    if (willDelete) {
+                        $.ajax({
+
+                            type: "DELETE",
+                            url: "{{ url('/ajax-adminTempatUsaha/delete') }}" + '/' + product_id,
+
+                            success: function (data) {
+                                table.draw();
+                            },
+
+                            error: function (data) {
+                                console.log('Error:', data);
+                            }
+                        });
+                    }
+                }));
+
+            });
+
+
         });
+        function deleteProduct(tempatUsahaId, namaTempat) {
+            swal({
+                title: "Apa anda yakin?",
+                text: "Anda Menghapus Product " + namaTempat,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete => {
+                if (willDelete) {
+                    let theUrl = "{{ route('tempatusaha.destroy', ':tempatUsahaId') }}";
+                    theUrl = theUrl.replace(":tempatUsahaId", tempatUsahaId);
+                    $.ajax({
+                        type: 'POST',
+                        url: theUrl,
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            _method: "delete"},
+                        success: function (data) {
+                            window.location.href = data;
+                        },
+                        error: function (data) {
+                            swal("Oops", "We couldn't connect to the server!", "error");
+                        }
+                    });
+                }
+            }));
+        }
     </script>
+@endsection
+
 

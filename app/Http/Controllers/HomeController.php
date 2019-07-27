@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\JenisProduk;
 use App\Product;
 use App\TempatUsaha;
 use Illuminate\Http\Request;
@@ -35,4 +36,10 @@ class HomeController extends Controller
 
         return view('beranda', compact(['tempatusaha','products']));
     }
+
+//    public function kategori(){
+//        $kategoriProduk = JenisProduk::all();
+//
+//        return view('layouts.app',compact('kategoriProduk'));
+//    }
 }

@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 
 class TempatUsahaController extends Controller
@@ -38,8 +39,6 @@ class TempatUsahaController extends Controller
         $kecamatan = Kecamatan::all();
         $sektor = SektorUsaha::all();
         $keywords = $request->get('keywords');
-
-
 
         $kecamatan_id = $request->get('kecamatan');
         $desa_id = $request->get('desa');
@@ -88,6 +87,7 @@ class TempatUsahaController extends Controller
 
         return view('tempatUsaha.usahaSaya', compact('tempatusaha'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -306,5 +306,65 @@ class TempatUsahaController extends Controller
 
 
         return route('tempatusaha.index');
+    }
+
+    public function admin(){
+        $usaha = TempatUsaha::with(['user'])->first();
+        $izinusaha = IzinUsaha::where('id_tempat_usaha', '=', $usaha->id)->get();
+        return view('admin.adminTempatUsaha',compact('usaha','izinusaha'));
+
+    }
+    public function adminUpdate(Request $request){
+       $usahaId =$request->id;
+       $usaha = TempatUsaha::findOrFail($usahaId);
+       $usaha -> status = $request->status;
+       $usaha -> update();
+        return response()->json($usaha);
+    }
+    public function adminEdit($id)
+    {
+        $where = array('id' => $id);
+        $usaha = Kecamatan::where($where)->first();
+
+        return response()->json($usaha);
+
+    }
+    public function adminDestroy($id){
+        $tempatUsaha = TempatUsaha::findOrFail($id);
+        $izinusaha = IzinUsaha::where('id_tempat_usaha', '=', $id)->get();
+        foreach ($izinusaha as $i) {
+            $i->delete();
+        }
+        Storage::delete('public/' . $tempatUsaha->foto_tempat_usaha);
+        $tempatUsaha->delete();
+
+
+        return response()->json($tempatUsaha);
+    }
+    public function adminIndex(Request $request)
+    {
+
+        if ($request->ajax()) {
+
+            $data = TempatUsaha::with(['user'])->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs dataTable"><i class="fas fa-pencil-alt mr-2"></i>Ubah</a>';
+
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="delete btn btn-danger btn-xs dataTable"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>';
+
+                    return $btn;
+
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+
+        }
+
+
+        return view('admin.adminTempatUsaha');
     }
 }

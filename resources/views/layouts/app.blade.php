@@ -21,7 +21,7 @@
 {{--    <!-- Active js -->--}}
 {{--    <script src="js/active.js"></script>--}}
 
-    <!-- font-awesome icons -->
+<!-- font-awesome icons -->
     <link href="{{asset('css/fontawesome-all.min.css')}}" rel="stylesheet">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-          <!-- Core Style CSS -->
+    <!-- Core Style CSS -->
     <link rel="stylesheet" href="{{asset('css/core-style.css')}}">
 
 
@@ -89,8 +89,9 @@
                     Kategori
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Hotel</a>
-                    <a class="dropdown-item" href="/Tempat">Bengkel</a>
+                    @foreach(getCategory() as $item)
+                        <a class="dropdown-item" href="/products?jenis={{$item->id}}">{{$item -> jenis_produk}}</a>
+                    @endforeach
                 </div>
             </li>
             <li class="nav-item dropdown mr-3 mt-lg-0 mt-3">
@@ -132,7 +133,7 @@
             </li>
             @guest
                 <li class="nav-item mr-3 mt-lg-0 mt-3">
-                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal" style="color: white" href="#">Login</a>
+                    <a class="nav-link" data-toggle="modal" data-target="#login" style="color: white" href="#">Login</a>
                 </li>
                 @if (Route::has('register'))
                     <li class="nav-item mr-3 mt-lg-0 mt-3">
@@ -174,7 +175,7 @@
     </div>
 </nav>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" role="dialog">
+<div class="modal fade" id="login" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -216,7 +217,7 @@
                                                      id="remember" {{ old('remember') ? 'checked' : '' }}>Remember
                             Me</label>
                     </div>
-                    <button type="submit" class="btn btn-block" style="background-color: #5682a3; color: white" ><span
+                    <button type="submit" class="btn btn-block" style="background-color: #5682a3; color: white"><span
                                 class="glyphicon glyphicon-off"></span> Login
                     </button>
                 </form>
