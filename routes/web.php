@@ -80,6 +80,22 @@ Route::resource('adminKecamatan','KecamatanController');
 Route::post('adminKecamatan/store', 'KecamatanController@store');
 Route::get('adminKecamatan/delete/{id}', 'KecamatanController@destroy');
 
+Route::resource('adminKategoriUsaha','KategoriUsahaController');
+Route::post('adminKategoriUsaha/store', 'KategoriUsahaController@store');
+Route::get('adminKategoriUsaha/delete/{id}', 'KategoriUsahaController@destroy');
+
+Route::resource('adminKegiatanUsaha','KegiatanUsahaController');
+Route::post('adminKegiatanUsaha/store', 'KegiatanUsahaController@store');
+Route::get('adminKegiatanUsaha/delete/{id}', 'KegiatanUsahaController@destroy');
+
+Route::resource('adminStatusKepemilikan','StatusKepemilikanController');
+Route::post('adminStatusKepemilikan/store', 'StatusKepemilikanController@store');
+Route::get('adminStatusKepemilikan/delete/{id}', 'StatusKepemilikanController@destroy');
+
+Route::resource('adminJenisInvestasi','JenisInvestasiController');
+Route::post('adminJenisInvestasi/store', 'JenisInvestasiController@store');
+Route::get('adminJenisInvestasi/delete/{id}', 'JenisInvestasiController@destroy');
+
 Route::resource('products','ProductController');
 Route::get('/detailproduk/{id}','ProductController@show');
 
@@ -130,15 +146,15 @@ Route::get('/admin', function () {
 Route::get('/adminSubKategoriUsaha', function () {
     return view('admin.adminSubKategoriUsaha');
 });
-Route::get('/adminKegiatanUsaha', function () {
-    return view('admin.adminKegiatanUsaha');
-});
-Route::get('/adminStatusKepemilikan', function () {
-    return view('admin.adminStatusKepemilikan');
-});
-Route::get('/adminJenisInvestasi', function () {
-    return view('admin.adminJenisInvestasi');
-});
+//Route::get('/adminKegiatanUsaha', function () {
+//    return view('admin.adminKegiatanUsaha');
+//});
+//Route::get('/adminStatusKepemilikan', function () {
+//    return view('admin.adminStatusKepemilikan');
+//});
+//Route::get('/adminJenisInvestasi', function () {
+//    return view('admin.adminJenisInvestasi');
+//});
 Route::get('/adminJenisProduk', function () {
     return view('admin.adminJenisProduk');
 });
@@ -148,7 +164,7 @@ Route::get('/adminJenisProduk', function () {
 //Route::get('/adminDesa', function () {
 //    return view('admin.adminDesa');
 //});
-Route::get('/adminKategoriUsaha', function () {
-    return view('admin.adminKategoriUsaha');
-});
+//Route::get('/adminKategoriUsaha', function () {
+//    return view('admin.adminKategoriUsaha');
+//});
 

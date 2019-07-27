@@ -10,47 +10,21 @@
         <div class="card-body">
             <div class="card-body">
                 <div class="col-md-12 mb-4">
-                    <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#exampleModal">
+                    <a href="javascript:void(0)" class="btn btn-primary btn-sm " id="createNewInvestasi">
                         <i class="fas fa-plus mr-2"></i>
                         Tambah Jenis Investasi
                     </a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered data-table dataTable float-left" id="laravel_datatable">
                         <thead>
                         <tr>
                             <th>Nama </th>
-                            <th width="20%">Aksi</th>
+                            <th width="30%">Action</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>
-                                <a href="#"
-                                   class="btn btn-primary btn-xs dataTable">
-                                    <i class="fas fa-pencil-alt mr-2"></i>Ubah</a>
-                                <button onclick=""
-                                        class="btn btn-danger btn-xs dataTable">
-                                    <i class="fas fa-trash-alt mr-2"></i>Hapus
-                                </button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>
-                                <a href="#"
-                                   class="btn btn-primary btn-xs dataTable">
-                                    <i class="fas fa-pencil-alt mr-2"></i>Ubah</a>
-                                <button onclick=""
-                                        class="btn btn-danger btn-xs dataTable">
-                                    <i class="fas fa-trash-alt mr-2"></i>Hapus
-                                </button>
-                            </td>
-
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -60,47 +34,133 @@
     <!-- /.container-fluid -->
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="ajaxModel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Jenis Investasi</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h4 class="modal-title" id="modelHeading"></h4>
                 </div>
                 <div class="modal-body">
-                    <label>Jenis Investasi</label>
-                    <input type="text" class="form-control" placeholder="masukkan jenis investasi" aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Tambah</button>
+                    <form id="investasiForm" name="investasiForm" class="form-horizontal">
+                        <input hidden id="id" name="id">
+
+                        <div class="form-group">
+                            <label for="jenis_investasi" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="jenis_investasi" name="jenis_investasi"
+                                       placeholder="Masukan Jenis Investasi" value="" maxlength="50" required="">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-    <script>
-        $('#data-table').DataTable({
-            "columnDefs": [{
-                "targets": 6,
-                "orderable": false
-            }],
-            "responsive": true,
-            "pageLength": 10,
-            "language": {
-                "lengthMenu": "Tampilkan _MENU_ per halaman",
-                "zeroRecords": "Tidak ada data",
-                "info": "Tampilkan _PAGE_ dari _PAGES_ halaman",
-                "infoEmpty": "",
-                "search": "Cari Data :",
-                "infoFiltered": "(filtered from _MAX_ total records)",
-                "paginate": {
-                    "previous": "Sebelumnya",
-                    "next": "Selanjutnya"
+
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            }
+            });
+
+            var table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('adminJenisInvestasi.index') }}",
+                columns: [
+                    {data: 'jenis_investasi', name: 'jenis_investasi'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+
+            $('#createNewInvestasi').click(function () {
+                $('#saveBtn').val("create-investasi");
+                $('#id').val();
+                $('#investasiForm').trigger("reset");
+                $('#modelHeading').html("Tambah Jenis Investasi Baru");
+                $('#ajaxModel').modal('show');
+            });
+
+            $('tbody').on('click', '.edit', function () {
+                var id = $(this).data('id');
+
+                $.get("{{ route('adminJenisInvestasi.index') }}" + '/' + id + '/edit', function (data) {
+                    $('#ajaxModel').modal('show');
+                    $('#modelHeading').html("Edit Product");
+                    $('#saveBtn').val("edit-investasi");
+                    $('#id').val(data.id);
+                    $('#jenis_investasi').val(data.jenis_investasi);
+                })
+
+            });
+
+            $('#saveBtn').click(function (e) {
+                e.preventDefault();
+                $(this).html('Sending..');
+                $.ajax({
+
+                    data: $('#investasiForm').serialize(),
+                    url: "{{ route('adminJenisInvestasi.store') }}",
+                    type: "POST",
+                    dataType: 'json',
+
+                    success: function (data) {
+                        $('#investasiForm').trigger("reset");
+                        $('#ajaxModel').modal('hide');
+                        table.draw();
+
+                    },
+
+                    error: function (data) {
+                        console.log('Error:', data);
+                        $('#saveBtn').html('Save Changes');
+                    }
+
+                });
+
+            });
+
+
+            $('body').on('click', '.delete', function () {
+                var product_id = $(this).data("id");
+                // confirm("Are You sure want to delete !");
+                swal({
+                    title: "Apa anda yakin?",
+                    text: "Anda Menghapus Jenis Investasi ini",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete => {
+                    if (willDelete) {
+                        $.ajax({
+
+                            type: "DELETE",
+                            url: "{{ route('adminJenisInvestasi.store') }}" + '/' + product_id,
+
+                            success: function (data) {
+                                table.draw();
+                            },
+
+                            error: function (data) {
+                                console.log('Error:', data);
+                            }
+                        });
+                    }
+                }));
+
+            });
+
+
         });
     </script>
-
+@endsection
