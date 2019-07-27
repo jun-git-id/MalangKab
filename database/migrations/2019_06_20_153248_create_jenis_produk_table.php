@@ -16,6 +16,8 @@ class CreateJenisProdukTable extends Migration
         Schema::create('jenis_produks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('jenis_produk');
+            $table -> timestamps();
+
         });
 
         \App\JenisProduk::insert([

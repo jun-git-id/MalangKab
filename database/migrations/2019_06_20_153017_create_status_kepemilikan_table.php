@@ -16,6 +16,8 @@ class CreateStatusKepemilikanTable extends Migration
         Schema::create('status_kepemilikans', function (Blueprint $table) {
             $table->increments('id');
             $table->string('status_kepemilikan');
+            $table -> timestamps();
+
         });
         \App\StatusKepemilikan::insert([
             'status_kepemilikan' => 'Pribadi'

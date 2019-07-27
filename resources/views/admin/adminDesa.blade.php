@@ -91,15 +91,15 @@
             var table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('adminKecamatan.index') }}",
+                ajax: "{{ route('desa.dataIndex') }}",
                 columns: [
-                    {data: 'nama_kecamatan', name: 'nama_kecamatan'},
+                    {data: 'nama_desa', name: 'nama_desa'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
 
             $('#createNewDesa').click(function () {
-                $('#saveBtn').val("create-kecamatan");
+                $('#saveBtn').val("create-desa");
                 $('#id').val();
                 $('#desaForm').trigger("reset");
                 $('#modelHeading').html("Tambah Kecamatan Baru");
@@ -109,12 +109,14 @@
             $('tbody').on('click', '.edit', function () {
                 var id = $(this).data('id');
 
-                $.get("{{ route('adminKecamatan.index') }}" + '/' + id + '/edit', function (data) {
+                $.get("{{ route('adminDesa.index') }}" + '/' + id + '/edit', function (data) {
+                    console.log(data);
                     $('#ajaxModel').modal('show');
-                    $('#modelHeading').html("Edit Product");
+                    $('#modelHeading').html("Edit Desa");
                     $('#saveBtn').val("edit-kecamatan");
                     $('#id').val(data.id);
-                    $('#nama_desa').val(data.nama_kecamatan);
+                    $('#nama_desa').val(data.nama_desa);
+                    $('#kecamatan').val(data.kecamatan_id);
                 })
 
             });
@@ -125,7 +127,7 @@
                 $.ajax({
 
                     data: $('#desaForm').serialize(),
-                    url: "{{ route('adminKecamatan.store') }}",
+                    url: "{{ route('adminDesa.store') }}",
                     type: "POST",
                     dataType: 'json',
 
@@ -160,7 +162,7 @@
                         $.ajax({
 
                             type: "DELETE",
-                            url: "{{ route('adminKecamatan.store') }}" + '/' + product_id,
+                            url: "{{ route('adminDesa.store') }}" + '/' + product_id,
 
                             success: function (data) {
                                 table.draw();

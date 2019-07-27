@@ -70,6 +70,10 @@ Route::delete('/ajax-adminTempatUsaha/delete/{id}','TempatUsahaController@adminD
 Route::get('/adminTempatUsaha','TempatUsahaController@admin');
 
 Route::resource('adminDesa','DesaController');
+Route::get('/adminDesa/json','DesaController@dataIndex')->name('desa.dataIndex');
+Route::get('adminDesa/{id}','DesaController@edit');
+Route::get('adminDesa/delete/{id}','DesaController@destroy');
+
 
 Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 Route::resource('adminKecamatan','KecamatanController');

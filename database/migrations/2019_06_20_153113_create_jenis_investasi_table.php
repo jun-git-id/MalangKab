@@ -16,6 +16,8 @@ class CreateJenisInvestasiTable extends Migration
         Schema::create('jenis_investasis', function (Blueprint $table) {
             $table->increments('id');
             $table->string('jenis_investasi');
+            $table -> timestamps();
+
         });
         \App\JenisInvestasi::insert([
            'jenis_investasi' => 'Pribadi'

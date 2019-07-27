@@ -17,6 +17,7 @@ class CreateDesaTable extends Migration
             $table->Increments('id');
             $table->unsignedInteger('kecamatan_id');
             $table->string('nama_desa');
+            $table->timestamps();
 
             $table->foreign('kecamatan_id')->references('id')->on('kecamatans');
         });

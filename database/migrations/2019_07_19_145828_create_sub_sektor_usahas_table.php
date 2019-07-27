@@ -17,6 +17,8 @@ class CreateSubSektorUsahasTable extends Migration
             $table->increments('id');
             $table->string('sub_sektor_usaha');
             $table->unsignedInteger('id_sektor_usaha');
+            $table -> timestamps();
+
 
             $table->foreign('id_sektor_usaha')->references('id')->on('sektor_usahas');
         });

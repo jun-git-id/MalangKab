@@ -16,6 +16,8 @@ class CreateKegiatanUsahaTable extends Migration
         Schema::create('kegiatan_usahas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_kegiatan_usaha');
+            $table -> timestamps();
+
         });
         KegiatanUsaha::insert([
             'nama_kegiatan_usaha' => 'Bengkel'

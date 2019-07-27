@@ -16,6 +16,8 @@ class CreateSektorUsahasTable extends Migration
         Schema::create('sektor_usahas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_sektor_usaha');
+            $table -> timestamps();
+
         });
         \App\SektorUsaha::insert([
             'nama_sektor_usaha' => 'pertanian'

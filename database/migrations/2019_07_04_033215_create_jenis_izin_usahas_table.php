@@ -16,6 +16,8 @@ class CreateJenisIzinUsahasTable extends Migration
         Schema::create('jenis_izin_usahas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('jenis_izin_usaha');
+            $table -> timestamps();
+
         });
 
         \App\JenisIzinUsaha::insert([

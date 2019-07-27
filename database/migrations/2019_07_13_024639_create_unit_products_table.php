@@ -17,6 +17,8 @@ class CreateUnitProductsTable extends Migration
         Schema::create('unit_products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('unit_product');
+            $table -> timestamps();
+
         });
 
         UnitProduct::insert([
