@@ -149,7 +149,7 @@
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         @if(Auth::user()->role_id == 1 ||Auth::user()->role_id == 2 )
-                            <a class="dropdown-item" href="/admin">Konsole Admin</a>
+                            <a class="dropdown-item" href="{{route('dashboard.index')}}">Konsole Admin</a>
                         @endif
                         <a class="dropdown-item" href="/editProfile/{{Auth::user()->id}}">
                             {{ __('Edit Profile') }}

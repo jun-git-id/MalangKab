@@ -310,7 +310,13 @@ class TempatUsahaController extends Controller
 
     public function admin(){
         $usaha = TempatUsaha::with(['user'])->first();
-        $izinusaha = IzinUsaha::where('id_tempat_usaha', '=', $usaha->id)->get();
+        if ($usaha){
+            $izinusaha = IzinUsaha::where('id_tempat_usaha', '=', $usaha->id)->get();
+
+        }else{
+            $usaha = null;
+            $izinusaha = null;
+        }
         return view('admin.adminTempatUsaha',compact('usaha','izinusaha'));
 
     }

@@ -74,6 +74,7 @@ Route::get('/adminDesa/json','DesaController@dataIndex')->name('desa.dataIndex')
 Route::get('adminDesa/{id}','DesaController@edit');
 Route::get('adminDesa/delete/{id}','DesaController@destroy');
 
+Route::resource('dashboard', 'DashboardController');
 
 Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 Route::resource('adminKecamatan','KecamatanController');

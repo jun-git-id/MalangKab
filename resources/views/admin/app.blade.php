@@ -35,12 +35,6 @@
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/admin/sb-admin-2.min.js')}}"></script>
 
-    <!-- Page level plugins -->
-    <script src="{{asset('js/admin/Chart.min.js')}}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{asset('js/admin/chart-area-demo.js')}}"></script>
-    <script src="{{asset('js/admin/chart-pie-demo.js')}}"></script>
 
 {{--    datatables--}}
     <link  href="{{asset('css/admin/datatables.css')}}" rel="stylesheet">
@@ -71,7 +65,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="/admin">
+            <a class="nav-link" href="{{route('dashboard.index')}}">
                 <i class="fas fa-tachometer-alt "></i>
                 <span>Dashboard</span></a>
         </li>
@@ -166,4 +160,10 @@
 
 </body>
 
+<!-- Page level plugins -->
+<script src="{{asset('js/admin/Chart.min.js')}}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{asset('js/admin/chart-area-demo.js')}}"></script>
+<script src="{{asset('js/admin/chart-pie-demo.js')}}"></script>
 </html>

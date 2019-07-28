@@ -31,7 +31,7 @@
 
     <!-- Modal -->
     <!-- Modal -->
-
+@if($usaha != null)
     <div class="modal fade" id="ajaxModel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -124,6 +124,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     <script type="text/javascript">
         $(function () {
