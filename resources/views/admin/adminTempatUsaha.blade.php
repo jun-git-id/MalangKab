@@ -31,7 +31,7 @@
 
     <!-- Modal -->
     <!-- Modal -->
-@if($usaha != null)
+{{--@if($usaha != null)--}}
     <div class="modal fade" id="ajaxModel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -109,8 +109,8 @@
 
                         <div class="form-group">
                             <label for="status" class="col-sm-12 control-label">Status</label>
-                            <select id="status" name="status[]" class="status custom-select ml-1">
-                                <option selected="true" value="{{$usaha -> status}}">{{$usaha->status}}</option>
+                            <select id="status" name="status" class="status custom-select ml-1">
+                                <option selected value="{{$usaha -> status}}">{{$usaha->status}}</option>
                                 <option value="Approve">Approve</option>
                                 <option value="Pending">Pending</option>
                             </select>
@@ -124,7 +124,7 @@
             </div>
         </div>
     </div>
-    @endif
+{{--    @endif--}}
 
     <script type="text/javascript">
         $(function () {

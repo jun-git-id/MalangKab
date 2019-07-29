@@ -16,11 +16,13 @@ class CreateKategoriUsahaTable extends Migration
         Schema::create('kategori_usahas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_kategori_usaha');
+            $table->string('color');
             $table -> timestamps();
 
         });
         \App\KategoriUsaha::insert([
-           'nama_kategori_usaha' => 'mikro'
+           'nama_kategori_usaha' => 'mikro',
+            'color' => '#97e2a5',
         ]);
     }
 

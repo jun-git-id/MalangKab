@@ -10,14 +10,14 @@
             @if($products->count())
                 @foreach($products as $item)
                     <div class="col-lg-3 mt-4 d-flex">
-                        <div class="card">
+                        <div class="card shadow-sm rounded p-2">
                             <a href="/detailproduk/{{$item->id}}">
                                 <img src="{{asset('storage/'. $item->image)}}"
                                      class="card-img-top py-2 card-img-container" alt="...">
                             </a>
                             <div class="card-body">
-                                <h5 class="card-title">{{$item -> nama_produk}}</h5>
-                                <p class="card-text">{{$item -> deskripsi}}</p>
+                                <h5 class="card-title text-primary">{{$item -> nama_produk}}</h5>
+                                <p class="card-text">{{$item -> provider -> nama_tempat}}</p>
                                 <div class="row ml-0">
                                     <p>
                                         <a href="{{route('products.edit',$item->id)}}" class="btn btn-outline-info mr-5 ml-2">Edit</a>

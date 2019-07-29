@@ -9,7 +9,6 @@ var jmlKec = document.getElementById("jmlKec").value;
 var randomColor = [];
 var randomColorHover = [];
 
-console.log(randomColor);
 var dataKec = [];
 var kecamatan = [];
 for (let i = 0; i <jmlKec  ; i++) {
@@ -21,7 +20,6 @@ for (let i = 0; i <jmlKec  ; i++) {
     if (dataKec[i]==0){
         dataKec[i]= 0;
     }
-    console.log(dataKec);
 }
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
@@ -48,7 +46,7 @@ var myPieChart = new Chart(ctx, {
       caretPadding: 10,
     },
     legend: {
-      display: true,
+      display: false,
     },
     cutoutPercentage: 80,
   },
