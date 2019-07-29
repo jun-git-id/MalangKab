@@ -96,7 +96,7 @@
 
                 $.get("{{ route('adminKecamatan.index') }}" + '/' + id + '/edit', function (data) {
                     $('#ajaxModel').modal('show');
-                    $('#modelHeading').html("Edit Product");
+                    $('#modelHeading').html("Edit Kecamatan");
                     $('#saveBtn').val("edit-kecamatan");
                     $('#id').val(data.id);
                     $('#nama_kecamatan').val(data.nama_kecamatan);

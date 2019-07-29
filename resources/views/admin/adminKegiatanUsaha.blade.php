@@ -96,7 +96,7 @@
 
                 $.get("{{ route('adminKegiatanUsaha.index') }}" + '/' + id + '/edit', function (data) {
                     $('#ajaxModel').modal('show');
-                    $('#modelHeading').html("Edit Product");
+                    $('#modelHeading').html("Edit Kegiatan Usaha");
                     $('#saveBtn').val("edit-kegiatan");
                     $('#id').val(data.id);
                     $('#nama_kegiatan_usaha').val(data.nama_kegiatan_usaha);

@@ -85,6 +85,15 @@ Route::resource('adminKategoriUsaha','KategoriUsahaController');
 Route::post('adminKategoriUsaha/store', 'KategoriUsahaController@store');
 Route::get('adminKategoriUsaha/delete/{id}', 'KategoriUsahaController@destroy');
 
+Route::resource('adminSektorUsaha','SektorController');
+Route::post('adminSektorUsaha/store', 'SektorController@store');
+Route::get('adminSektorUsaha/delete/{id}', 'SektorController@destroy');
+
+Route::resource('adminSubSektorUsaha','SubSektorController');
+Route::get('/adminSubSektorUsaha/json','SubSektorController@dataIndex')->name('subsektor.dataIndex');
+Route::get('adminSubSektorUsaha/{id}','SubSektorController@edit');
+Route::get('adminSubSektorUsaha/delete/{id}','SubSektorController@destroy');
+
 Route::resource('adminKegiatanUsaha','KegiatanUsahaController');
 Route::post('adminKegiatanUsaha/store', 'KegiatanUsahaController@store');
 Route::get('adminKegiatanUsaha/delete/{id}', 'KegiatanUsahaController@destroy');
@@ -96,6 +105,14 @@ Route::get('adminStatusKepemilikan/delete/{id}', 'StatusKepemilikanController@de
 Route::resource('adminJenisInvestasi','JenisInvestasiController');
 Route::post('adminJenisInvestasi/store', 'JenisInvestasiController@store');
 Route::get('adminJenisInvestasi/delete/{id}', 'JenisInvestasiController@destroy');
+
+Route::resource('adminJenisProduk','JenisProductController');
+Route::post('adminJenisProduk/store', 'JenisProductController@store');
+Route::get('adminJenisProduk/delete/{id}', 'JenisProductController@destroy');
+
+Route::resource('adminUnitProduct','UnitProductController');
+Route::post('adminUnitProduct/store', 'UnitProductController@store');
+Route::get('adminUnitProduct/delete/{id}', 'UnitProductController@destroy');
 
 Route::resource('products','ProductController');
 Route::get('/detailproduk/{id}','ProductController@show');
@@ -144,9 +161,9 @@ Route::get('/admin', function () {
     return view('admin.dasboard');
 });
 
-Route::get('/adminSubKategoriUsaha', function () {
-    return view('admin.adminSubKategoriUsaha');
-});
+//Route::get('/adminSubKategoriUsaha', function () {
+//    return view('admin.adminSubKategoriUsaha');
+//});
 //Route::get('/adminKegiatanUsaha', function () {
 //    return view('admin.adminKegiatanUsaha');
 //});
@@ -156,9 +173,9 @@ Route::get('/adminSubKategoriUsaha', function () {
 //Route::get('/adminJenisInvestasi', function () {
 //    return view('admin.adminJenisInvestasi');
 //});
-Route::get('/adminJenisProduk', function () {
-    return view('admin.adminJenisProduk');
-});
+//Route::get('/adminJenisProduk', function () {
+//    return view('admin.adminJenisProduk');
+//});
 //Route::get('/adminKecamatan', function () {
 ////    return view('admin.adminKecamatan');
 ////});

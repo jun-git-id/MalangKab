@@ -96,7 +96,7 @@
 
                 $.get("{{ route('adminJenisInvestasi.index') }}" + '/' + id + '/edit', function (data) {
                     $('#ajaxModel').modal('show');
-                    $('#modelHeading').html("Edit Product");
+                    $('#modelHeading').html("Edit Jenis Investasi");
                     $('#saveBtn').val("edit-investasi");
                     $('#id').val(data.id);
                     $('#jenis_investasi').val(data.jenis_investasi);

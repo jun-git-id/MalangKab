@@ -105,7 +105,7 @@
 
                 $.get("{{ route('adminKategoriUsaha.index') }}" + '/' + id + '/edit', function (data) {
                     $('#ajaxModel').modal('show');
-                    $('#modelHeading').html("Edit Product");
+                    $('#modelHeading').html("Edit Kategori Usaha");
                     $('#saveBtn').val("edit-kategori");
                     $('#id').val(data.id);
                     $('#nama_kategori_usaha').val(data.nama_kategori_usaha);
