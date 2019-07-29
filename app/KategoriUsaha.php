@@ -6,7 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class KategoriUsaha extends Model
 {
-    protected $fillable = [
-        'nama_kategori_usaha'
-    ];
+    protected $fillable = ['nama_kategori_usaha', 'color'];
 }

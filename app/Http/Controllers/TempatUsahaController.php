@@ -310,6 +310,7 @@ class TempatUsahaController extends Controller
 
     public function admin(){
         $usaha = TempatUsaha::with(['user'])->first();
+
         if ($usaha){
             $izinusaha = IzinUsaha::where('id_tempat_usaha', '=', $usaha->id)->get();
 
@@ -317,21 +318,22 @@ class TempatUsahaController extends Controller
             $usaha = null;
             $izinusaha = null;
         }
+
         return view('admin.adminTempatUsaha',compact('usaha','izinusaha'));
 
     }
     public function adminUpdate(Request $request){
        $usahaId =$request->id;
        $usaha = TempatUsaha::findOrFail($usahaId);
-       $usaha -> status = $request->status;
-       $usaha -> update();
+        $usaha -> status = $request->status;
+       $usaha -> save();
+
         return response()->json($usaha);
     }
     public function adminEdit($id)
     {
         $where = array('id' => $id);
-        $usaha = Kecamatan::where($where)->first();
-
+        $usaha = TempatUsaha::where($where)->first();
         return response()->json($usaha);
 
     }

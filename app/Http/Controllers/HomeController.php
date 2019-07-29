@@ -32,7 +32,7 @@ class HomeController extends Controller
             $query->select('id')->from('tempat_usahas')->where([
                 ['status', '=', 'Approve']]);
         })->paginate(4);
-        $tempatusaha = TempatUsaha::where('status','=','Approve')->paginate(4);
+        $tempatusaha = TempatUsaha::with('kategoriUsaha')->where('status','=','Approve')->paginate(4);
 
         return view('beranda', compact(['tempatusaha','products']));
     }

@@ -15,6 +15,8 @@ class KategoriUsahaController extends Controller
 
     public function index(Request $request)
     {
+        $kategori = KategoriUsaha::where('id', '=', $request->id)->first();
+
         if ($request->ajax()) {
 
             $data = KategoriUsaha::latest()->get();
@@ -35,15 +37,26 @@ class KategoriUsahaController extends Controller
 
         }
 
-        return view('admin.adminKategoriUsaha');
+        return view('admin.adminKategoriUsaha', compact('kategori'));
     }
 
     public function store(Request $request)
     {
 
         $kategoriId = $request->id;
-        $kategori = KategoriUsaha::updateOrCreate(['id' => $kategoriId],
-            ['nama_kategori_usaha' => $request->nama_kategori_usaha]);
+        if ($kategoriId) {
+            $kategori = KategoriUsaha::findOrFail($kategoriId);
+            $kategori->nama_kategori_usaha = $request->nama_kategori_usaha;
+            $kategori->color = $request->warna;
+
+            $kategori->save();
+        } else {
+            $kategori = KategoriUsaha::create([
+                'nama_kategori_usaha' => $request->nama_kategori_usaha,
+                'color' => $request->warna,
+            ]);
+        }
+
         return response()->json($kategori);
 
     }

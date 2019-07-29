@@ -42,7 +42,6 @@
                 <div class="modal-body">
                     <form id="kategoriForm" name="KategoriForm" class="form-horizontal">
                         <input hidden id="id" name="id">
-
                         <div class="form-group">
                             <label for="nama_kategori_usaha" class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-12">
@@ -50,7 +49,16 @@
                                        placeholder="Masukan Kategori Usaha" value="" maxlength="50" required="">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="color">Pilih Warna:</label>
+                            <div class="col-sm-12">
+                                    <p>*Warna digunakan sebagai tanda kategori ini</p>
+                                <input type="text" class="form-control" id="color" name="warna"
+                                       placeholder="Masukan Kategori Usaha" value="#fff" maxlength="50" required="">
+                                <div id="picker"></div>
 
+                            </div>
+                        </div>
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
                             </button>
@@ -61,7 +69,11 @@
         </div>
     </div>
 
-
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            $('#picker').farbtastic('#color');
+        });
+    </script>
     <script type="text/javascript">
         $(function () {
             $.ajaxSetup({
@@ -97,6 +109,7 @@
                     $('#saveBtn').val("edit-kategori");
                     $('#id').val(data.id);
                     $('#nama_kategori_usaha').val(data.nama_kategori_usaha);
+                    $('#color').val(data.color);
                 })
 
             });
@@ -160,4 +173,5 @@
 
         });
     </script>
+
 @endsection

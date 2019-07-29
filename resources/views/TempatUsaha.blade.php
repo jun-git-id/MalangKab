@@ -48,19 +48,21 @@
                     @if($tempatusaha->count())
                         @foreach($tempatusaha as $itemUsaha)
                             <div class="col-lg-3 mt-4 d-flex">
-                                <div class="card" style="width: 18rem;">
+                                <div class="card shadow-sm rounded p-2" style="width: 18rem;">
                                     <a href="/detailusaha/{{$itemUsaha->id}}">
-                                        <img src="{{asset('storage/'. $itemUsaha->foto_tempat_usaha)}}"
-                                             class="card-img-top py-2 card-img-container" alt="...">
+                                        <img src="{{asset('storage/'. $itemUsaha->foto_tempat_usaha)}}" class="card-img-top py-2 card-img-container"  alt="...">
                                     </a>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{$itemUsaha->nama_tempat}}</h5>
+                                    <div class="card-body pb-0">
+                                        <h5 class="card-title text-primary">{{$itemUsaha->nama_tempat}}</h5>
                                         <p class="card-text">{{$itemUsaha->deskripsi}}</p>
-                                        <div class="row ml-0">
-                                            <p><i class="fas fa-heart"></i> {{$itemUsaha->like}}</p>
-                                            <p><i class="fas fa-star ml-4"></i> {{$itemUsaha->rating}}</p>
+                                        <div class="row">
+                                            <p class="col-4 "><i class="fas fa-heart"></i> {{$itemUsaha->like}}</p>
+                                            <p class="col-4"><i class="fas fa-star"></i> {{$itemUsaha->rating}}</p>
                                         </div>
+
                                     </div>
+                                    <div data-toggle="tooltip" data-placement="left" title="{{$itemUsaha->kategoriUsaha->nama_kategori_usaha}}" style="height:10px;border-bottom: 0.5rem solid {{$itemUsaha->kategoriUsaha->color}} !important;"></div>
+
                                 </div>
                             </div>
                         @endforeach
@@ -97,6 +99,11 @@
                     $('#desa').append('<option value="' + desaObj.id + '">' + desaObj.nama_desa + '</option>');
                 })
             });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(this).tooltip();
         });
     </script>
 @endsection

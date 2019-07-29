@@ -39,18 +39,21 @@
         @if($tempatusaha->count())
             @foreach($tempatusaha as $itemUsaha)
             <div class="col-lg-3 mt-4 d-flex">
-                <div class="card" style="width: 18rem;">
+                <div class="card shadow-sm rounded p-2" style="width: 18rem;">
                     <a href="/detailusaha/{{$itemUsaha->id}}">
                     <img src="{{asset('storage/'. $itemUsaha->foto_tempat_usaha)}}" class="card-img-top py-2 card-img-container"  alt="...">
                     </a>
-                    <div class="card-body">
-                        <h5 class="card-title">{{$itemUsaha->nama_tempat}}</h5>
+                    <div class="card-body pb-0">
+                        <h5 class="card-title text-primary">{{$itemUsaha->nama_tempat}}</h5>
                         <p class="card-text">{{$itemUsaha->deskripsi}}</p>
-                        <div class="row ml-0">
-                            <p><i class="fas fa-heart"></i> {{$itemUsaha->like}}</p>
-                            <p><i class="fas fa-star ml-4"></i> {{$itemUsaha->rating}}</p>
+                        <div class="row">
+                            <p class="col-4 "><i class="fas fa-heart"></i> {{$itemUsaha->like}}</p>
+                            <p class="col-4"><i class="fas fa-star"></i> {{$itemUsaha->rating}}</p>
                         </div>
+
                     </div>
+                    <div data-toggle="tooltip" data-placement="left" title="{{$itemUsaha->kategoriUsaha->nama_kategori_usaha}}" style="height:10px;border-bottom: 0.5rem solid {{$itemUsaha->kategoriUsaha->color}} !important;"></div>
+
                 </div>
             </div>
                 @endforeach
@@ -72,15 +75,15 @@
             @if($products->count())
                 @foreach($products as $itemProduct)
                     <div class="col-lg-3 mt-4 d-flex">
-                        <div class="card" style="width: 18rem;">
+                        <div class="card shadow-sm rounded p-2 " style="width: 18rem;">
                             <a href="/detailproduk/{{$itemProduct->id}}">
                                 <img src="{{asset('storage/'. $itemProduct->image)}}" class="card-img-top py-2 card-img-container"  alt="...">
                             </a>
-                            <div class="card-body">
-                                <h5 class="card-title">{{$itemProduct->nama_produk}}</h5>
-                                <p class="card-text">{{$itemProduct->deskripsi}}</p>
+                            <div class="card-body pb-0">
+                                <h5 class="card-title text-primary">{{$itemProduct->nama_produk}}</h5>
+                                <p class="card-text">{{$itemProduct -> provider -> nama_tempat}}</p>
                                 <div class="row ml-0">
-                                    <p id="totalLike"><i id="like" class="fas fa-heart"></i> </p>
+                                    <p id="totalLike"><i id="like" class="fas fa-heart"></i> {{$itemProduct->like}}</p>
                                     <p><i class="fas fa-star ml-4"></i> {{$itemProduct->rating}}</p>
                                 </div>
                             </div>
@@ -102,5 +105,10 @@
             var i = 1;
             $('#totalLike').append(i++);
         })
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(this).tooltip();
+        });
     </script>
 @endsection

@@ -244,17 +244,24 @@
     color: white;
     padding: 8px;
   }
-  .empat {
+  .cat-color {
           font-size: 14px;
           position: relative;
           margin-bottom: 1rem;
           border: 1px solid transparent;
-          border-radius: 0.25rem;
           color: #155724;
           background-color: #d4edda;
-          border-color: #c3e6cb;
 }
+  .border-bottom-primary {
+      border-bottom: .25rem solid #4e73df !important;
+  }
 
+  .border-bottom-success {
+      border-bottom: .25rem solid #1cc88a !important
+  }
+  .border-bottom-success:hover {
+      border-bottom: .25rem solid #1cc88a !important
+  }
 
   .success {background-color: #4CAF50;} /* Green */
   .info {background-color: #2196F3;} /* Blue */

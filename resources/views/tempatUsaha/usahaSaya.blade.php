@@ -10,14 +10,13 @@
             @if($tempatusaha->count())
                 @foreach($tempatusaha as $itemUsaha)
                     <div class="col-lg-3 mt-4 d-flex">
-                        <div class="card" style="width: 18rem;">
+                        <div class="card shadow-sm rounded p-2" style="width: 18rem;">
                             <a href="/detailusaha/{{$itemUsaha->id}}">
-                                <img src="{{asset('storage/'. $itemUsaha->foto_tempat_usaha)}}" class="card-img-top py-2 card-img-container mr-2 ml-2"   alt="...">
+                                <img src="{{asset('storage/'. $itemUsaha->foto_tempat_usaha)}}" class="card-img-top py-2 card-img-container"   alt="...">
                             </a>
                             <div class="card-body">
-                                <h5 class="card-title">{{$itemUsaha->nama_tempat}}</h5>
+                                <h5 class="card-title text-primary">{{$itemUsaha->nama_tempat}}</h5>
                                 <p class="card-text">{{$itemUsaha->deskripsi}}</p>
-                                <div class="empat"> Mikro</div>
                                 <div class="row ml-0">
                                     <p>
                                         <a href="{{route('tempatusaha.edit',$itemUsaha->id)}}" class="btn btn-outline-info mr-5 ml-2">Edit</a>
@@ -28,6 +27,8 @@
                                     </p>
                                 </div>
                             </div>
+                            <div data-toggle="tooltip" data-placement="left" title="{{$itemUsaha->kategoriUsaha->nama_kategori_usaha}}" style="height:10px;border-bottom: 0.5rem solid {{$itemUsaha->kategoriUsaha->color}} !important;"></div>
+
                         </div>
                     </div>
                 @endforeach
