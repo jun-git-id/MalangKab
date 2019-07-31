@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\UnitProduct;
+use App\SektorUsaha;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class UnitProductController extends Controller
+class SektorController extends Controller
 {
-//    public function index(){
-//        $unit = UnitProduct::all();
-//        return view('inputProduct',compact('unit'));
-//    }
-
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index']]);
@@ -22,7 +17,7 @@ class UnitProductController extends Controller
     {
         if ($request->ajax()) {
 
-            $data = UnitProduct::latest()->get();
+            $data = SektorUsaha::latest()->get();
 
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -40,16 +35,16 @@ class UnitProductController extends Controller
 
         }
 
-        return view('admin.adminUnitProduct');
+        return view('admin.adminSektorUsaha');
     }
 
     public function store(Request $request)
     {
 
-        $unitproductId = $request->id;
-        $unitproduct = UnitProduct::updateOrCreate(['id' => $unitproductId],
-            ['unit_product' => $request->unit_product]);
-        return response()->json($unitproduct);
+        $sektorId = $request->id;
+        $sektor = SektorUsaha::updateOrCreate(['id' => $sektorId],
+            ['nama_sektor_usaha' => $request->nama_sektor_usaha]);
+        return response()->json($sektor);
 
     }
 
@@ -61,9 +56,9 @@ class UnitProductController extends Controller
     public function edit($id)
     {
         $where = array('id' => $id);
-        $unitproduct = UnitProduct::where($where)->first();
+        $sektor = SektorUsaha::where($where)->first();
 
-        return response()->json($unitproduct);
+        return response()->json($sektor);
 
     }
 
@@ -74,8 +69,8 @@ class UnitProductController extends Controller
 
     public function destroy($id)
     {
-        $unitproduct = UnitProduct::where('id', $id)->delete();
-        return response()->json($unitproduct);
+        $sektor = SektorUsaha::where('id', $id)->delete();
+        return response()->json($sektor);
 
 
     }

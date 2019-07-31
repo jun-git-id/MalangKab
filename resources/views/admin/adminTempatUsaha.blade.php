@@ -192,7 +192,7 @@
                 // confirm("Are You sure want to delete !");
                 swal({
                     title: "Apa anda yakin?",
-                    text: "Anda Menghapus Kecamatan ini",
+                    text: "Anda Menghapus Tempat Usaha ini",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

@@ -102,7 +102,7 @@
                 $('#saveBtn').val("create-desa");
                 $('#id').val();
                 $('#desaForm').trigger("reset");
-                $('#modelHeading').html("Tambah Kecamatan Baru");
+                $('#modelHeading').html("Tambah Desa Baru");
                 $('#ajaxModel').modal('show');
             });
 
@@ -113,7 +113,7 @@
                     console.log(data);
                     $('#ajaxModel').modal('show');
                     $('#modelHeading').html("Edit Desa");
-                    $('#saveBtn').val("edit-kecamatan");
+                    $('#saveBtn').val("edit-desa");
                     $('#id').val(data.id);
                     $('#nama_desa').val(data.nama_desa);
                     $('#kecamatan').val(data.kecamatan_id);

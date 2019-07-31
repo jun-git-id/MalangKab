@@ -66,24 +66,31 @@
                 <span>Dashboard</span></a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" href="/adminTempatUsaha">
+                <i class="fas fa-store"></i>
+                <span>Tempat Usaha</span></a>
+        </li>
+
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-table"></i>
-                <span>Data User</span>
+                <span>Data Tabel</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/adminTempatUsaha">Tempat Usaha</a>
                     <a class="collapse-item" href="{{route('adminKecamatan.index')}}">Kecamatan</a>
                     <a class="collapse-item" href="/adminDesa">Desa</a>
                     <a class="collapse-item" href="/adminKategoriUsaha">Kategori Usaha</a>
-                    <a class="collapse-item" href="/adminSubKategoriUsaha">Sub Kategori Usaha</a>
+                    <a class="collapse-item" href="/adminSektorUsaha">Sektor Usaha</a>
+                    <a class="collapse-item" href="/adminSubSektorUsaha">Sub Sektor Usaha</a>
                     <a class="collapse-item" href="/adminKegiatanUsaha">Kegiatan Usaha</a>
                     <a class="collapse-item" href="/adminStatusKepemilikan">Status Kepemilikan</a>
                     <a class="collapse-item" href="/adminJenisInvestasi">Jenis Investasi</a>
                     <a class="collapse-item" href="/adminJenisProduk">Jenis Produk</a>
+                    <a class="collapse-item" href="/adminUnitProduct">Unit Produk</a>
                 </div>
             </div>
         </li>
@@ -91,7 +98,9 @@
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
         <li class="nav-item">
-            <a href="/" class="nav-link" target="_blank"><i class="fas fa-paper-plane"></i><span>Go to Marketplace</span></a>
+            <a class="nav-link" href="/">
+                <i class="far fa-window-maximize"></i>
+                <span>Go To Website</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
