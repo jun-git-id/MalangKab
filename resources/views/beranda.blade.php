@@ -82,9 +82,16 @@
                             <div class="card-body pb-0">
                                 <h5 class="card-title text-primary">{{$itemProduct->nama_produk}}</h5>
                                 <p class="card-text">{{$itemProduct -> provider -> nama_tempat}}</p>
+                                <p class="card-text text-primary font-bold">Rp. {{$itemProduct -> harga}}</p>
                                 <div class="row ml-0">
-                                    <p id="totalLike"><i id="like" class="fas fa-heart"></i> {{$itemProduct->like}}</p>
+                                    <form action="{{route('tempatusaha.update',$itemProduct->id)}}"  method="post"
+                                          enctype="multipart/form-data">
+                                        @csrf
+                                        {{method_field('put')}}
+                                        <input type="hidden" name="like" value="1">
+                                    <button type="submit"> <p id="totalLike"><i id="like" class="fas fa-heart"></i> {{$itemProduct->like}}</p></button>
                                     <p><i class="fas fa-star ml-4"></i> {{$itemProduct->rating}}</p>
+                                    </form>
                                 </div>
                             </div>
                         </div>

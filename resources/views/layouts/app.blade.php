@@ -105,7 +105,7 @@
                     @else
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/tempat-usaha-saya">Tempat Saya</a>
-                        <a class="dropdown-item" href="usahaFavorit">Tempat Favorit</a>
+                        <a class="dropdown-item" href="/usahaFavorit">Tempat Favorit</a>
                 </div>
                 @endguest
             </li>

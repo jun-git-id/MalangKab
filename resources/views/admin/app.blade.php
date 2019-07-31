@@ -91,6 +91,9 @@
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
         <li class="nav-item">
+            <a href="/" class="nav-link" target="_blank"><i class="fas fa-paper-plane"></i><span>Go to Marketplace</span></a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
                onclick="event.preventDefault();
                document.getElementById('logout-form').submit();">

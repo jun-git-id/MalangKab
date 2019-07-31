@@ -49,16 +49,16 @@
                 @if($products->count())
                     @foreach($products as $itemProduct)
                         <div class="col-lg-3 mt-4 d-flex">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card shadow-sm rounded p-2 " style="width: 18rem;">
                                 <a href="/detailproduk/{{$itemProduct->id}}">
-                                    <img src="{{ asset('storage/' . $itemProduct->image) }}"
-                                         class="card-img-top py-2 card-img-container" alt="...">
+                                    <img src="{{asset('storage/'. $itemProduct->image)}}" class="card-img-top py-2 card-img-container"  alt="...">
                                 </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{$itemProduct->nama_produk}}</h5>
-                                    <p class="card-text">{{$itemProduct->deskripsi}}</p>
+                                <div class="card-body pb-0">
+                                    <h5 class="card-title text-primary">{{$itemProduct->nama_produk}}</h5>
+                                    <p class="card-text">{{$itemProduct -> provider -> nama_tempat}}</p>
+                                    <p class="card-text text-primary font-bold">Rp. {{$itemProduct -> harga}}</p>
                                     <div class="row ml-0">
-                                        <p><i class="fas fa-heart"></i> {{$itemProduct->like}}</p>
+                                        <p id="totalLike"><i id="like" class="fas fa-heart"></i> {{$itemProduct->like}}</p>
                                         <p><i class="fas fa-star ml-4"></i> {{$itemProduct->rating}}</p>
                                     </div>
                                 </div>

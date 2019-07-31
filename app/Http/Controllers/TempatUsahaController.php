@@ -375,4 +375,6 @@ class TempatUsahaController extends Controller
 
         return view('admin.adminTempatUsaha');
     }
+
+
 }
