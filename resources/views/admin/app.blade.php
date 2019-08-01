@@ -84,8 +84,8 @@
                     <a class="collapse-item" href="{{route('adminKecamatan.index')}}">Kecamatan</a>
                     <a class="collapse-item" href="/adminDesa">Desa</a>
                     <a class="collapse-item" href="/adminKategoriUsaha">Kategori Usaha</a>
-                    <a class="collapse-item" href="/adminSektorUsaha">Sektor Usaha</a>
-                    <a class="collapse-item" href="/adminSubSektorUsaha">Sub Sektor Usaha</a>
+                    <a class="collapse-item" href="/adminSektorUsaha">Bidang Usaha</a>
+                    <a class="collapse-item" href="/adminSubSektorUsaha">Sub Bidang Usaha</a>
                     <a class="collapse-item" href="/adminKegiatanUsaha">Kegiatan Usaha</a>
                     <a class="collapse-item" href="/adminStatusKepemilikan">Status Kepemilikan</a>
                     <a class="collapse-item" href="/adminJenisInvestasi">Jenis Investasi</a>
@@ -144,7 +144,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Marketplace Malang 2019</span>
+                    <span>Copyright &copy; Marketplace Malang 2019 by Tim Kerja Praktek Telkom University</span>
                 </div>
             </div>
         </footer>
@@ -198,4 +198,5 @@
 <!-- Page level custom scripts -->
 <script src="{{asset('js/admin/chart-area-demo.js')}}"></script>
 <script src="{{asset('js/admin/chart-pie-demo.js')}}"></script>
+<script src="{{asset('js/admin/chart-bar-demo.js')}}"></script>
 </html>
