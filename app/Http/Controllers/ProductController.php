@@ -8,6 +8,7 @@ use App\ImageProduct;
 use App\JenisProduk;
 use App\KategoriUsaha;
 use App\Kecamatan;
+use App\LikeProduct;
 use App\Product;
 use App\TempatUsaha;
 use App\UnitProduct;
@@ -84,7 +85,7 @@ class ProductController extends Controller
         } else {
             $products = Product::all()->where('tempat_usaha_id', '=', $tempatUsaha);
         }
-        return view('products.produkSaya', ['products' => $products]);
+        return view('products.produkSaya', compact('products'));
     }
 
     public function desa()
@@ -186,5 +187,41 @@ class ProductController extends Controller
         Session::flash('success', 'Berhasil Menghapus Product');
 
         return route('products.index');
+    }
+    public function like($id){
+        $product = Product::findOrFail($id);
+        $like = LikeProduct::where('liked_by','=',Auth::user()->id)->first();
+        if (!$like){
+            $product->like++;
+            $product->save();
+
+            $like = LikeProduct::create([
+                'product_id' => $product->id,
+                'liked_by' => Auth::user()->id,
+            ]);
+        }
+
+
+        return redirect()->back();
+    }
+    public function deleteFavorit($id){
+        $likeProduct = LikeProduct::where('id','=',$id)->delete();
+
+        Session::flash('success', 'Berhasil Menghapus Product');
+        return route('products.favorit');
+    }
+    public function dislike($id){
+        $product = Product::find($id);
+        $product->like--;
+        $product->save();
+        return route('products.favorit');
+
+    }
+
+    public function product_favorit(){
+        $products = LikeProduct::with(['likeProduct'])->where('liked_by','=',Auth::user()->id)->get();
+
+        $tempat = Product::with(['provider'])->first();
+        return view('products.produkFavorit',compact('products','tempat'));
     }
 }

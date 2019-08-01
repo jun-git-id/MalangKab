@@ -47,8 +47,18 @@
                         <h5 class="card-title text-primary">{{$itemUsaha->nama_tempat}}</h5>
                         <p class="card-text">{{$itemUsaha->deskripsi}}</p>
                         <div class="row">
-                            <p class="col-4 "><i class="fas fa-heart"></i> {{$itemUsaha->like}}</p>
-                            <p class="col-4"><i class="fas fa-star"></i> {{$itemUsaha->rating}}</p>
+                            <form action="{{route('like.usaha',$itemUsaha->id)}}"  method="post"
+                                  enctype="multipart/form-data">
+                                @csrf
+                                {{method_field('put')}}
+                                <button class="btn" type="submit"> <i id="like" class="fas fa-heart"></i> {{$itemUsaha->like}}</button>
+                            </form>
+{{--                            <form action=""  method="post"--}}
+{{--                                  enctype="multipart/form-data">--}}
+{{--                                @csrf--}}
+{{--                                {{method_field('put')}}--}}
+                                <button class="btn"><i class="fas fa-star ml-4"></i> {{$itemUsaha->rating}}</button>
+{{--                            </form>--}}
                         </div>
 
                     </div>
@@ -84,14 +94,19 @@
                                 <p class="card-text">{{$itemProduct -> provider -> nama_tempat}}</p>
                                 <p class="card-text text-primary font-bold">Rp. {{$itemProduct -> harga}}</p>
                                 <div class="row ml-0">
-                                    <form action="{{route('tempatusaha.update',$itemProduct->id)}}"  method="post"
+                                    <form action="{{route('like.product',$itemProduct->id)}}"  method="post"
                                           enctype="multipart/form-data">
                                         @csrf
                                         {{method_field('put')}}
-                                        <input type="hidden" name="like" value="1">
-                                    <button type="submit"> <p id="totalLike"><i id="like" class="fas fa-heart"></i> {{$itemProduct->like}}</p></button>
-                                    <p><i class="fas fa-star ml-4"></i> {{$itemProduct->rating}}</p>
+                                    <button class="btn" type="submit"> <i id="like" class="fas fa-heart"></i> {{$itemProduct->like}}</button>
                                     </form>
+{{--                                    <form action="{{route('like.product',$itemProduct->id)}}"  method="post"--}}
+{{--                                          enctype="multipart/form-data">--}}
+{{--                                        @csrf--}}
+{{--                                        {{method_field('put')}}--}}
+
+                                    <button class="btn"><i class="fas fa-star ml-4"></i> {{$itemProduct->rating}}</button>
+{{--                                    </form>--}}
                                 </div>
                             </div>
                         </div>

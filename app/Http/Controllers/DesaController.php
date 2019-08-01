@@ -39,12 +39,21 @@ class DesaController extends Controller
     }
     public function store(Request $request)
     {
-
         $kecamatanId = $request->kecamatan;
-        $desa = Desa::updateOrCreate(
-            ['id' => $request->id],
-            ['nama_desa' => $request->nama_desa],
-            ['kecamatan_id' => $kecamatanId]);
+        $desaId = $request->id;
+        if ($desaId) {
+            $desa = Desa::findOrFail($desaId);
+            $desa->nama_desa = $request->nama_desa;
+            $desa->kecamatan_id = $kecamatanId;
+
+            $desa->save();
+        } else {
+            $desa = Desa::create([
+                'nama_desa' => $request->nama_desa,
+                'kecamatan_id' => $kecamatanId,
+            ]);
+        }
+
         return response()->json($desa);
 
     }

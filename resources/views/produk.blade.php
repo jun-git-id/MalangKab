@@ -58,8 +58,19 @@
                                     <p class="card-text">{{$itemProduct -> provider -> nama_tempat}}</p>
                                     <p class="card-text text-primary font-bold">Rp. {{$itemProduct -> harga}}</p>
                                     <div class="row ml-0">
-                                        <p id="totalLike"><i id="like" class="fas fa-heart"></i> {{$itemProduct->like}}</p>
-                                        <p><i class="fas fa-star ml-4"></i> {{$itemProduct->rating}}</p>
+                                        <form action="{{route('like.product',$itemProduct->id)}}"  method="post"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            {{method_field('put')}}
+                                            <button class="btn" type="submit"> <i id="like" class="fas fa-heart"></i> {{$itemProduct->like}}</button>
+                                        </form>
+                                        {{--                                    <form action="{{route('like.product',$itemProduct->id)}}"  method="post"--}}
+                                        {{--                                          enctype="multipart/form-data">--}}
+                                        {{--                                        @csrf--}}
+                                        {{--                                        {{method_field('put')}}--}}
+
+                                        <button class="btn"><i class="fas fa-star ml-4"></i> {{$itemProduct->rating}}</button>
+                                        {{--                                    </form>--}}
                                     </div>
                                 </div>
                             </div>

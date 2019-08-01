@@ -9,6 +9,8 @@ use App\JenisIzinUsaha;
 use App\KategoriUsaha;
 use App\Kecamatan;
 use App\KegiatanUsaha;
+use App\LikeProduct;
+use App\LikeUsaha;
 use App\Product;
 use App\SektorUsaha;
 use App\StatusKepemilikan;
@@ -21,6 +23,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -376,5 +379,38 @@ class TempatUsahaController extends Controller
         return view('admin.adminTempatUsaha');
     }
 
+    public function like($id){
+        $tempat = TempatUsaha::findOrFail($id);
+        $like = LikeUsaha::where('liked_by','=',Auth::user()->id)->first();
+        if (!$like) {
+            $tempat->like++;
+            $tempat->save();
 
+            $like = LikeUsaha::create([
+                'tempat_usaha_id' => $tempat->id,
+                'liked_by' => Auth::user()->id,
+            ]);
+        }
+
+        return redirect()->back();
+    }
+    public function dislike($id){
+        $product = TempatUsaha::findOrFail($id);
+        $product->like--;
+        $product->save();
+        return route('tempatUsaha.favorit');
+
+    }
+    public function deleteFavorit($id){
+        $likeUsaha = LikeUsaha::where('id','=',$id)->delete();
+
+        Session::flash('success', 'Berhasil Menghapus Product');
+        return route('tempatUsaha.favorit');
+    }
+    public function usaha_favorit(){
+        $tempatusaha = LikeUsaha::with(['likeUsaha'])->where('liked_by','=',Auth::user()->id)->get();
+
+//        $tempatusaha = TempatUsaha::with(['provider'])->get();
+        return view('tempatUsaha.usahaFavorit',compact('tempatusaha'));
+    }
 }

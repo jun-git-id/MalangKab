@@ -36,7 +36,13 @@ class HomeController extends Controller
 
         return view('beranda', compact(['tempatusaha','products']));
     }
+    public function like($id){
+        $product = Product::findOrFail($id);
+        $product->like++;
+        $product->save();
 
+        return redirect()->back();
+    }
 //    public function kategori(){
 //        $kategoriProduk = JenisProduk::all();
 //

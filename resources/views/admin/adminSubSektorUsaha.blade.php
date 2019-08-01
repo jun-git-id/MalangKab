@@ -115,8 +115,8 @@
                     $('#modelHeading').html("Edit Sub Sektor Usaha");
                     $('#saveBtn').val("edit-subsektor");
                     $('#id').val(data.id);
-                    $('#sub-sektor_usaha').val(data.sub_sektor_usaha);
-                    $('#ksektor').val(data.id_sektor_usaha);
+                    $('#sub_sektor_usaha').val(data.sub_sektor_usaha);
+                    $('#nama_sektor_usaha').val(data.id_sektor_usaha);
                 })
 
             });

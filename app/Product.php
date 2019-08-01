@@ -35,4 +35,8 @@ class Product extends Model
     {
         return ($this->productimage[0]->path . $this->productimage[0]->filename);
     }
+    public function likeProduct(){
+        return $this->hasMany(LikeProduct::class,'product_id','id');
+    }
+
 }
