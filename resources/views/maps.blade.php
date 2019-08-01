@@ -10,7 +10,7 @@
             </form>
             <div class="container">
                 <div class="row ml-1">
-                    <div class="form-group w-25 mr-3">
+                    <div class="form-group w-10 mr-3">
                         <form action="{{route('maps.index')}}">
 
                             <select name="kecamatan" class="form-control" id="kecamatan">
@@ -20,16 +20,24 @@
                                 @endforeach
                             </select>
                     </div>
-                    <div class="form-group w-25 ml-4 mr-4">
+                    <div class="form-group w-10 ml-4 mr-4">
                         <select name="desa" class="form-control" id="desa">
                             <option disabled selected hidden>Pilih Desa</option>
                         </select>
                     </div>
-                    <div class="form-group w-25 ml-4 mr-4">
+                    <div class="form-group w-10 ml-4 mr-4">
                         <select name="sektor" class="form-control" id="sektor">
                             <option disabled selected hidden>Pilih Sektor</option>
                             @foreach($sektor as $item)
                                 <option value="{{$item -> id}}">{{$item -> nama_sektor_usaha}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group w-10 ml-4 mr-4">
+                        <select name="subsektor" class="form-control" id="subsektor">
+                            <option disabled selected hidden>Pilih Sub Bidang Usaha</option>
+                            @foreach($subsektor as $item)
+                                <option value="{{$item -> id}}">{{$item -> nama_sub_sektor_usaha}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -112,6 +120,19 @@
 
                         $.each(data, function (index, desaObj) {
                             $('#desa').append('<option value="' + desaObj.id + '">' + desaObj.nama_desa + '</option>');
+                        })
+                    });
+                });
+                $('#sektor').on('change', function (e) {
+                    console.log(e);
+                    var sektor_id = e.target.value;
+                    $.get('/json-subSektor?id=' + sektor_id, function (data) {
+                        console.log(data);
+                        $('#subsektor').empty();
+                        $('#subsektor').append('<option value="0" disable="true" selected="true">Pilih sub sektor</option>');
+
+                        $.each(data, function (index, Obj) {
+                            $('#subsektor').append('<option value="' + Obj.id + '">' + Obj.sub_sektor_usaha + '</option>');
                         })
                     });
                 });
