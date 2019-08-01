@@ -21,7 +21,7 @@ class CreateJenisProdukTable extends Migration
         });
 
         \App\JenisProduk::insert([
-            'jenis_produk' => 'test'
+            'jenis_produk' => 'Makanan'
         ]);
     }
 

@@ -28,7 +28,7 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-
+        $count = 0;
         $products = Product::with(['productimage'])->paginate(20);
         $kecamatan = Kecamatan::all();
         $desa = Desa::all();
@@ -41,38 +41,73 @@ class ProductController extends Controller
         $desa_id = $request->get('desa');
         $jenis_id = $request->get('jenis');
 
-        if ($jenis_id) {
+        if ($kecamatan_id && $desa_id && $jenis_id){
+            $products = Product::with('provider')->where('jenis_produk_id', '=', $jenis_id)->select('*')
+                ->whereIn('tempat_usaha_id', function ($query) use ($request){
+                $query->select('id')->from('tempat_usahas')->where([
+                    ['status', '=', 'Approve'],
+                    ['kecamatan_id', '=', $request->get('kecamatan')],
+                    ['desa_id', '=', $request->get('desa')],]);
+            })->paginate(20);
+            if ($products ->count()){
+                $count = 1;
+            }else{
+                $count = 2;
+            }
+        }elseif($kecamatan_id && $desa_id){
+            $products = Product::with('provider')->select('*')->whereIn('tempat_usaha_id', function ($query) use ($request) {
+
+                $query->select('id')->from('tempat_usahas')->where([
+                    ['status', '=', 'Approve'],
+                    ['kecamatan_id', '=', $request->get('kecamatan')],
+                    ['desa_id', '=', $request->get('desa')],
+                ]);
+            })->paginate(20);
+            if ($products ->count()){
+                $count = 1;
+            }else{
+                $count = 2;
+            }
+        }elseif ($kecamatan_id){
+            $products = Product::with('provider')->select('*')->whereIn('tempat_usaha_id', function ($query) use ($request) {
+                $query->select('id')->from('tempat_usahas')->where([
+                    ['status', '=', 'Approve'],
+                    ['kecamatan_id', '=', $request->get('kecamatan')],
+                ]);
+            })->paginate(20);
+            if ($products ->count()){
+                $count = 1;
+            }else{
+                $count = 2;
+            }
+        }elseif ($jenis_id) {
             $products = Product::with('provider')->where('jenis_produk_id', '=', $jenis_id)->select('*')->whereIn('tempat_usaha_id', function ($query) {
                 $query->select('id')->from('tempat_usahas')->where([
                     ['status', '=', 'Approve']]);
             })->paginate(20);
+            if ($products ->count()){
+                $count = 1;
+            }else{
+                $count = 2;
+            }
         } else {
-            $products = Product::with('provider')->select('*')->whereIn('tempat_usaha_id', function ($query) use ($request) {
-                if ($request->get('kecamatan')) {
-                    $query->select('id')->from('tempat_usahas')->where([
-                        ['status', '=', 'Approve'],
-                        ['kecamatan_id', '=', $request->get('kecamatan')],
-                    ]);
-                }
-                if ($request->get('desa')) {
-                    $query->select('id')->from('tempat_usahas')->where([
-                        ['status', '=', 'Approve'],
-                        ['desa_id', '=', $request->get('desa')],
-                    ]);
-                }
-                $query->select('id')->from('tempat_usahas')->where([
-                    ['status', '=', 'Approve']]);
-            })->paginate(20);
+                $count = 0;
+
         }
 
         if ($keywords) {
             $products = Product::with(['productimage'])->where([
                 ['nama_produk', 'LIKE', "%$keywords%"],
             ])->paginate(20);
-
+            if ($products ->count()){
+                $count = 1;
+            }else{
+                $count = 2;
+            }
         }
 
-        return view('produk', compact(['products', 'kecamatan', 'desa', 'jenis']));
+
+        return view('produk', compact(['products', 'kecamatan', 'desa', 'jenis','count']));
 
     }
 

@@ -38,7 +38,9 @@ class ProfileController extends Controller
         $profile->no_telp = $request -> no_telp;
         $profile->alamat = $request -> alamat;
         $profile->gender = $request -> gender;
-        $profile->password = Hash::make($request -> password);
+        if ($request->password != ''){
+            $profile->password = Hash::make($request -> password);
+        }
         if ($request->hasFile('foto')){
             $image = $request-> file('foto');
             $new_name = uniqid() . '.' . $image->getClientOriginalName();

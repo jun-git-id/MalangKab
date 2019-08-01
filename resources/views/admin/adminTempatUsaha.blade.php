@@ -41,7 +41,6 @@
                 <div class="modal-body">
                     <form id="usahaForm" name="usahaForm" class="form-horizontal">
                         <input hidden id="id" name="id">
-
                         <div class="form-group">
                             <label for="nama_tempat" class="col-sm-12 control-label">Nama Tempat Usaha</label>
                             <div class="col-sm-12">

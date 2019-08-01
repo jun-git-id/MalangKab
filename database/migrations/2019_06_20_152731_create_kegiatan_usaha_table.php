@@ -20,7 +20,7 @@ class CreateKegiatanUsahaTable extends Migration
 
         });
         KegiatanUsaha::insert([
-            'nama_kegiatan_usaha' => 'Bengkel'
+            'nama_kegiatan_usaha' => 'Toko Kelontong'
         ]);
 
     }

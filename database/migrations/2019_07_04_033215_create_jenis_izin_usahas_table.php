@@ -21,7 +21,7 @@ class CreateJenisIzinUsahasTable extends Migration
         });
 
         \App\JenisIzinUsaha::insert([
-            'jenis_izin_usaha' => 'test'
+            'jenis_izin_usaha' => 'NIB'
         ]);
     }
 

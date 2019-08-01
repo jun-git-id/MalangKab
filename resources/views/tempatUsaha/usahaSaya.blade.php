@@ -2,12 +2,28 @@
 
 @section('content')
     <div class="container mt-4">
-        <h3>Tempat Usaha Saya <a href="{{route('tempatusaha.create')}}" class="right btn btn-outline-info" >Tambah Usaha</a></h3>
+        <h3>Tempat Usaha Saya @if(Auth::user()->role_id != 3)<a href="{{route('tempatusaha.create')}}" class="right btn btn-outline-info" >Tambah Usaha</a>@endif</h3>
     </div>
 
     <div class="container ">
         <div class="row">
-            @if($tempatusaha->count())
+
+                @if(Auth::user()->role_id == 3 && $cekStatus)
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <span class="fas fa-sad-tear fa-4x mt-3 mb-3 opacity-3"></span>
+                            <h3 class="opacity-3">Status Pengajuan Anda Belum Terverifikasi!</h3>
+                        </div>
+                    </div>
+                @elseif(Auth::user()->role_id == 3)
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <span class="fas fa-sad-cry fa-4x mt-3 mb-3 opacity-3"></span>
+                            <h3 class="opacity-3">Anda belum terdaftar sebagai pelaku usaha</h3>
+                            <a href="{{route('tempatusaha.create')}}" class="mt-3 btn btn-outline-info" >Daftar Usaha Anda!</a>
+                        </div>
+                    </div>
+            @elseif($tempatusaha->count())
                 @foreach($tempatusaha as $itemUsaha)
                     <div class="col-lg-3 mt-4 d-flex">
                         <div class="card shadow-sm rounded p-2" style="width: 18rem;">
@@ -17,6 +33,7 @@
                             <div class="card-body">
                                 <h5 class="card-title text-primary">{{$itemUsaha->nama_tempat}}</h5>
                                 <p class="card-text">{{$itemUsaha->deskripsi}}</p>
+                                <p class="card-text">Status <i class="font-bold">{{$itemUsaha->status}}</i></p>
                                 <div class="row ml-0">
                                     <p>
                                         <a href="{{route('tempatusaha.edit',$itemUsaha->id)}}" class="btn btn-outline-info mr-5 ml-2">Edit</a>

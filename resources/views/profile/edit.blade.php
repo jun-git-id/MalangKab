@@ -113,7 +113,7 @@
 
                         <div class="col-md-6">
                                     <textarea id="alamat" type="text" class="form-control"
-                                              name="alamat" autocomplete="alamat"> </textarea>
+                                              name="alamat" autocomplete="alamat">{{Auth::user()->alamat}} </textarea>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -150,8 +150,7 @@
 
                         <div class="col-md-6">
                             <input id="password" type="password"
-                                   class="form-control @error('password') is-invalid @enderror" name="password"
-                                   autocomplete="new-password">
+                                   class="form-control @error('password') is-invalid @enderror" name="password">
 
                             @error('password')
                             <span class="invalid-feedback" role="alert">

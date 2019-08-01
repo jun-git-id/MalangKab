@@ -46,8 +46,8 @@
         {{--card--}}
         <div class="container ">
             <div class="row">
-                @if($products->count())
-                    @foreach($products as $itemProduct)
+                @if($count == 1)
+                @foreach($products as $itemProduct)
                         <div class="col-lg-3 mt-4 d-flex">
                             <div class="card shadow-sm rounded p-2 " style="width: 18rem;">
                                 <a href="/detailproduk/{{$itemProduct->id}}">
@@ -76,11 +76,18 @@
                             </div>
                         </div>
                     @endforeach
-                @else
+                @elseif($count != 1 && $count != 0)
                     <div class="col-md-12">
                         <div class="text-center">
                             <span class="fas fa-store fa-4x mt-5 mb-3 opacity-3"></span>
-                            <h3 class="opacity-3">Tidak ada produk tersedia</h3>
+                            <h3 class="opacity-3">Tidak ada Tempat Usaha tersedia</h3>
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <span class="fas fa-search fa-4x mt-5 mb-3 opacity-3"></span>
+                            <h3 class="opacity-3">Cari / Filter Terlebih dahulu</h3>
                         </div>
                     </div>
                 @endif

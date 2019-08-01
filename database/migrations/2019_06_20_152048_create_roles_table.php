@@ -23,6 +23,7 @@ class CreateRolesTable extends Migration
             ['name' => 'superadmin'],
             ['name' => 'admin'],
             ['name' => 'user'],
+            ['name' => 'pelaku usaha']
         ]);
     }
 

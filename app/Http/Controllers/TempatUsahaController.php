@@ -38,7 +38,6 @@ class TempatUsahaController extends Controller
 
     public function index(Request $request)
     {
-        $tempatusaha = TempatUsaha::where('status', '=', 'Approve')->paginate(15);
         $kecamatan = Kecamatan::all();
         $sektor = SektorUsaha::all();
         $subsektor = SubSektorUsaha::all();
@@ -57,29 +56,55 @@ class TempatUsahaController extends Controller
                 ['sektor_usaha_id','=',$sektor_id],
                 ['sub_sektor_usaha_id','=',$subsektor_id]
             ])->paginate(15);
+            if ($tempatusaha ->count()){
+                $count = 1;
+            }else{
+                $count = 2;
+            }
         }elseif ($kecamatan_id && $desa_id){
             $tempatusaha = TempatUsaha::where([
                 ['status', '=', 'Approve'],
                 ['kecamatan_id', '=', $kecamatan_id],
                 ['desa_id','=',$desa_id],
             ])->paginate(15);
+            if ($tempatusaha ->count()){
+                $count = 1;
+            }else{
+                $count = 2;
+            }
         } elseif($kecamatan_id) {
             $tempatusaha = TempatUsaha::where([
                 ['status', '=', 'Approve'],
                 ['kecamatan_id', '=', $kecamatan_id],
             ])->paginate(15);
+            if ($tempatusaha ->count()){
+                $count = 1;
+            }else{
+                $count = 2;
+            }
         }elseif($sektor_id && $subsektor_id){
             $tempatusaha = TempatUsaha::where([
                 ['status', '=', 'Approve'],
                 ['sektor_usaha_id','=',$sektor_id],
                 ['sub_sektor_usaha_id','=',$subsektor_id]
             ])->paginate(15);
+            if ($tempatusaha ->count()){
+                $count = 1;
+            }else{
+                $count = 2;
+            }
         }elseif ($sektor_id){
             $tempatusaha = TempatUsaha::where([
                 ['status', '=', 'Approve'],
                 ['sektor_usaha_id','=',$sektor_id],
             ])->paginate(15);
+            if ($tempatusaha ->count()){
+                $count = 1;
+            }else{
+                $count = 2;
+            }
         }else{
+            $count=0;
             $tempatusaha = TempatUsaha::where('status', '=', 'Approve')->paginate(15);
         }
 
@@ -88,16 +113,23 @@ class TempatUsahaController extends Controller
                 ['status', '=', 'Approve'],
                 ['nama_tempat', 'LIKE', "%$keywords%"],
             ])->paginate(15);
+            if ($tempatusaha ->count()){
+                $count = 1;
+            }else{
+                $count = 2;
+            }
 
         }
-        return view('TempatUsaha', compact('tempatusaha','kecamatan','sektor','subsektor'));
+        return view('TempatUsaha', compact('tempatusaha','kecamatan','sektor','subsektor','count'));
     }
 
     public function tempatUsahaSaya()
     {
+        $cekStatus = TempatUsaha::where('status', '=','Pending')->first();
         $tempatusaha = TempatUsaha::where('user_id', '=', Auth::user()->id)->paginate(15);
 
-        return view('tempatUsaha.usahaSaya', compact('tempatusaha'));
+
+        return view('tempatUsaha.usahaSaya', compact('tempatusaha','cekStatus'));
     }
 
 
@@ -339,6 +371,9 @@ class TempatUsahaController extends Controller
        $usahaId =$request->id;
        $usaha = TempatUsaha::findOrFail($usahaId);
         $usaha -> status = $request->status;
+        $user = User::findOrFail($usaha->user_id);
+        $user-> role_id = 4;
+        $user->save();
        $usaha -> save();
 
         return response()->json($usaha);

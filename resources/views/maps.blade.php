@@ -36,9 +36,6 @@
                     <div class="form-group w-10 ml-4 mr-4">
                         <select name="subsektor" class="form-control" id="subsektor">
                             <option disabled selected hidden>Pilih Sub Bidang Usaha</option>
-                            @foreach($subsektor as $item)
-                                <option value="{{$item -> id}}">{{$item -> nama_sub_sektor_usaha}}</option>
-                            @endforeach
                         </select>
                     </div>
                     <div class="form-group mr-4 ml-4">
@@ -48,22 +45,27 @@
                 </div>
             </div>
 
-
-            <form class="form">
-                @if($tempatusaha -> count())
-                @foreach($tempatusaha as $item)
-                    <input name="lat[]" id="lat[]" hidden value="{{$item -> lokasi_lat}}">
-                    <input name="lng[]" id="lng[]" hidden value="{{$item -> lokasi_lang}}">
-                    <input name="nama_tempat[]" hidden id="nama_tempat[]" value="{{$item -> nama_tempat}}">
-                @endforeach
-
-            </form>
+            @if($count == 1)
+                <form class="form">
+                        @foreach($tempatusaha as $item)
+                            <input name="lat[]" id="lat[]" hidden value="{{$item -> lokasi_lat}}">
+                            <input name="lng[]" id="lng[]" hidden value="{{$item -> lokasi_lang}}">
+                            <input name="nama_tempat[]" hidden id="nama_tempat[]" value="{{$item -> nama_tempat}}">
+                        @endforeach
+                </form>
             <div id="map-index"></div>
-            @else
+            @elseif($count != 1 && $count != 0)
                 <div class="col-md-12">
                     <div class="text-center">
                         <span class="fas fa-store fa-4x mt-5 mb-3 opacity-3"></span>
                         <h3 class="opacity-3">Tidak ada Tempat Usaha tersedia</h3>
+                    </div>
+                </div>
+                @else
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <span class="fas fa-search fa-4x mt-5 mb-3 opacity-3"></span>
+                        <h3 class="opacity-3">Cari / Filter Terlebih dahulu</h3>
                     </div>
                 </div>
             @endif
@@ -129,7 +131,7 @@
                     $.get('/json-subSektor?id=' + sektor_id, function (data) {
                         console.log(data);
                         $('#subsektor').empty();
-                        $('#subsektor').append('<option value="0" disable="true" selected="true">Pilih sub sektor</option>');
+                        $('#subsektor').append('<option value="0" disable="true" selected="true">Pilih Sub Bidang Usaha</option>');
 
                         $.each(data, function (index, Obj) {
                             $('#subsektor').append('<option value="' + Obj.id + '">' + Obj.sub_sektor_usaha + '</option>');
