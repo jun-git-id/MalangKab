@@ -263,6 +263,10 @@
       border-bottom: .25rem solid #1cc88a !important
   }
 
+  .w-10 {
+      width: 18% !important;
+
+  }
   .success {background-color: #4CAF50;} /* Green */
   .info {background-color: #2196F3;} /* Blue */
   .warning {background-color: #ff9800;} /* Orange */

@@ -41,18 +41,21 @@ class TempatUsahaController extends Controller
         $tempatusaha = TempatUsaha::where('status', '=', 'Approve')->paginate(15);
         $kecamatan = Kecamatan::all();
         $sektor = SektorUsaha::all();
+        $subsektor = SubSektorUsaha::all();
         $keywords = $request->get('keywords');
 
         $kecamatan_id = $request->get('kecamatan');
         $desa_id = $request->get('desa');
         $sektor_id = $request->get('sektor');
+        $subsektor_id = $request->get('subsektor');
 
-        if ($kecamatan_id && $desa_id && $sektor_id){
+        if ($kecamatan_id && $desa_id && $sektor_id && $subsektor){
             $tempatusaha = TempatUsaha::where([
                 ['status', '=', 'Approve'],
                 ['kecamatan_id', '=', $kecamatan_id],
                 ['desa_id','=',$desa_id],
                 ['sektor_usaha_id','=',$sektor_id],
+                ['sub_sektor_usaha_id','=',$subsektor_id]
             ])->paginate(15);
         }elseif ($kecamatan_id && $desa_id){
             $tempatusaha = TempatUsaha::where([
@@ -65,7 +68,13 @@ class TempatUsahaController extends Controller
                 ['status', '=', 'Approve'],
                 ['kecamatan_id', '=', $kecamatan_id],
             ])->paginate(15);
-        }elseif($sektor_id){
+        }elseif($sektor_id && $subsektor_id){
+            $tempatusaha = TempatUsaha::where([
+                ['status', '=', 'Approve'],
+                ['sektor_usaha_id','=',$sektor_id],
+                ['sub_sektor_usaha_id','=',$subsektor_id]
+            ])->paginate(15);
+        }elseif ($sektor_id){
             $tempatusaha = TempatUsaha::where([
                 ['status', '=', 'Approve'],
                 ['sektor_usaha_id','=',$sektor_id],
@@ -81,7 +90,7 @@ class TempatUsahaController extends Controller
             ])->paginate(15);
 
         }
-        return view('TempatUsaha', compact('tempatusaha','kecamatan','sektor'));
+        return view('TempatUsaha', compact('tempatusaha','kecamatan','sektor','subsektor'));
     }
 
     public function tempatUsahaSaya()
@@ -141,6 +150,7 @@ class TempatUsahaController extends Controller
 
         return response()->json($desa);
     }
+
 
     /**
      * Store a newly created resource in storage.

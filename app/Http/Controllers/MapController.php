@@ -14,22 +14,25 @@ class MapController extends Controller
 {
 
     public function index(Request $request){
-        $tempatusaha = TempatUsaha::all()->where('status', '=', 'Approve');
+        $tempatusaha = 0;
         $kecamatan = Kecamatan::all();
         $sektor = SektorUsaha::all();
+        $subsektor = SubSektorUsaha::all();
         $keywords = $request->get('keywords');
 
 
         $kecamatan_id = $request->get('kecamatan');
         $desa_id = $request->get('desa');
         $sektor_id = $request->get('sektor');
+        $subsektor_id = $request->get('subsektor');
 
-        if ($kecamatan_id && $desa_id && $sektor_id){
+        if ($kecamatan_id && $desa_id && $sektor_id && $subsektor_id){
             $tempatusaha = TempatUsaha::where([
                 ['status', '=', 'Approve'],
                 ['kecamatan_id', '=', $kecamatan_id],
                 ['desa_id','=',$desa_id],
                 ['sektor_usaha_id','=',$sektor_id],
+                ['sub_sektor_usaha_id','=',$subsektor_id]
             ])->get();
         }elseif ($kecamatan_id && $desa_id){
             $tempatusaha = TempatUsaha::where([
@@ -42,7 +45,13 @@ class MapController extends Controller
                 ['status', '=', 'Approve'],
                 ['kecamatan_id', '=', $kecamatan_id],
             ])->get();
-        }elseif($sektor_id){
+        }elseif ($sektor_id && $subsektor_id){
+            $tempatusaha = TempatUsaha::where([
+                ['status', '=', 'Approve'],
+                ['sektor_usaha_id','=',$sektor_id],
+                ['sub_sektor_usaha_id','=',$subsektor_id]
+            ])->get();
+        } elseif($sektor_id){
             $tempatusaha = TempatUsaha::where([
                 ['status', '=', 'Approve'],
                 ['sektor_usaha_id','=',$sektor_id],
@@ -58,52 +67,10 @@ class MapController extends Controller
 
         }
 
-        return view('maps', compact('tempatusaha','kecamatan','sektor'));
+        return view('maps', compact('tempatusaha','kecamatan','sektor','subsektor'));
     }
     public function maps(Request $request){
-        $maps = TempatUsaha::all()->where('status', '=', 'Approve');
-        $keywords = $request->get('keywords');
-
-        if ($keywords) {
-            $maps = TempatUsaha::where([
-                ['status', '=', 'Approve'],
-                ['nama_tempat', 'LIKE', "%$keywords%"],
-            ])->get();
-
-        }
-
-        $kecamatan_id = $request->get('kecamatan');
-        $desa_id = $request->get('desa');
-        $sektor_id = $request->get('sektor');
-
-        if ($kecamatan_id && $desa_id && $sektor_id){
-            $maps = TempatUsaha::where([
-                ['status', '=', 'Approve'],
-                ['kecamatan_id', '=', $kecamatan_id],
-                ['desa_id','=',$desa_id],
-                ['sektor_usaha_id','=',$sektor_id],
-            ])->get();
-        }elseif ($kecamatan_id && $desa_id){
-            $maps = TempatUsaha::where([
-                ['status', '=', 'Approve'],
-                ['kecamatan_id', '=', $kecamatan_id],
-                ['desa_id','=',$desa_id],
-            ])->get();
-        } elseif($kecamatan_id) {
-            $maps = TempatUsaha::where([
-                ['status', '=', 'Approve'],
-                ['kecamatan_id', '=', $kecamatan_id],
-            ])->get();
-        }elseif($sektor_id){
-            $maps = TempatUsaha::where([
-                ['status', '=', 'Approve'],
-                ['sektor_usaha_id','=',$sektor_id],
-            ])->get();
-        }else{
-            $maps = TempatUsaha::all()->where('status', '=', 'Approve');
-        }
-
-        return response()->json($maps);
+//
     }
     public function subSektor()
     {
