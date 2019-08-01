@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use App\Desa;
 use App\Kecamatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class DesaController extends Controller
 {
     public function index(){
-        $kecamatan = Kecamatan::all();
+        if (Auth::user()->role_id == 2 ||  Auth::user()->role_id == 1){
+            $kecamatan = Kecamatan::all();
 
-        return view('admin.adminDesa',compact('kecamatan'));
+            return view('admin.adminDesa', compact('kecamatan'));
+        }else {
+            return view('notfound');
+
+        }
     }
     public function show(Request $request){
 

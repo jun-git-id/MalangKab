@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\JenisProduk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class JenisProductController extends Controller
@@ -15,27 +16,32 @@ class JenisProductController extends Controller
 
     public function index(Request $request)
     {
-        if ($request->ajax()) {
+        if (Auth::user()->id == 2 || Auth::user()->id == 1){
+            if ($request->ajax()) {
 
-            $data = JenisProduk::latest()->get();
+                $data = JenisProduk::latest()->get();
 
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
+                return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($row) {
 
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs dataTable"><i class="fas fa-pencil-alt mr-2"></i>Ubah</a>';
+                        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs dataTable"><i class="fas fa-pencil-alt mr-2"></i>Ubah</a>';
 
-                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="delete btn btn-danger btn-xs dataTable"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>';
+                        $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="delete btn btn-danger btn-xs dataTable"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>';
 
-                    return $btn;
+                        return $btn;
 
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
 
+            }
+
+            return view('admin.adminJenisProduk');
+        }else {
+            return view('notfound');
         }
 
-        return view('admin.adminJenisProduk');
     }
 
     public function store(Request $request)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\KategoriUsaha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class KategoriUsahaController extends Controller
@@ -15,34 +16,38 @@ class KategoriUsahaController extends Controller
 
     public function index(Request $request)
     {
-        $kategori = KategoriUsaha::where('id', '=', $request->id)->first();
+        if (Auth::user()->id == 2 || Auth::user()->id == 1) {
+            $kategori = KategoriUsaha::where('id', '=', $request->id)->first();
 
-        if ($request->ajax()) {
+            if ($request->ajax()) {
 
-            $data = KategoriUsaha::latest()->get();
+                $data = KategoriUsaha::latest()->get();
 
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
+                return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($row) {
 
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs dataTable"><i class="fas fa-pencil-alt mr-2"></i>Ubah</a>';
+                        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs dataTable"><i class="fas fa-pencil-alt mr-2"></i>Ubah</a>';
 
-                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="delete btn btn-danger btn-xs dataTable"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>';
+                        $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="delete btn btn-danger btn-xs dataTable"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>';
 
-                    return $btn;
+                        return $btn;
 
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
 
+            }
+
+            return view('admin.adminKategoriUsaha', compact('kategori'));
+        } else {
+            return view('notfound');
         }
 
-        return view('admin.adminKategoriUsaha', compact('kategori'));
     }
 
     public function store(Request $request)
     {
-
         $kategoriId = $request->id;
         if ($kategoriId) {
             $kategori = KategoriUsaha::findOrFail($kategoriId);

@@ -354,17 +354,22 @@ class TempatUsahaController extends Controller
     }
 
     public function admin(){
-        $usaha = TempatUsaha::with(['user'])->first();
+        if (Auth::user()->id == 2 || Auth::user()->id == 1) {
+            $usaha = TempatUsaha::with(['user'])->first();
 
-        if ($usaha){
-            $izinusaha = IzinUsaha::where('id_tempat_usaha', '=', $usaha->id)->get();
+            if ($usaha){
+                $izinusaha = IzinUsaha::where('id_tempat_usaha', '=', $usaha->id)->get();
 
-        }else{
-            $usaha = null;
-            $izinusaha = null;
+            }else{
+                $usaha = null;
+                $izinusaha = null;
+            }
+
+            return view('admin.adminTempatUsaha',compact('usaha','izinusaha'));
+        }else {
+            return view('notfound');
         }
 
-        return view('admin.adminTempatUsaha',compact('usaha','izinusaha'));
 
     }
     public function adminUpdate(Request $request){
@@ -399,29 +404,33 @@ class TempatUsahaController extends Controller
     }
     public function adminIndex(Request $request)
     {
+        if (Auth::user()->id == 2 || Auth::user()->id == 1) {
+            if ($request->ajax()) {
 
-        if ($request->ajax()) {
+                $data = TempatUsaha::with(['user'])->get();
 
-            $data = TempatUsaha::with(['user'])->get();
+                return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($row) {
 
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
+                        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs dataTable"><i class="fas fa-pencil-alt mr-2"></i>Ubah</a>';
 
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs dataTable"><i class="fas fa-pencil-alt mr-2"></i>Ubah</a>';
+                        $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="delete btn btn-danger btn-xs dataTable"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>';
 
-                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="delete btn btn-danger btn-xs dataTable"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>';
+                        return $btn;
 
-                    return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
 
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+            }
 
+
+            return view('admin.adminTempatUsaha');
+        }else {
+            return view('notfound');
         }
 
-
-        return view('admin.adminTempatUsaha');
     }
 
     public function like($id){

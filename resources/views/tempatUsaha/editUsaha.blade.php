@@ -134,7 +134,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="formGroupExampleInput">Sektor Usaha</label>
+                <label for="formGroupExampleInput">Bidang Usaha</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right"><i class="fas fa-list-ul"></i></span>
                     <select name="sektor_usaha" class="custom-select dynamic" id="sektor" data-dependent="sektor" required>
@@ -147,7 +147,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="formGroupExampleInput">Sub Sektor Usaha</label>
+                <label for="formGroupExampleInput">Sub Bidang Usaha</label>
                 <div class="input-group-prepend">
                     <span class="input-group-text no-border-right dynamic"><i class="fas fa-list-ul"></i></span>
                     <select name="sub_sektor_usaha" class="custom-select" id="subSektor" data-dependent="subSektor" required>
@@ -320,7 +320,7 @@
             $.get('/json-subSektor?id=' + kategori_id,function(data) {
                 console.log(data);
                 $('#subSektor').empty();
-                $('#subSektor').append('<option value="0" disable="true" selected="true">Pilih Sub Sektor Usaha</option>');
+                $('#subSektor').append('<option value="0" disable="true" selected="true">Pilih Sub Bidang Usaha</option>');
 
                 $.each(data, function(index, subSektorObj){
                     $('#subSektor').append('<option value="'+ subSektorObj.id +'">'+ subSektorObj.sub_sektor_usaha +'</option>');

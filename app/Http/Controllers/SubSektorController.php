@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use App\SektorUsaha;
 use App\SubSektorUsaha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class SubSektorController extends Controller
 {
     public function index(){
-        $sektor = SektorUsaha::all();
+        if (Auth::user()->id == 2 || Auth::user()->id == 1) {
+            $sektor = SektorUsaha::all();
 
-        return view('admin.adminSubSektorUsaha',compact('sektor'));
+            return view('admin.adminSubSektorUsaha',compact('sektor'));
+        }else {
+            return view('notfound');
+        }
+
     }
     public function show(Request $request){
 

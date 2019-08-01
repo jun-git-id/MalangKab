@@ -24,7 +24,7 @@ class CreateSubSektorUsahasTable extends Migration
         });
 
         \App\SubSektorUsaha::insert([
-            'sub_sektor_usaha' => 'sub sektor 1',
+            'sub_sektor_usaha' => 'Tani Jagung',
             'id_sektor_usaha' => 1,
         ]);
     }

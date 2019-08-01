@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('beranda');
 });
+Route::fallback(function(){
+    return view('notfound');
+});
 
 Route::get('/daftar', function () {
     return view('daftar');
