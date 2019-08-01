@@ -35,16 +35,16 @@ class JenisIzinUsahaController extends Controller
 
         }
 
-        return view('admin.adminKecamatan');
+        return view('admin.adminJenisIzinUsaha');
     }
 
     public function store(Request $request)
     {
 
-        $kecamatanId = $request->id;
-        $kecamatan = Kecamatan::updateOrCreate(['id' => $kecamatanId],
-            ['nama_kecamatan' => $request->nama_kecamatan]);
-        return response()->json($kecamatan);
+        $jenisizinId = $request->id;
+        $jenisizin = JenisIzinUsaha::updateOrCreate(['id' => $jenisizinId],
+            ['jenis_izin_usaha' => $request->jenis_izin_usaha]);
+        return response()->json($jenisizin);
 
     }
 
@@ -56,9 +56,9 @@ class JenisIzinUsahaController extends Controller
     public function edit($id)
     {
         $where = array('id' => $id);
-        $kecamatan = Kecamatan::where($where)->first();
+        $jenisizin = JenisIzinUsaha::where($where)->first();
 
-        return response()->json($kecamatan);
+        return response()->json($jenisizin);
 
     }
 
@@ -69,8 +69,8 @@ class JenisIzinUsahaController extends Controller
 
     public function destroy($id)
     {
-        $kecamatan = Kecamatan::where('id', $id)->delete();
-        return response()->json($kecamatan);
+        $jenisizin = JenisIzinUsaha::where('id', $id)->delete();
+        return response()->json($jenisizin);
 
 
     }

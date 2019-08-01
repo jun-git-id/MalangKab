@@ -89,6 +89,7 @@
                     <a class="collapse-item" href="/adminKegiatanUsaha">Kegiatan Usaha</a>
                     <a class="collapse-item" href="/adminStatusKepemilikan">Status Kepemilikan</a>
                     <a class="collapse-item" href="/adminJenisInvestasi">Jenis Investasi</a>
+                    <a class="collapse-item" href="/adminJenisIzinUsaha">Jenis Izin Usaha</a>
                     <a class="collapse-item" href="/adminJenisProduk">Jenis Produk</a>
                     <a class="collapse-item" href="/adminUnitProduct">Unit Produk</a>
                 </div>

@@ -112,6 +112,10 @@ Route::resource('adminJenisInvestasi','JenisInvestasiController');
 Route::post('adminJenisInvestasi/store', 'JenisInvestasiController@store');
 Route::get('adminJenisInvestasi/delete/{id}', 'JenisInvestasiController@destroy');
 
+Route::resource('adminJenisIzinUsaha','JenisIzinUsahaController');
+Route::post('adminJenisIzinUsaha/store', 'JenisIzinUsahaController@store');
+Route::get('adminJenisIzinUsaha/delete/{id}', 'JenisIzinUsahaController@destroy');
+
 Route::resource('adminJenisProduk','JenisProductController');
 Route::post('adminJenisProduk/store', 'JenisProductController@store');
 Route::get('adminJenisProduk/delete/{id}', 'JenisProductController@destroy');
