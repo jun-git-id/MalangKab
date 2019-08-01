@@ -236,7 +236,7 @@
 </main>
 
 <div class="cpy-right text-center py-2 mt-5 ">
-    <p class="text-white mt-2">© 2019 Marketplace Kab.Malang. All rights reserved </p>
+    <p class="text-white mt-2">Copyright &copy; Marketplace Malang 2019 by Tim Kerja Praktek Telkom University </p>
 </div>
 </body>
 

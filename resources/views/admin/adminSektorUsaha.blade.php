@@ -5,21 +5,21 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Sektor Usaha</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Bidang Usaha</h6>
         </div>
         <div class="card-body">
             <div class="card-body">
                 <div class="col-md-12 mb-4">
                     <a href="javascript:void(0)" class="btn btn-primary btn-sm " id="createNewSektor">
                         <i class="fas fa-plus mr-2"></i>
-                        Tambah Sektor Usaha
+                        Tambah Bidang Usaha
                     </a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered data-table dataTable float-left" id="laravel_datatable">
                         <thead>
                         <tr>
-                            <th>Nama Sektor Usaha</th>
+                            <th>Nama Bidang Usaha</th>
                             <th width="30%">Action</th>
                         </tr>
                         </thead>
@@ -48,7 +48,7 @@
                             <label for="nama_sektor_usaha" class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="nama_sektor_usaha" name="nama_sektor_usaha"
-                                       placeholder="Masukan Sektor Usaha" value="" maxlength="50" required="">
+                                       placeholder="Masukan Bidang Usaha" value="" maxlength="50" required="">
                             </div>
                         </div>
 
@@ -87,7 +87,7 @@
                 $('#saveBtn').val("create-sektor");
                 $('#id').val();
                 $('#sektorForm').trigger("reset");
-                $('#modelHeading').html("Tambah Sektor Usaha Baru");
+                $('#modelHeading').html("Tambah Bidang Usaha Baru");
                 $('#ajaxModel').modal('show');
             });
 
@@ -96,7 +96,7 @@
 
                 $.get("{{ route('adminSektorUsaha.index') }}" + '/' + id + '/edit', function (data) {
                     $('#ajaxModel').modal('show');
-                    $('#modelHeading').html("Edit Sektor Usaha");
+                    $('#modelHeading').html("Edit Bidang Usaha");
                     $('#saveBtn').val("edit-sektor");
                     $('#id').val(data.id);
                     $('#nama_sektor_usaha').val(data.nama_sektor_usaha);
@@ -136,7 +136,7 @@
                 // confirm("Are You sure want to delete !");
                 swal({
                     title: "Apa anda yakin?",
-                    text: "Anda Menghapus Sektor Usaha ini",
+                    text: "Anda Menghapus Bidang Usaha ini",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

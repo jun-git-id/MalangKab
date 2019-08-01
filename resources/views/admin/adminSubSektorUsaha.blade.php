@@ -5,21 +5,21 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Sub Sektor Usaha</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Sub Bidang Usaha</h6>
         </div>
         <div class="card-body">
             <div class="card-body">
                 <div class="col-md-12 mb-4">
                     <a href="javascript:void(0)" class="btn btn-primary btn-sm " id="createNewSubSektor">
                         <i class="fas fa-plus mr-2"></i>
-                        Tambah Sub Sektor Usaha
+                        Tambah Sub Bidang Usaha
                     </a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered data-table dataTable float-left" id="laravel_datatable">
                         <thead>
                         <tr>
-                            <th>Nama Sub Sektor</th>
+                            <th>Nama Sub Bidang Usaha</th>
                             <th width="30%">Action</th>
                         </tr>
                         </thead>
@@ -46,11 +46,11 @@
                         <div class="form-group">
                             <input hidden id="id" name="id">
 
-                            <label for="nama_sektor_usaha" class="col-sm-2 control-label">Sektor Usaha</label>
+                            <label for="nama_sektor_usaha" class="col-sm-2 control-label">Bidang Usaha</label>
                             <div class="col-sm-12">
                                 <select name="nama_sektor_usaha" class="custom-select"
                                         id="nama_sektor_usaha" required>
-                                    <option selected value="0">Pilih Sektor</option>
+                                    <option selected value="0">Pilih Bidang Usaha</option>
                                     @foreach($sektor as $item)
                                         <option value="{{$item->id}}">{{$item->nama_sektor_usaha}}</option>
                                     @endforeach
@@ -63,7 +63,7 @@
                             <label for="sub_sektor_usaha" class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="sub_sektor_usaha" name="sub_sektor_usaha"
-                                       placeholder="Masukan Sub Sektor Usaha" value="" maxlength="50" required="">
+                                       placeholder="Masukan Sub Bidang Usaha" value="" maxlength="50" required="">
                             </div>
                         </div>
 
@@ -102,7 +102,7 @@
                 $('#saveBtn').val("create-subsektor");
                 $('#id').val();
                 $('#subsektorForm').trigger("reset");
-                $('#modelHeading').html("Tambah Sub Sektor Baru");
+                $('#modelHeading').html("Tambah Sub Bidang Usaha Baru");
                 $('#ajaxModel').modal('show');
             });
 
@@ -112,7 +112,7 @@
                 $.get("{{ route('adminSubSektorUsaha.index') }}" + '/' + id + '/edit', function (data) {
                     console.log(data);
                     $('#ajaxModel').modal('show');
-                    $('#modelHeading').html("Edit Sub Sektor Usaha");
+                    $('#modelHeading').html("Edit Sub Bidang Usaha");
                     $('#saveBtn').val("edit-subsektor");
                     $('#id').val(data.id);
                     $('#sub_sektor_usaha').val(data.sub_sektor_usaha);
@@ -153,7 +153,7 @@
                 // confirm("Are You sure want to delete !");
                 swal({
                     title: "Apa anda yakin?",
-                    text: "Anda Menghapus Sub Sektor Usaha ini",
+                    text: "Anda Menghapus Sub Bidang Usaha ini",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

@@ -27,38 +27,31 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-// Area Chart Example
-var ctx = document.getElementById("myAreaChart");
-var jan = document.getElementById("dataUsahaJan").value;
-var feb = document.getElementById("dataUsahaFeb").value;
-var mar = document.getElementById("dataUsahaMar").value;
-var apr = document.getElementById("dataUsahaApr").value;
-var mei = document.getElementById("dataUsahaMei").value;
-var jun = document.getElementById("dataUsahaJun").value;
-var jul = document.getElementById("dataUsahaJul").value;
-var aug = document.getElementById("dataUsahaAug").value;
-var sep = document.getElementById("dataUsahaSep").value;
-var okt = document.getElementById("dataUsahaOkt").value;
-var nov = document.getElementById("dataUsahaNov").value;
-var des = document.getElementById("dataUsahaDes").value;
-var myLineChart = new Chart(ctx, {
-  type: 'line',
+// Bar Chart Example
+var ctx = document.getElementById("myBarChart");
+
+var dataKec = [];
+var kecamatan = [];
+for (let i = 0; i <jmlKec  ; i++) {
+    kecamatan[i] = document.getElementById("kecamatan["+i+"]").value;
+    dataKec[i] = document.getElementById("dataByKec["+i+"]").value;
+    randomColor[i] = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+    randomColorHover[i] = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+
+    if (dataKec[i]==0){
+        dataKec[i]= 0;
+    }
+}
+var myBarChart = new Chart(ctx, {
+  type: 'bar',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [{
+      labels: kecamatan,
+      datasets: [{
+          data: dataKec,
       label: "Total",
-      lineTension: 0.3,
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
-      pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
-      pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-      pointHitRadius: 10,
-      pointBorderWidth: 2,
-      data: [jan, feb, mar, apr, mei, jun, jul, aug, sep, okt, nov, des],
+      backgroundColor: "#4e73df",
+      hoverBackgroundColor: "#2e59d9",
+      borderColor: "#4e73df",
     }],
   },
   options: {
@@ -74,23 +67,24 @@ var myLineChart = new Chart(ctx, {
     scales: {
       xAxes: [{
         time: {
-          unit: 'date'
+          unit: 'month'
         },
         gridLines: {
           display: false,
           drawBorder: false
         },
         ticks: {
-          maxTicksLimit: 7
-        }
+          maxTicksLimit: 6
+        },
+        maxBarThickness: 25,
       }],
       yAxes: [{
         ticks: {
-          maxTicksLimit: 10,
+          min: 0,
+          maxTicksLimit: 12,
           padding: 10,
-          steps : 5,
-          stepValue :5,
-          max: 300,
+            stepValue :5,
+            max: 200,
         },
         gridLines: {
           color: "rgb(234, 236, 244)",
@@ -105,25 +99,23 @@ var myLineChart = new Chart(ctx, {
       display: false
     },
     tooltips: {
-      backgroundColor: "rgb(255,255,255)",
-      bodyFontColor: "#858796",
       titleMarginBottom: 10,
       titleFontColor: '#6e707e',
       titleFontSize: 14,
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
       borderColor: '#dddfeb',
       borderWidth: 1,
       xPadding: 15,
       yPadding: 15,
       displayColors: false,
-      intersect: false,
-      mode: 'index',
       caretPadding: 10,
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+          return datasetLabel+': ' + number_format(tooltipItem.yLabel);
         }
       }
-    }
+    },
   }
 });
