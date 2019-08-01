@@ -39,12 +39,25 @@ class SubSektorController extends Controller
     }
     public function store(Request $request)
     {
+        $sektorId = $request->nama_sektor_usaha;
+        $subSektorId = $request->id;
+        if ($subSektorId) {
+            $subsektor = SubSektorUsaha::findOrFail($subSektorId);
+            $subsektor->sub_sektor_usaha = $request->sub_sektor_usaha;
+            $subsektor->id_sektor_usaha = $sektorId;
 
-        $sektorId = $request->sektor;
-        $subsektor = SubSektorUsaha::updateOrCreate(
-            ['id' => $request->id],
-            ['sub_sektor_usaha' => $request->sub_sektor_usaha],
-            ['id_sektor_usaha' => $sektorId]);
+            $subsektor->save();
+        } else {
+            $subsektor = SubSektorUsaha::create([
+                'sub_sektor_usaha' => $request->sub_sektor_usaha,
+                'id_sektor_usaha' => $sektorId,
+            ]);
+        }
+//        $sektorId = $request->sektor;
+//        $subsektor = SubSektorUsaha::updateOrCreate(
+//            ['id' => $request->id],
+//            ['sub_sektor_usaha' => $request->sub_sektor_usaha],
+//            ['id_sektor_usaha' => $sektorId]);
         return response()->json($subsektor);
 
     }

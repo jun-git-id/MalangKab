@@ -56,6 +56,9 @@ Route::get('/editProfile/{id}', 'ProfileController@edit');
 Route::put('/editProfile/{id}', 'ProfileController@update');
 
 Route::get('/', 'HomeController@index');
+Route::put('/beranda/{id}', 'ProductController@like')->name('like.product');
+Route::put('/{id}', 'TempatUsahaController@like')->name('like.usaha');
+
 
 Route::resource('tempatusaha','TempatUsahaController');
 Route::get('/tempat-usaha-saya','TempatUsahaController@tempatUsahaSaya');
@@ -80,6 +83,9 @@ Route::get('/detailusaha/{id}', 'TempatUsahaController@show');
 Route::resource('adminKecamatan','KecamatanController');
 Route::post('adminKecamatan/store', 'KecamatanController@store');
 Route::get('adminKecamatan/delete/{id}', 'KecamatanController@destroy');
+Route::get('/usahaFavorit', 'TempatUsahaController@usaha_favorit')->name('tempatUsaha.favorit');
+Route::delete('/usahaFavorit/{id}','TempatUsahaController@deleteFavorit')->name('tempatUsaha.deleteFavorit');
+Route::post('/usahaFavorit/{usaha}','TempatUsahaController@dislike')->name('tempatUsaha.dislike');
 
 Route::resource('adminKategoriUsaha','KategoriUsahaController');
 Route::post('adminKategoriUsaha/store', 'KategoriUsahaController@store');
@@ -121,6 +127,9 @@ Route::get('/json-desa','ProductController@desa');
 Route::get('/produk-saya','ProductController@produkSaya');
 Route::post('upload-image', 'ProductController@uploadImage')->name('upload.image');
 Route::delete('delete-image/{id}', 'ProductController@deleteImage')->name('delete.image');
+Route::get('/produkFavorit', 'ProductController@product_favorit')->name('products.favorit');
+Route::delete('/produkFavorit/{id}','ProductController@deleteFavorit')->name('product.deleteFavorit');
+Route::post('/produkFavorit/{products}','ProductController@dislike')->name('product.dislike');
 
 Route::resource('maps','MapController');
 Route::get('/json-maps','MapController@maps');
@@ -145,18 +154,14 @@ Route::get('/inputProduk', function () {
 //Route::get('/usahaSaya', function () {
 //    return view('usahaSaya');
 //});
-Route::get('/usahaFavorit', function () {
-    return view('tempatUsaha.usahaFavorit');
-});
+
 Route::get('/produk', function () {
     return view('produk');
 });
 //Route::get('/produkSaya', function () {
 //    return view('produkSaya');
 //});
-Route::get('/produkFavorit', function () {
-    return view('products.produkFavorit');
-});
+
 Route::get('/admin', function () {
     return view('admin.dasboard');
 });

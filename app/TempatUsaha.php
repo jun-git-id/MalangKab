@@ -63,4 +63,7 @@ public function provider(){
     {
         return $this->belongsTo(JenisIzinUsaha::class);
     }
+    public function likeUsaha(){
+        return $this->hasMany(LikeUsaha::class,'tempat_usaha_id','id');
+    }
 }
